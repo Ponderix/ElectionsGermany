@@ -1,0 +1,11 @@
+body > h2 {
+  z-index: -1;
+  display: block;
+  width: 306px;
+  top: 30px;
+  left: 150px;
+  float:top
+}
+
+path:hover {fill: white;}
+path {transition: 0.15s;}
