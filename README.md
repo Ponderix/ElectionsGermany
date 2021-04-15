@@ -34,3 +34,6 @@ Yes, this is because one of the functions I used to parse the CSV data does not 
 2. Click "properties" and navigate to the "security" tab
 3. Select your user account and tick all permissions
 4. Press "OK"
+
+#### macOS
+https://websitebeaver.com/set-up-localhost-on-macos-high-sierra-apache-mysql-and-php-7-with-sslhttps 
