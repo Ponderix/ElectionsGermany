@@ -1,0 +1,18 @@
+/*body > h2 {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  width: 306px;
+  top: 130px;
+  left: 9px;
+  float:top
+}*/
+
+path:hover {fill: white;}
+path {
+  transition: 0.15s;
+}
+
+svg {
+  z-index: -2;
+}
