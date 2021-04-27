@@ -2,13 +2,12 @@
 This is a website with interactive maps and data about the 2017 German general election. This website attempts to inform people about the German election system and politics in Germany.
 
 ## Code
-This website is written with HTML, using CSS for styling and JavaScript for most of the functions to do with maps and other interactive elements.
+This website is written in HTML, using CSS for styling and JavaScript for most of the functions to do with maps and other interactive elements.
 
 ## Question and Answers
 
 ### What is the point?
-This project was initially created for my IB (International Baccalaureate) Personal Project which every person of the same year group had to complete to pass the Middle Years Program. 
-My intention with this project is to inform people about politics in other countries and how their systems differ from more well-known elections such as those in the USA.
+This project was initially created for as a school project. My intention with this project is to inform people about politics in in Germany and their unique election system.
 
 ### Launching the website by opening the ```index.html``` file in my browser returns an error.
 Yes, this is because one of the functions I used to parse the CSV data does not recognise the ```file:///``` origin (CORS request not HTTP) and as a consequence I had to move the website onto my localhost.
