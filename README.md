@@ -11,7 +11,7 @@ This project was initially created for my IB (International Baccalaureate) Perso
 My intention with this project is to inform people about politics in other countries and how their systems differ from more well-known elections such as those in the USA.
 
 ### Launching the website by opening the ```index.html``` file in my browser returns an error.
-Yes, this is because one of the functions I used to parse the CSV data does not recognise the ```file:///``` origin (CORS request not HTTP) and as a consequence I had to move the server onto my localhost.
+Yes, this is because one of the functions I used to parse the CSV data does not recognise the ```file:///``` origin (CORS request not HTTP) and as a consequence I had to move the website onto my localhost.
 
 ### How do I set up localhost?
 #### Windows 10
@@ -26,11 +26,11 @@ Yes, this is because one of the functions I used to parse the CSV data does not 
 ##### Running a website
 1. Navigate to ```C:\inetpub\wwwroot```
 2. In this directory there should be a .png and .htm file, you can delete these if you want to but I recommend that you keep them stored in a separate directory just in case
-3. In this directory you can create new files and write on them. To create a website you need to have at least one HTML file called index.html, this will be the page that opens first so you would probably want to name your home page index.html. It does not matter what any of the other folders or files are called.
+3. In this directory you can create new files and write on them. To create a website you need to have at least one HTML file called index.html, this will be the page that opens first so you would probably want this to be your home page. It does not matter what any of the other folders or files are called.
 4. Now just launch your locahost and the results should appear.
 
 ##### Issues
-1. If you have insufficient permissions to edit the files in this directory, exit the `wwwroot` file and right click the `inetpub` file
+1. If you have insufficient permissions to edit the files in this directory, exit the `wwwroot` file and right click the `inetpub` folder
 2. Click "properties" and navigate to the "security" tab
 3. Select your user account and tick all permissions
 4. Press "OK"
