@@ -17,7 +17,7 @@ The maps are generated from GeoJSON files released by the Bundestagswahleiter ht
 Please note that d3.js v6 has different syntax thanm the previous versions, most online tutorials are sadly working with versions prior to this one, if something is not working always check if it is because of the version first.
 
 ### Launching the website by opening the ```index.html``` file in my browser returns an error.
-Yes, this is because one of processing .json and .csv files in d3.js creates and error as it does not recognise the ```file:///``` origin (CORS request not HTTP). The solution is the use a localhost.
+Yes, this is because one of processing .json and .csv files in d3.js creates and error as it does not recognise the ```file:///``` origin (CORS request not HTTP). The solution is to use a localhost.
 
 ### How do I set up localhost?
 #### Windows 10
