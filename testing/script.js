@@ -1,28 +1,32 @@
-//const declaration
+//margins and height
 const margin = {"top": 20, "right": 20, "bottom": 20, "left": 20};
 const svgHeight = 500;
 const svgWidth = 600;
 const height = svgHeight - margin.top - margin.bottom;
 const width = svgWidth - margin.left - margin.right;
 
+
+//selecting svg
 const svg = d3.select("svg");
 
 
-//var declaration
+//declaring scales
 var yScale;
 var xScale;
+
+
+//default party order for initial chart
 var defaultPartyOrder = ["CDU", "SPD", "Die Linke", "Die Grünen", "CSU", "FDP", "AfD", "Others"];
 
+
+//appending chart group
 var chart = svg.append("g")
   .attr("height", height)
   .attr("width", width)
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-var tooltip = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
-
 svg.style("cursor", "default");
+
 
 //default x and y scales
 yScale = d3.scaleLinear()
@@ -35,7 +39,9 @@ xScale = d3.scaleBand()
   .padding(0.2);
 
 
-//draw initial blank chart
+
+
+//drawing initial blank chart
 chart.append("g")
   .attr("id", "yAxis")
   .attr("transform", `translate(20, 0)`)
@@ -47,8 +53,12 @@ chart.append("g")
   .call(d3.axisBottom(xScale));
 
 
-//csv processing
+
+
+//processing data and creating chart
 d3.csv("/data/wk_17_processed", function(d) {
+
+  //string values to numerical values if applicable
   return {
     "Name" : d["Name"],
     "ID" : +d["ID"],
@@ -93,18 +103,22 @@ d3.csv("/data/wk_17_processed", function(d) {
   };
 }).then(function(data) {
 
+  // objects to arrays for easier manipulation and referencing
   var dataArray = data.map(Object.values);
 
 
+
+
+  //event listener on button click, will be different in finished version
   btn.addEventListener("click", () =>{
+
+    //fetching result according to text input
     var result = dataArray.filter(element =>{
       return element.includes(input.value);
     });
 
 
-  //graph
-
-    //defining parties and their relative results, ordering them from largest to smallest and removing invalids
+    //getting erst stimmen results for each party and multiplying by 100
     var cdu = result[0][10] * 100
         spd = result[0][14] * 100
         linke = result[0][18] * 100
@@ -114,13 +128,25 @@ d3.csv("/data/wk_17_processed", function(d) {
         afd = result[0][34] * 100
         other = result[0][38] * 100;
 
-    var unsortedPartyArray = [["CDU", cdu, "#000000"],["SPD", spd, "#EB001F"],["Die Linke", linke, "#BE3075"],["Die Grünen", gruene, "#64A12D"],["CSU", csu, "#008AC5"],["FDP", fdp, "#FFED00"],["AfD", afd, "#009EE0"],["Others", other, "#bfbfbf"]];
-    var sortedPartyArray = unsortedPartyArray.sort(function(a, b) {
+    //creating array with the vote share, party name and party color
+    var unsortedPartyArray = [
+      ["CDU", cdu, "#000000"],
+      ["SPD", spd, "#EB001F"],
+      ["Die Linke", linke, "#BE3075"],
+      ["Die Grünen", gruene, "#64A12D"],
+      ["CSU", csu, "#008AC5"],
+      ["FDP", fdp, "#FFED00"],
+      ["AfD", afd, "#009EE0"],
+      ["Others", other, "#bfbfbf"]
+    ];
+    //sorting array from largest to smallest
+    var sortedPartyArray = unsortedPartyArray.sort(function(a, b) { //sorting from largest to smallest, takes first string
       return b[1] - a[1];
     });
 
-    var percentOnlySortedArray = [sortedPartyArray[0][1], sortedPartyArray[1][1], sortedPartyArray[2][1], sortedPartyArray[3][1], sortedPartyArray[4][1], sortedPartyArray[5][1], sortedPartyArray[6][1], sortedPartyArray[7][1]]
-    var partiesOnlySortedArray = [sortedPartyArray[0][0], sortedPartyArray[1][0], sortedPartyArray[2][0], sortedPartyArray[3][0], sortedPartyArray[4][0], sortedPartyArray[5][0], sortedPartyArray[6][0], sortedPartyArray[7][0]];
+      //differentiating between the results and the party
+      var percentOnlySortedArray = [sortedPartyArray[0][1], sortedPartyArray[1][1], sortedPartyArray[2][1], sortedPartyArray[3][1], sortedPartyArray[4][1], sortedPartyArray[5][1], sortedPartyArray[6][1], sortedPartyArray[7][1]]
+      var partiesOnlySortedArray = [sortedPartyArray[0][0], sortedPartyArray[1][0], sortedPartyArray[2][0], sortedPartyArray[3][0], sortedPartyArray[4][0], sortedPartyArray[5][0], sortedPartyArray[6][0], sortedPartyArray[7][0]];
 
       //removing parties with "0"
       var index = percentOnlySortedArray.indexOf(0);
@@ -130,6 +156,8 @@ d3.csv("/data/wk_17_processed", function(d) {
       }
 
 
+
+    //max value +10 rounded to the nearest 10 to get height of the chart
     var maxResult = Math.max(...percentOnlySortedArray);
 
     var yMaxRaw = (maxResult + 10); //highest value of dataset + 10
@@ -162,6 +190,7 @@ d3.csv("/data/wk_17_processed", function(d) {
       .call(d3.axisBottom(xScale));
 
 
+
     //drawing the bars
     svg.selectAll("rect").remove();
 
@@ -172,16 +201,16 @@ d3.csv("/data/wk_17_processed", function(d) {
         .attr("fill", (r) =>{return r[2]})
         .attr("x", (r) => xScale(r[0]) + 40)
         .attr("width", xScale.bandwidth())
-        .attr("y", (r) => yScale(-1.7)) //has to equal 0 at start
-        .attr("height", (r) => height - yScale(0)) //has to equal 0 at start
-        .on("mouseover", (event, r) => {
-          event.target.style.opacity = "0.75";
+        .attr("y", (r) => yScale(-1.7))
+        .attr("height", (r) => height - yScale(0)) //has to equal 0 at start for animation to load from bottom up
+        .on("mouseover", (event, r) =>{
         })
-        .on("mouseout", (r) => {
-          event.target.style.opacity = "1";
+        .on("mouseout", (r) =>{
         });
 
-    //load animation & hover
+
+
+    //loading animation
     svg.selectAll("rect")
       .attr("height", 0)
       .transition()
@@ -190,9 +219,7 @@ d3.csv("/data/wk_17_processed", function(d) {
         .attr("y", (r) => yScale(r[1]) + 19.5)
         .attr("height", (r) => height - yScale(r[1]));
 
-    //tooltip
 
-
-    //console.log(sortedPartyArray);
   });
+
 });
