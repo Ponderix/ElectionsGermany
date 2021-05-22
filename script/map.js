@@ -103,67 +103,67 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
           });
     
 
-  ///////////
-  ///GRAPH///
-  ///////////
-    
-  //margins and height
-  const chartMargin = {"top": 15, "right": 15, "bottom": 20, "left": 15};
-  const containerHeight = 375;
-  const containerWidth = 450;
-  const chartHeight = containerHeight - chartMargin.top - chartMargin.bottom;
-  const chartWidth = containerWidth - chartMargin.left - chartMargin.right;
-
-  //selecting svg
-  const graphSVG = d3.select("#graph")
-    .attr("height", containerHeight)
-    .attr("width", containerWidth)
-
-  //declaring scales
-  var yScale;
-  var xScale;
-
-  //default party order for initial chart
-  var defaultPartyOrder = ["CDU", "SPD", "Die Linke", "Die Grünen", "CSU", "FDP", "AfD", "Others"];
-
-  //appending chart group
-  var chart = graphSVG.append("g")
-    .attr("height", chartHeight)
-    .attr("width", chartWidth)
-    .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
-
-  graphSVG.style("cursor", "default");
-
-  //default x and y scales
-  yScale = d3.scaleLinear()
-    .range([chartHeight, 0])
-    .domain([0, 50]);
-
-  xScale = d3.scaleBand()
-    .range([0, chartWidth])
-    .domain(defaultPartyOrder)
-    .padding(0.2);
-
-  //drawing initial blank chart
-  chart.append("g")
-    .attr("id", "yAxis")
-    .attr("transform", `translate(20, 0)`)
-    .style("color", "#333333")
-    .style("font-weight", "bold")
-    .style("font-family", "Tahoma")
-    .call(d3.axisLeft(yScale));
-
-  chart.append("g")
-    .attr("id", "xAxis")
-    .attr("transform", `translate(20, ${chartHeight})`)
-    .style("color", "#333333")
-    .style("font-weight", "bold")
-    .style("font-family", "Tahoma")
-    .call(d3.axisBottom(xScale));
-
-
-
-  btn.addEventListener("click", () =>{
+    ///////////
+    ///GRAPH///
+    ///////////
+          
+    //margins and height
+    const chartMargin = {"top": 15, "right": 15, "bottom": 20, "left": 15};
+    const containerHeight = 375;
+    const containerWidth = 450;
+    const chartHeight = containerHeight - chartMargin.top - chartMargin.bottom;
+    const chartWidth = containerWidth - chartMargin.left - chartMargin.right;
+          
+    //selecting svg
+    const graphSVG = d3.select("#graph")
+      .attr("height", containerHeight)
+      .attr("width", containerWidth)
+          
+    //declaring scales
+    var yScale;
+    var xScale;
+          
+    //default party order for initial chart
+    var defaultPartyOrder = ["CDU", "SPD", "Die Linke", "Die Grünen", "CSU", "FDP", "AfD", "Others"];
+          
+    //appending chart group
+    var chart = graphSVG.append("g")
+      .attr("height", chartHeight)
+      .attr("width", chartWidth)
+      .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+          
+    graphSVG.style("cursor", "default");
+          
+    //default x and y scales
+    yScale = d3.scaleLinear()
+      .range([chartHeight, 0])
+      .domain([0, 50]);
+          
+    xScale = d3.scaleBand()
+      .range([0, chartWidth])
+      .domain(defaultPartyOrder)
+      .padding(0.2);
+          
+    //drawing initial blank chart
+    chart.append("g")
+      .attr("id", "yAxis")
+      .attr("transform", `translate(20, 0)`)
+      .style("color", "#333333")
+      .style("font-weight", "bold")
+      .style("font-family", "Tahoma")
+      .call(d3.axisLeft(yScale));
+          
+    chart.append("g")
+      .attr("id", "xAxis")
+      .attr("transform", `translate(20, ${chartHeight})`)
+      .style("color", "#333333")
+      .style("font-weight", "bold")
+      .style("font-family", "Tahoma")
+      .call(d3.axisBottom(xScale));
+          
+          
+          
+    btn.addEventListener("click", () =>{
     //fetching result according to text input
     var result = dataArray.filter(element =>{
       return element.includes(input.value);
@@ -282,9 +282,8 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         .duration(400)
         .attr("y", (r) => yScale(r[1]) + 14.5)
         .attr("height", (r) => chartHeight - yScale(r[1]));
+    });
   });
-  });
-
 });
 
 
