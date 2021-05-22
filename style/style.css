@@ -1,5 +1,11 @@
-html {
+body {
   overflow-x: hidden;
+  font-family: Tahoma,sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  background-color: #bfbfbf;
+  margin-top: 5px;
+  margin-bottom: 0px;
 }
 
 header {
@@ -19,25 +25,18 @@ header > h1 {
   margin-right: 25px;
   letter-spacing: 1px;
   font-size: 25px;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+ -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 h2 {
   position: relative;
-  font-weight: 600;
-  font-size: 21px;
-  color: white;
-  align: center;
-  background: #3d7ca6;
-  padding: 2px 5px;
-  display: inline;
-}
-
-body {
-  font-family: Tahoma,sans-serif;
-  font-size: 12px;
-  font-weight: normal;
-  background-color: #bfbfbf;
-  margin-top: 7px;
+  font-weight: 800;
+  font-size: 15px;
+  color: black;
 }
 
 .background {
@@ -58,7 +57,7 @@ body {
   cursor: default;
 }
 
-#NavBar > a {
+#NavBar a {
   float: left;
   display: block;
   color: white;
@@ -69,7 +68,15 @@ body {
   outline: none;
 }
 
+#NavBar a:hover {
+  transition: 0.15s;
+  background-color: #ffb3b3;
+  color: #333333;
+}
+
 #NavBar a.active {
   background-color: #ff7575;
   color: white;
 }
+
+

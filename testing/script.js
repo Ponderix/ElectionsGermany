@@ -56,7 +56,7 @@ chart.append("g")
 
 
 //processing data and creating chart
-d3.csv("/data/wk_17_processed", function(d) {
+d3.csv("data/wk_17_processed.csv", function(d) {
 
   //string values to numerical values if applicable
   return {
