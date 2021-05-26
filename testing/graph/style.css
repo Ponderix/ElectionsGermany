@@ -1,0 +1,37 @@
+body {
+  overflow-x: hidden;
+  font-family: sans-serif;
+  background-color: #535353;
+}
+
+li {
+  position: relative;
+  list-style-type: none;
+}
+
+svg rect:hover {
+  opacity: 50%;
+  transition: 0.15s;
+}
+
+.bar_chart {
+  color: white;
+}
+
+.content {
+  left: 700px;
+  bottom: 470px;
+  position: relative;
+  color: #fff;
+}
+
+/*.a {
+  left: 200px;
+  bottom: 429px;
+}*/
+
+.wahlkreis_button {
+  position: absolute;
+  top: 8px;
+  left: 700px;
+}

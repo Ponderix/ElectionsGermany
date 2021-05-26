@@ -1,0 +1,93 @@
+#reset {
+  position: absolute;
+  margin-top: 8px;
+  border: none;
+  background-color: #4e6692;
+  font: inherit;
+  color: white;
+  cursor: pointer;
+  height: 30px;
+  width: 100px;
+}
+#reset:hover {
+  background-color: #8597b9;
+  transition: 0.15s;
+}
+
+#searchBar {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #4e6692;
+  text-align: center;
+  width: 155px;
+}
+#searchBar:hover {
+  border-color: #8597b9;
+  transition: 0.15s;
+}
+
+.search {
+  position: absolute;
+  margin-top: 8px;
+  height: 30.0px;
+  font: inherit;
+  left: 117px;
+  display: flex;
+  justify-content: space-between;
+}
+.search_icon {
+  background-color: #4e6692;
+  width: 30px;
+  position: relative;
+  cursor: pointer;
+}
+.search_icon:hover {
+  background-color: #8597b9;
+  transition: 0.15s;
+}
+.search i {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#wahlkreise path:hover {
+  opacity: 0.9;
+}
+
+/*CHART*/
+#graph_container {
+  position: relative;
+  left: 740px;
+  bottom: 837px;
+}
+#graph rect:hover {
+  opacity: 0.5;
+  transition: 0.15s;
+}
+
+#graph_title {
+  width: 470px;
+}
+#graph_title h2 {
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  left: inherit;
+  background-color: #333333;
+  padding: 0 15px 0 15px;
+  display: block;
+}
+#graph_title span {
+  font-weight: normal;
+}
+#graph_body {
+  position: relative;
+  bottom: 12px;
+  height: 395px;
+  width: 470px;
+  background-color: whitesmoke;
+  display: block;
+}
