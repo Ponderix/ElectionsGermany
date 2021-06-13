@@ -20,6 +20,7 @@
   border-color: #4e6692;
   text-align: center;
   width: 155px;
+  font-size: 90%;
 }
 #searchBar:hover {
   border-color: #8597b9;
@@ -53,19 +54,11 @@
   transform: translate(-50%, -50%);
 }
 
-#wahlkreise path:hover {
-  opacity: 0.8;
-}
-
 /*CHART*/
 #graph_container {
   position: relative;
-  left: 740px;
+  left: 738px;
   bottom: 837px;
-}
-#graph rect:hover {
-  opacity: 0.5;
-  transition: 0.15s;
 }
 
 #graph_title {
@@ -90,4 +83,12 @@
   width: 470px;
   background-color: whitesmoke;
   display: block;
+}
+#results_container {
+  position: absolute;
+  background-color: grey;
+  top: 75px;
+  left: 250px;
+  height: 175px;
+  width: 200px;
 }

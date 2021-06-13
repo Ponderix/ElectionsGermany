@@ -1,6 +1,6 @@
 
 //margins and dimensions for map
-var margin = {
+let margin = {
   top: 0,
   left: 0,
   bottom: 20,
@@ -8,7 +8,7 @@ var margin = {
 };
 var map = {
   height: 850 - margin.top - margin.bottom,
-  width: 750 - margin.left - margin.right
+  width: 750 - margin.left - margin.right,
 }
 
 var svg = d3.select("#map")
@@ -88,23 +88,36 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
   //map
   d3.json("../data/Wahlkreise_map.topo.json").then(function(mapData) {
+    //selecting first or second vote
+    function whichVote(n) {
+      if (n != 1 && n != 2 ) {
+        return 0;
+      } else {
+        return n - 1;
+      }
+    }
+    var vote = 1;
 
-    //retrieve wahlkreise
     var jsonArray = mapData.objects.wahlkreise.geometries;
 
-    var dimensions = {
+    var defaultPartyOrder = ["CDU", "SPD", "Linke", "Grünen", "CSU", "FDP", "AfD", "Others"];
+
+
+
+    let dimensions = {
       margins: {"top": 15, "right": 15, "bottom": 20, "left": 15},
       container: {"height": 375, "width": 450},
     }
-
-    //draw graph functions
     var graph = {
       height: dimensions.container.height - dimensions.margins.top - dimensions.margins.bottom,
       width: dimensions.container.width - dimensions.margins.left - dimensions.margins.right,
+
       write: function() {
+
         let searchResult = jsonArray.filter((e, i) =>{
             return jsonArray[i].properties.WKR_NAME === input.value; //filter for array wkrname same as search bar input
         });
+
         if (searchResult.length > 0) {
           d3.select("#name") //wahlkreis name if array includes anything
             .html(() =>{
@@ -113,33 +126,31 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         } else {
           return null;
         }
+
       },
+
       draw: function(wahlkreis) {
-              //fetching result according to text input
               var result = dataArray.filter(element =>{
                 return element.includes(wahlkreis);
               });
-              let searchResult = jsonArray.filter((e, i) =>{
-                  return jsonArray[i].properties.WKR_NAME === input.value; //filter for array wkrname same as search bar input
-              });
 
               //getting erst stimmen results for each party and multiplying by 100
-              var cdu = result[0][10] * 100
-                  spd = result[0][14] * 100
-                  linke = result[0][18] * 100
-                  gruene = result[0][22] * 100
-                  csu = result[0][26] * 100
-                  fdp = result[0][30] * 100
-                  afd = result[0][34] * 100
-                  other = result[0][38] * 100;
+              var cdu = result[0][10 + whichVote(vote)] * 100
+                  spd = result[0][14 + whichVote(vote)] * 100
+                  linke = result[0][18 + whichVote(vote)] * 100
+                  gruene = result[0][22 + whichVote(vote)] * 100
+                  csu = result[0][26 + whichVote(vote)] * 100
+                  fdp = result[0][30 + whichVote(vote)] * 100
+                  afd = result[0][34 + whichVote(vote)] * 100
+                  other = result[0][38 + whichVote(vote)] * 100;
 
               //creating array with the vote share, party name and party color
               var unsortedPartyArray = [
                 ["CDU", cdu, "#000000"],
                 ["SPD", spd, "#EB001F"],
-                ["Die Linke", linke, "#BE3075"],
-                ["Die Grünen", gruene, "#64A12D"],
-                ["CSU", csu, "#008AC5"],
+                ["Linke", linke, "#BE3075"],
+                ["Grünen", gruene, "#64A12D"],
+                ["CSU", csu, "#202257"],
                 ["FDP", fdp, "#FFED00"],
                 ["AfD", afd, "#009EE0"],
                 ["Others", other, "#5e5e5e"]
@@ -173,7 +184,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
               xScale = d3.scaleBand()
                 .range([0, graph.width])
                 .domain(partiesOnlySortedArray)
-                .padding(0.2);
+                .padding(0.025);
 
               //removing and redrawing axis
               graphSVG.select("#yAxis").remove();
@@ -181,18 +192,14 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
               chart.append("g")
                 .attr("id", "yAxis")
+                .attr("class", "axis")
                 .attr("transform", `translate(20, 0)`)
-                .style("color", "#333333")
-                .style("font-weight", "bold")
-                .style("font-family", "Tahoma")
                 .call(d3.axisLeft(yScale));
 
               chart.append("g")
                 .attr("id", "xAxis")
+                .attr("class", "axis")
                 .attr("transform", `translate(20, ${graph.height})`)
-                .style("color", "#333333")
-                .style("font-weight", "bold")
-                .style("font-family", "Tahoma")
                 .call(d3.axisBottom(xScale));
 
 
@@ -207,29 +214,60 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                   .attr("x", (r) => xScale(r[0]) + 35)
                   .attr("width", xScale.bandwidth())
                   .attr("y", (r) => yScale(-1.7))
-                  .attr("height", (r) => graph.height - yScale(0)) //has to equal 0 at start for animation to load from bottom up
-                  .on("mouseover", (event, r) =>{
-                  })
-                  .on("mouseout", (r) =>{
-                  });
+                  .attr("height", (r) => graph.height - yScale(0)); //has to equal 0 at start for animation to load from bottom up
 
               //loading animation
               graphSVG.selectAll("rect")
                 .attr("height", 0)
                 .transition()
-                  .delay((d, i) => {return i*50})
+                  .delay((d, i) =>{return i*50})
                   .duration(400)
-                  .attr("y", (r) => yScale(r[1]) + 14.5)
+                  .attr("y", (r) =>{
+                    return yScale(r[1]) + 14.5;
+                  })
                   .attr("height", (r) => graph.height - yScale(r[1]));
                 }
     }
 
+    //appending path form topo data
     g.selectAll("path")
          .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
          .enter().append("path")
           .attr("d", path)
           .style("stroke-width", "0.4px")
           .style("stroke", "#bfbfbf")
+          .attr("fill", (e, i) =>{
+            let wahlkreis = jsonArray[i].properties.WKR_NAME;
+            var result = dataArray.filter(element =>{
+              return element.includes(wahlkreis);
+            });
+
+            var cdu = result[0][10 + whichVote(vote)] * 100
+                spd = result[0][14 + whichVote(vote)] * 100
+                linke = result[0][18 + whichVote(vote)] * 100
+                gruene = result[0][22 + whichVote(vote)] * 100
+                csu = result[0][26 + whichVote(vote)] * 100
+                fdp = result[0][30 + whichVote(vote)] * 100
+                afd = result[0][34 + whichVote(vote)] * 100
+                other = result[0][38 + whichVote(vote)] * 100;
+
+            var unsortedPartyArray = [
+              ["CDU", cdu, "#000000"],
+              ["SPD", spd, "#EB001F"],
+              ["Linke", linke, "#BE3075"],
+              ["Grünen", gruene, "#64A12D"],
+              ["CSU", csu, "#202257"],
+              ["FDP", fdp, "#FFED00"],
+              ["AfD", afd, "#009EE0"],
+              ["Others", other, "#5e5e5e"]
+            ];
+
+            var sortedPartyArray = unsortedPartyArray.sort(function(a, b) { //sorting from largest to smallest, takes first string
+              return b[1] - a[1];
+            });
+
+            return sortedPartyArray[0][2];
+          })
           .html((d, i) =>{ //wahlkreis name popup on hover
             return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data
           })
@@ -253,13 +291,6 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
       .attr("width", dimensions.container.width)
       .style("cursor", "default");
 
-    //declaring scales
-    var yScale;
-    var xScale;
-
-    //default party order for initial chart
-    var defaultPartyOrder = ["CDU", "SPD", "Die Linke", "Die Grünen", "CSU", "FDP", "AfD", "Others"];
-
     //appending chart group
     var chart = graphSVG.append("g")
       .attr("height", graph.height)
@@ -267,11 +298,11 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
       .attr("transform", `translate(${dimensions.margins.left}, ${dimensions.margins.top})`);
 
     //default x and y scales
-    yScale = d3.scaleLinear()
+    var yScale = d3.scaleLinear()
       .range([graph.height, 0])
       .domain([0, 50]);
 
-    xScale = d3.scaleBand()
+    var xScale = d3.scaleBand()
       .range([0, graph.width])
       .domain(defaultPartyOrder)
       .padding(0.2);
@@ -279,33 +310,36 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
     //drawing initial blank chart
     chart.append("g")
       .attr("id", "yAxis")
+      .attr("class", "axis")
       .attr("transform", `translate(20, 0)`)
-      .style("color", "#333333")
-      .style("font-weight", "bold")
-      .style("font-family", "Tahoma")
       .call(d3.axisLeft(yScale));
 
     chart.append("g")
       .attr("id", "xAxis")
+      .attr("class", "axis")
       .attr("transform", `translate(20, ${graph.height})`)
-      .style("color", "#333333")
-      .style("font-weight", "bold")
-      .style("font-family", "Tahoma")
       .call(d3.axisBottom(xScale));
 
 
 
 
     btn.addEventListener("click", () =>{
-      graph.draw(input.value);
-      graph.write();
+      if (input.value === "") {
+        return null;
+      } else {
+        graph.draw(input.value);
+        graph.write();
+      }
     });
 
     input.addEventListener("keyup", function (event) {
       if (event.keyCode === 13) {
-         event.preventDefault();
-         graph.draw(input.value);
-         graph.write();
+        if (input.value === "") {
+          return null;
+        } else {
+          graph.draw(input.value);
+          graph.write();
+        }
       }
     });
   });
@@ -314,10 +348,11 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
 //svg zooming effects
 var zoom = d3.zoom()
-  .scaleExtent([0.5, 15])
+  .scaleExtent([0.7, 15])
   .on("zoom", zoomed);
 
-svg.call(zoom);
+svg.call(zoom)
+  .on("dblclick.zoom", null);
 
 function zoomed(event) {
   var transform = event.transform;
