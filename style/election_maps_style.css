@@ -54,6 +54,33 @@
   transform: translate(-50%, -50%);
 }
 
+/*Results*/
+#results_container {
+  position: absolute;
+  background-color: none;
+  top: 45px;
+  left: 251px;
+  height: 175px;
+  width: 200px;
+}
+.party-result {
+  height: 18px;
+  border-bottom: 1px dotted #bfbfbf;
+}
+.party-flair {
+  position: relative;
+  border: white;
+  margin-top: 2px;
+  width: 30px;
+  height: 15px;
+}
+.party-name {
+  position: relative;
+  left: 35px;
+  bottom: 15px;
+  font-weight: bold;
+}
+
 /*CHART*/
 #graph_container {
   position: relative;
@@ -83,12 +110,4 @@
   width: 470px;
   background-color: whitesmoke;
   display: block;
-}
-#results_container {
-  position: absolute;
-  background-color: grey;
-  top: 75px;
-  left: 250px;
-  height: 175px;
-  width: 200px;
 }

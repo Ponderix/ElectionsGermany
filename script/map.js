@@ -28,6 +28,7 @@ var path = d3.geoPath()
 
 var btn = document.querySelector(".search_icon");
 var input = document.querySelector("#searchBar");
+var results_container = d3.select("#results_container");
 
 
 
@@ -102,8 +103,6 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
     var defaultPartyOrder = ["CDU", "SPD", "Linke", "Grünen", "CSU", "FDP", "AfD", "Others"];
 
-
-
     let dimensions = {
       margins: {"top": 15, "right": 15, "bottom": 20, "left": 15},
       container: {"height": 375, "width": 450},
@@ -129,9 +128,9 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
       },
 
-      draw: function(wahlkreis) {
+      draw: function(name) {
               var result = dataArray.filter(element =>{
-                return element.includes(wahlkreis);
+                return element.includes(name);
               });
 
               //getting erst stimmen results for each party and multiplying by 100
@@ -145,7 +144,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                   other = result[0][38 + whichVote(vote)] * 100;
 
               //creating array with the vote share, party name and party color
-              var unsortedPartyArray = [
+              var partyArray = [
                 ["CDU", cdu, "#000000"],
                 ["SPD", spd, "#EB001F"],
                 ["Linke", linke, "#BE3075"],
@@ -157,13 +156,13 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
               ];
 
               //sorting array from largest to smallest
-              var sortedPartyArray = unsortedPartyArray.sort(function(a, b) { //sorting from largest to smallest, takes first string
+              partyArray.sort(function(a, b) { //sorting from largest to smallest, takes first string
                 return b[1] - a[1];
               });
 
                 //differentiating between the results and the party
-                var percentOnlySortedArray = [sortedPartyArray[0][1], sortedPartyArray[1][1], sortedPartyArray[2][1], sortedPartyArray[3][1], sortedPartyArray[4][1], sortedPartyArray[5][1], sortedPartyArray[6][1], sortedPartyArray[7][1]]
-                var partiesOnlySortedArray = [sortedPartyArray[0][0], sortedPartyArray[1][0], sortedPartyArray[2][0], sortedPartyArray[3][0], sortedPartyArray[4][0], sortedPartyArray[5][0], sortedPartyArray[6][0], sortedPartyArray[7][0]];
+                var percentOnlySortedArray = [partyArray[0][1], partyArray[1][1], partyArray[2][1], partyArray[3][1], partyArray[4][1], partyArray[5][1], partyArray[6][1], partyArray[7][1]]
+                var partiesOnlySortedArray = [partyArray[0][0], partyArray[1][0], partyArray[2][0], partyArray[3][0], partyArray[4][0], partyArray[5][0], partyArray[6][0], partyArray[7][0]];
 
                 //removing parties with "0"
                 var index = percentOnlySortedArray.indexOf(0);
@@ -207,26 +206,42 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
               graphSVG.selectAll("rect").remove();
 
               graphSVG.selectAll("rect")
-                .data(sortedPartyArray) //important that all data needed for the chart is included in this array
+                .data(partyArray) //important that all data needed for the chart is included in this array
                 .enter()
                 .append("rect")
                   .attr("fill", (r) =>{return r[2]})
                   .attr("x", (r) => xScale(r[0]) + 35)
                   .attr("width", xScale.bandwidth())
                   .attr("y", (r) => yScale(-1.7))
-                  .attr("height", (r) => graph.height - yScale(0)); //has to equal 0 at start for animation to load from bottom up
+                  .attr("height", (r) => graph.height - yScale(0)) //has to equal 0 at start for animation to load from bottom up
+                  .transition() //loading animation
+                    .delay((d, i) =>{return i*50})
+                    .duration(400)
+                    .attr("y", (r) =>{
+                      return yScale(r[1]) + 14.5;
+                    })
+                    .attr("height", (r) => graph.height - yScale(r[1]));
 
-              //loading animation
-              graphSVG.selectAll("rect")
-                .attr("height", 0)
-                .transition()
-                  .delay((d, i) =>{return i*50})
-                  .duration(400)
-                  .attr("y", (r) =>{
-                    return yScale(r[1]) + 14.5;
-                  })
-                  .attr("height", (r) => graph.height - yScale(r[1]));
-                }
+              //RESULTS
+              results_container.selectAll("div").remove();
+
+              for (var i = 0; i < partyArray.length; i++) {
+                let party = results_container.append("div")
+                  .attr("id", partyArray[i][0])
+                  .attr("class", "party-result");
+
+                party.append("div")
+                  .attr("class", "party-flair")
+                  .style("background-color", partyArray[i][2]);
+
+                party.append("div")
+                  .attr("class", "party-name")
+                  .html(partyArray[i][0]);
+
+                party.append("div")
+                  .attr("class", "percent-result")
+              }
+            },
     }
 
     //appending path form topo data
@@ -251,7 +266,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 afd = result[0][34 + whichVote(vote)] * 100
                 other = result[0][38 + whichVote(vote)] * 100;
 
-            var unsortedPartyArray = [
+            var partyArray = [
               ["CDU", cdu, "#000000"],
               ["SPD", spd, "#EB001F"],
               ["Linke", linke, "#BE3075"],
@@ -262,11 +277,11 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
               ["Others", other, "#5e5e5e"]
             ];
 
-            var sortedPartyArray = unsortedPartyArray.sort(function(a, b) { //sorting from largest to smallest, takes first string
+            partyArray.sort(function(a, b) { //sorting from largest to smallest, takes first string
               return b[1] - a[1];
             });
 
-            return sortedPartyArray[0][2];
+            return partyArray[0][2];
           })
           .html((d, i) =>{ //wahlkreis name popup on hover
             return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data
