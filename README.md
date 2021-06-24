@@ -8,8 +8,8 @@ This is a website with interactive maps and data about German politics. This web
 
 
 ## Resources and Links
-- [JavaScript Functions Guide](null)
 - [Social Media](null)
+- [Functions Guide](FUNCTIONS.md)
 
 ## Purpouse
 This project was initially created as a school project. My intention with this project was, and still is, to inform people about politics in Germany. Specifically, political geography and voting behaviour.
@@ -27,7 +27,7 @@ The JavaScript is structured so that there is one main script file which generat
 
 To run the website yourself for personal purpouses use a localhost as just opening the `index.html` file won't work.
 
-If you wish to edit the code it is best to keep the file structure as is. If you wish to add additional features create a new script file and store the functions within an object in that file (a guide to the functions can be found under the ). If linked to the main html file these can then be used throughout other script files, similar to libraries.
+If you wish to edit the code it is best to keep the file structure as is. If you wish to add additional features create a new script file and store the functions within an object in that file (a guide to the functions can be found under the Resources and Links section). If linked to the main html file these can then be used throughout other script files, similar to libraries.
 
 For Example:
 ```js
