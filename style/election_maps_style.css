@@ -1,3 +1,4 @@
+/*ELEMENTS*/
 #reset {
   position: absolute;
   margin-top: 8px;
@@ -110,4 +111,45 @@
   width: 470px;
   background-color: whitesmoke;
   display: block;
+}
+
+/*COLOURS*/
+.CDU {
+  fill: #000000;
+  background-color: #000000;
+}
+
+.SPD {
+  fill: #EB001F;
+  background-color: #EB001F;
+}
+
+.Linke {
+  fill: #BE3075;
+  background-color: #BE3075;
+}
+
+.Grünen {
+  fill: #64A12D;
+  background-color: #64A12D;
+}
+
+.CSU {
+  fill: #202257;
+  background-color: #202257;
+}
+
+.FDP {
+  fill: #FFED00;
+  background-color: #FFED00;
+}
+
+.AfD {
+  fill: #009EE0;
+  background-color: #009EE0;
+}
+
+.Others {
+  fill: #5e5e5e;
+  background-color: #5e5e5e;
 }
