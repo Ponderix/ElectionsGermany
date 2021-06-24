@@ -4,6 +4,7 @@
 
 This is a website with interactive maps and data about German politics. This website attempts to inform about the German election system and politics in Germany.
 
+<br/>
 
 
 ## Resources and Links
@@ -30,7 +31,7 @@ If you wish to edit the code it is best to keep the file structure as is. If you
 
 For Example:
 ```js
-foo = {
+var foo = {
   write : function(input) {
     console.log(input);
   }
@@ -38,7 +39,7 @@ foo = {
 ```
 *in a separate file which is also linked on the HTML document*
 ```js
-foo.write("Hello World!")
+foo.write("Hello World!");
 ```
 *output*
 ```HTML
