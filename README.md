@@ -2,7 +2,7 @@
 
 <a href="null"><img src="assets/favicon.png" align="left" hspace="10" vspace="6" height="100px"></a>
 
-This is a website with interactive maps and data about German politics. This website attempts to inform about the German election system and politics in Germany.
+This is a website with interactive maps and data about German politics. This website attempts to inform people about the German election system and politics in Germany. This Website is a static website due to the limitations of Github pages. Feel free to use code from this website for your own projects or create your own projects based off this one, just look at the [liscense](LISCENSE.md) first.
 
 <br/>
 
