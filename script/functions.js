@@ -2,7 +2,7 @@ var functions = {
   //zooming functions
   zoomed : function(event) {
     var transform = event.transform;
-    g.attr("transform", transform.toString());
+    mapGroup.attr("transform", transform.toString());
   },
 
   //on click zoom to path
@@ -14,10 +14,13 @@ var functions = {
   },
 
   //removing all values of 0 IF ordered from large -> small
-  removeZero : function(array) {
+  removeZero : function(array, secondIndex) {
+    array.sort((a, b) =>{
+      return b[secondIndex] - a[secondIndex];
+    });
     for (i = array.length - 1; i >= 0; --i) {
       if (array[i].includes(0)) {
-        array.splice(i, 7);
+        array.splice(i, array.length);
       }
     }
   },

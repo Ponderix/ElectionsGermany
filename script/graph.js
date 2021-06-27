@@ -1,4 +1,4 @@
-let dimensions = {
+var dimensions = {
   margins : {top: 15, right: 15, bottom: 20, left: 15},
   container : {height: 375, width: 450},
 }
@@ -48,11 +48,7 @@ var graph = {
       ["Others", other]
     ];
 
-    partyArray.sort(function(a, b) { //sorting from largest to smallest, takes first string
-      return b[1] - a[1];
-    });
-
-    functions.removeZero(partyArray);
+    functions.removeZero(partyArray, 1);
 
     //from inner to outer bracket: 1. largest value, 2. largest value + 10, 3. rounded to nearest 10
     var yMaxRounded = (Math.round( (Math.max(...functions.whichValue(partyArray, 1)) + 10)/10 )) * 10;

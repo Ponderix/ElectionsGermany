@@ -2,6 +2,8 @@
 var btn = document.querySelector(".search_icon");
 var input = document.querySelector("#searchBar");
 var results_container = d3.select("#results_container");
+var defaultPartyOrder = ["CDU", "SPD", "Linke", "Grünen", "CSU", "FDP", "AfD", "Others"];
+
 var zoom = d3.zoom()
   .scaleExtent([0.7, 15])
   .on("zoom", functions.zoomed);
@@ -11,15 +13,24 @@ var mapSVG = d3.select("#map")
   .attr("width", map.width)
   .attr("preserveAspectRatio", "xMinYMin meet")
   .attr("viewBox", "760 -3850 " + map.width + " " + map.height);
+var mapGroup = mapSVG.append("g")
+  .attr("id", "wahlkreise");
 
 mapSVG.call(zoom).on("dblclick.zoom", null);
 
-var g = mapSVG.append("g")
-  .attr("id", "wahlkreise");
 var projection = d3.geoMercator()
   .scale(3500);
 var path = d3.geoPath()
   .projection(projection);
+
+var graphSVG = d3.select("#graph")
+  .attr("height", dimensions.container.height)
+  .attr("width", dimensions.container.width)
+  .style("cursor", "default");
+var graphGroup = graphSVG.append("g")
+  .attr("height", graph.height)
+  .attr("width", graph.width)
+  .attr("transform", `translate(${dimensions.margins.left}, ${dimensions.margins.top})`);
 
 
 
@@ -69,17 +80,16 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
     "Other % Zweit stimmen" : +d["Other % Zweit stimmen"]
   }
 
-}).then(function(data) {
+}).then(function(resultsData) {
 
-  var dataArray = data.map(Object.values);
+  var dataArray = resultsData.map(Object.values);
 
   d3.json("../data/Wahlkreise_map.topo.json").then(function(mapData) {
 
     var vote = 1;
     var jsonArray = mapData.objects.wahlkreise.geometries;
-    var defaultPartyOrder = ["CDU", "SPD", "Linke", "Grünen", "CSU", "FDP", "AfD", "Others"];
 
-    g.selectAll("path")
+    mapGroup.selectAll("path")
          .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
          .enter().append("path")
           .attr("d", path)
@@ -88,7 +98,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
           .attr("class", (d, i) =>{
             return map.class(dataArray, jsonArray, vote, i);
           })
-          .html((d, i) =>{ //wahlkreis name popup on hover
+          .html((d, i) =>{ //wahlkreis name on hover
             return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data
           })
           .on("click", (d, i) =>{
@@ -96,20 +106,11 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
               .html(() =>{
                 return "<span>" + i.properties.WKR_NR + ". </span>" + i.properties.WKR_NAME;
               });
-            graph.draw(dataArray, i.properties.WKR_NAME, vote, graphSVG, chart, results_container);
+            graph.draw(dataArray, i.properties.WKR_NAME, vote, graphSVG, graphGroup, results_container);
           });
 
 
     //GRAPH//
-    var graphSVG = d3.select("#graph")
-      .attr("height", dimensions.container.height)
-      .attr("width", dimensions.container.width)
-      .style("cursor", "default");
-
-    var chart = graphSVG.append("g")
-      .attr("height", graph.height)
-      .attr("width", graph.width)
-      .attr("transform", `translate(${dimensions.margins.left}, ${dimensions.margins.top})`);
 
     //default x and y scales
     var yScale = d3.scaleLinear()
@@ -122,13 +123,13 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
       .padding(0.2);
 
     //drawing initial blank chart
-    chart.append("g")
+    graphGroup.append("g")
       .attr("id", "yAxis")
       .attr("class", "axis")
       .attr("transform", `translate(20, 0)`)
       .call(d3.axisLeft(yScale));
 
-    chart.append("g")
+    graphGroup.append("g")
       .attr("id", "xAxis")
       .attr("class", "axis")
       .attr("transform", `translate(20, ${graph.height})`)
@@ -139,7 +140,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
       if (input.value === "") {
         return null;
       } else {
-        graph.draw(dataArray, input.value, vote, graphSVG, chart, results_container);
+        graph.draw(dataArray, input.value, vote, graphSVG, graphGroup, results_container);
         graph.write(jsonArray, input.value, "#name");
       }
     });
@@ -149,16 +150,11 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         if (input.value === "") {
           return null;
         } else {
-          graph.draw(dataArray, input.value, vote, graphSVG, chart, results_container);
+          graph.draw(dataArray, input.value, vote, graphSVG, graphGroup, results_container);
           graph.write(jsonArray, input.value, "#name");
         }
       }
     });
+
   });
 });
-
-
-//svg zooming effects
-
-
-//onclick => zoom
