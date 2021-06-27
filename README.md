@@ -27,7 +27,7 @@ The JavaScript is structured so that there is one main script file which generat
 
 To run the website for personal purpouses use a localhost as just opening the `index.html` file won't work.
 
-If you wish to edit the code it is best to keep the file structure as is. If you wish to add additional features create a new script file and store the functions within an object in that file (a guide to the functions can be found under the [Resources and Links section](#resources-and-links)). If linked to the main html file these can then be used throughout other script files, similar to libraries.
+If you wish to edit the code it is best to keep the file structure as is, unless you know exactly what you are doing. If you wish to add additional features create a new script file and store the functions within an object in that file (a guide to the functions can be found under the [Resources and Links section](#resources-and-links)). If linked to the main html file these can then be used throughout other script files, similar to libraries.
 
 For Example:
 ```js
