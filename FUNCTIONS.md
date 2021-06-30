@@ -100,9 +100,9 @@ A function to round to a set amount of decimal places. The "num" parameter is th
 In the function the number 10 is raised to the value of the "decimal" parameter. This is needed because the JavaScript rounding functions only rounds decimals to the nearest integer. To get around this issue you would need to multiply the given value by a power of 10 (depending on how many decimal places you want), and then divide it by the same value after rounding it. For example; say you want to round 12.271 to the nearest 10th, the steps would go as following:
 ```js
 //nearest 10th => multiply by 10
-12.271 * 10;
-Math.round(122.71); //output would be 123, to solve this divide it
-123 / 10; //output would be 12.3
+var input = 12.271 * 10; //122.71
+var rounded = Math.round(input); //output would be 123, to solve this divide it
+rounded / 10; //output would be 12.3
 ```
 As seen, this process is quite tedious. This function just shortens this process. Here is how it would be used:
 <a name="round"></a>
