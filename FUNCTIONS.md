@@ -94,10 +94,10 @@ Still confused? Contact me at germanelectionmaps@gmail.com or [twitter]()
 
 
 ### [#](#round) *functions*.round(num, decimal)
-A function to round to a set amount of decimal places. The "num" parameter is the number which will be rounded to the specified decimals. The "decimal" parameter is the length of the decimals after the point. A "2" would be #.##, a "1" would be #.# et. However, you can also go the opposite way, "-1" would be to the nearest 10, "-2" would be to the nearest 100 etc.
+A function to round to a set amount of decimal places. The "num" parameter is the number which will be rounded to the specified decimals. The "decimal" parameter is the length of the decimals after the point, a "2" would be #.##, a "1" would be #.# etc. However, you can also go the opposite way, "-1" would be to the nearest 10, "-2" would be to the nearest 100 etc.
 
 
-In the functions the number 10 is raised to the value of the "decimal" parameter. This is needed because the JavaScript rounding functions only rounds decimals to the nearest integer. To get around this issue you would need to multiply the given value by a power of 10 (depending on how many decimal places you want), and then divide it by the same value after rounding it. For example; say you want to round 12.271 to the nearest 10th, the steps would go as following:
+In the function the number 10 is raised to the value of the "decimal" parameter. This is needed because the JavaScript rounding functions only rounds decimals to the nearest integer. To get around this issue you would need to multiply the given value by a power of 10 (depending on how many decimal places you want), and then divide it by the same value after rounding it. For example; say you want to round 12.271 to the nearest 10th, the steps would go as following:
 ```js
 //nearest 10th => multiply by 10
 12.271 * 10;
