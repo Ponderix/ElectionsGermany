@@ -1,5 +1,5 @@
 # Functions Guide
-A guide to functions used in this project. Useful for those who want to edit and/or improve this project. To successfully follow this guid you will need a mediocore understanding of JavaScript arrays and basic knowledge about [d3.js](https://d3js.org/).
+A guide to functions used in this project. Useful for those who want to edit and/or improve this project. To successfully follow this guide you will need a mediocore understanding of JavaScript arrays and basic knowledge about [d3.js](https://d3js.org/).
 - [Misc. Functions](#functions)
 - [Graph Functions](#graph)
 - [Map Functions](#map)
@@ -77,7 +77,7 @@ Due to this I needed a way to manipulate the data so that by changing the value 
 
 
 If it should be changed to the Zweit Stimme, the variable `vote` would be changed to 2. When this variable is passed through the function it returns -1 because all the second vote results are one column before the first vote on the data file.<br/>
-Here is what I mean: 
+Here is what I mean:
 <a name="which_vote"></a>
 ```js
 var vote = 1;
@@ -91,6 +91,28 @@ var cdu = data[0][10 + functions.whichVote(vote)] * 100
         other = data[0][38 + functions.whichVote(vote)] * 100;
 ```
 Still confused? Contact me at germanelectionmaps@gmail.com or [twitter]()
+
+
+### [#](#round) *functions*.round(num, decimal)
+A function to round to a set amount of decimal places. The "num" parameter is the number which will be rounded to the specified decimals. The "decimal" parameter is the length of the decimals after the point. A "2" would be #.##, a "1" would be #.# et. However, you can also go the opposite way, "-1" would be to the nearest 10, "-2" would be to the nearest 100 etc.
+
+
+In the functions the number 10 is raised to the value of the "decimal" parameter. This is needed because the JavaScript rounding functions only rounds decimals to the nearest integer. To get around this issue you would need to multiply the given value by a power of 10 (depending on how many decimal places you want), and then divide it by the same value after rounding it. For example; say you want to round 12.271 to the nearest 10th, the steps would go as following:
+```js
+//nearest 10th => multiply by 10
+12.271 * 10;
+Math.round(122.71); //output would be 123, to solve this divide it
+123 / 10; //output would be 12.3
+```
+As seen, this process is quite tedious. This function just shortens this process.
+<a name="round"></a>
+```js
+functions.round(12.271, 1);
+```
+OUTPUT:
+```js
+12.3
+```
 
 ## [Graph.js](script/graph.js) <a name="graph"></a>
 

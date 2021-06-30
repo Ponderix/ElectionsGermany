@@ -80,6 +80,17 @@
   bottom: 15px;
   font-weight: bold;
 }
+.percent-result {
+  position: relative;
+  bottom: 30px;
+  text-align: right;
+}
+.turnout-info {
+  position: relative;
+  top: 10px;
+  text-align: right;
+  font-weight: bold;
+}
 
 /*CHART*/
 #graph_container {

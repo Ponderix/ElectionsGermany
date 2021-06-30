@@ -37,6 +37,9 @@ var graph = {
         afd = result[0][34 + functions.whichVote(vote)] * 100
         other = result[0][38 + functions.whichVote(vote)] * 100;
 
+    var eligibleVoters = result[0][3]
+        votesCast = result[0][4];
+
     var partyArray = [
       ["CDU", cdu],
       ["SPD", spd],
@@ -51,7 +54,7 @@ var graph = {
     functions.removeZero(partyArray, 1);
 
     //from inner to outer bracket: 1. largest value, 2. largest value + 10, 3. rounded to nearest 10
-    var yMaxRounded = (Math.round( (Math.max(...functions.whichValue(partyArray, 1)) + 10)/10 )) * 10;
+    var yMaxRounded = functions.round((Math.max(...functions.whichValue(partyArray, 1)) + 10), -1);
 
     //redefining chart axis on click according to data
     yScale = d3.scaleLinear()
@@ -99,12 +102,16 @@ var graph = {
           })
           .attr("height", (r) => graph.height - yScale(r[1]));
 
-    //RESULTS
+    //RESULTS & TURNOUT
     results_container.selectAll("div").remove();
 
+
     for (var i = 0; i < partyArray.length; i++) {
-      var party = results_container.append("div")
-        .attr("id", partyArray[i][0])
+      var shortenedResult = functions.round(partyArray[i][1], 2);
+
+      var party = results_container.append("div");
+
+      party.attr("id", partyArray[i][0])
         .attr("class", "party-result");
 
       party.append("div")
@@ -116,6 +123,17 @@ var graph = {
 
       party.append("div")
         .attr("class", "percent-result")
+        .html(shortenedResult + " %");
+
+      party.append("div")
+        .attr("class", "majority-info");
+
+      party.append("div")
+        .attr("class", "state-info");
     }
+
+    results_container.append("div")
+      .attr("class", "turnout-info")
+      .html("Turnout: " + functions.round((votesCast / eligibleVoters) * 100, 2) + "%");
   }
 }
