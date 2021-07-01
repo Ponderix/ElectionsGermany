@@ -1,3 +1,4 @@
+/*ELEMENTS*/
 #reset {
   position: absolute;
   margin-top: 8px;
@@ -20,6 +21,7 @@
   border-color: #4e6692;
   text-align: center;
   width: 155px;
+  font-size: 90%;
 }
 #searchBar:hover {
   border-color: #8597b9;
@@ -53,19 +55,48 @@
   transform: translate(-50%, -50%);
 }
 
-#wahlkreise path:hover {
-  opacity: 0.9;
+/*Results*/
+#results_container {
+  position: absolute;
+  top: 45px;
+  left: 251px;
+  height: 175px;
+  width: 200px;
+}
+.party-result {
+  height: 18px;
+  border-bottom: 1px dotted #bfbfbf;
+}
+.party-flair {
+  position: relative;
+  border: white;
+  margin-top: 2px;
+  width: 30px;
+  height: 15px;
+}
+.party-name {
+  position: relative;
+  left: 35px;
+  bottom: 15px;
+  font-weight: bold;
+}
+.percent-result {
+  position: relative;
+  bottom: 30px;
+  text-align: right;
+}
+.turnout-info {
+  position: relative;
+  top: 10px;
+  text-align: right;
+  font-weight: bold;
 }
 
 /*CHART*/
 #graph_container {
   position: relative;
-  left: 740px;
+  left: 738px;
   bottom: 837px;
-}
-#graph rect:hover {
-  opacity: 0.5;
-  transition: 0.15s;
 }
 
 #graph_title {
@@ -90,4 +121,45 @@
   width: 470px;
   background-color: whitesmoke;
   display: block;
+}
+
+/*COLOURS*/
+.CDU {
+  fill: #000000;
+  background-color: #000000;
+}
+
+.SPD {
+  fill: #EB001F;
+  background-color: #EB001F;
+}
+
+.Linke {
+  fill: #BE3075;
+  background-color: #BE3075;
+}
+
+.Grünen {
+  fill: #64A12D;
+  background-color: #64A12D;
+}
+
+.CSU {
+  fill: #202257;
+  background-color: #202257;
+}
+
+.FDP {
+  fill: #FFED00;
+  background-color: #FFED00;
+}
+
+.AfD {
+  fill: #009EE0;
+  background-color: #009EE0;
+}
+
+.Others {
+  fill: #5e5e5e;
+  background-color: #5e5e5e;
 }
