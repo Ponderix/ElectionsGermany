@@ -37,9 +37,6 @@ var graph = {
         afd = result[0][34 + functions.whichVote(vote)] * 100
         other = result[0][38 + functions.whichVote(vote)] * 100;
 
-    var eligibleVoters = result[0][3]
-        votesCast = result[0][4];
-
     var partyArray = [
       ["CDU", cdu],
       ["SPD", spd],
@@ -50,6 +47,17 @@ var graph = {
       ["AfD", afd],
       ["Others", other]
     ];
+
+    var rawVotes = result[0].filter((e, index) =>{
+      for (var i = 1; i < result[0].length; i++) {
+        if (index == i * 4 + 4) {
+          return e;
+        }
+      }
+    });
+
+    var eligibleVoters = result[0][3]
+        votesCast = result[0][4];
 
     functions.removeZero(partyArray, 1);
 
@@ -108,7 +116,6 @@ var graph = {
 
     for (var i = 0; i < partyArray.length; i++) {
       var shortenedResult = functions.round(partyArray[i][1], 2);
-
       var party = results_container.append("div");
 
       party.attr("id", partyArray[i][0])
@@ -124,16 +131,14 @@ var graph = {
       party.append("div")
         .attr("class", "percent-result")
         .html(shortenedResult + " %");
-
-      party.append("div")
-        .attr("class", "majority-info");
-
-      party.append("div")
-        .attr("class", "state-info");
     }
 
     results_container.append("div")
       .attr("class", "turnout-info")
       .html("Turnout: " + functions.round((votesCast / eligibleVoters) * 100, 2) + "%");
+
+    results_container.append("div")
+      .attr("class", "seat-info")
+      .html(functions.getMargin(rawVotes));
   }
 }

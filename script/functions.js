@@ -47,5 +47,14 @@ var functions = {
   //rounds to nearest nth term
   round : function(num, decimals) {
     return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
+  },
+
+  //get diff between largest and second largest value in array
+  getMargin : function(array) {
+    var max = Math.max(...array);
+    array.splice(array.indexOf(max), 1);
+    var secondMax = Math.max(...array);
+
+    return max - secondMax;
   }
 }
