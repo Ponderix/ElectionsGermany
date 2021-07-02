@@ -114,6 +114,19 @@ OUTPUT:
 12.3
 ```
 
+### [#](#get_margin) *functions*.getMargin(array)
+A function to get the difference, aka the margin, between the largest and second largest value in an array. It can be applied universally and does not need any special inputs. The "array" parameter is the array the function should be applied to. The function first finds the largest value, removes this value from the array and finds the largest value from the remaining array, essentially getting the first and second largest values. It subtracts these values from each other to get the margin.
+
+```js
+var arr = [10, 13, 23, 28];
+
+functions.getMargin(arr);
+```
+OUTPUT:
+```js
+5 //28-23 = 5
+```
+
 ## [Graph.js](script/graph.js) <a name="graph"></a>
 
 ## [Map.js](script/map.js) <a name="map"></a>
