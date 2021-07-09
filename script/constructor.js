@@ -84,6 +84,9 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
   var dataArray = resultsData.map(Object.values);
 
+  //drawing boxes over input to indicate party
+  userinput.drawParties(d3.select("#input_national"), dataArray);
+
   d3.json("../data/Wahlkreise_map.topo.json").then(function(mapData) {
 
     var vote = 1;

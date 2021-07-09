@@ -55,41 +55,21 @@
   transform: translate(-50%, -50%);
 }
 
-/*Results*/
-#results_container {
-  position: absolute;
-  top: 45px;
-  left: 251px;
-  height: 175px;
-  width: 200px;
+/*class elements chart&input*/
+.title {
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  left: inherit;
+  background-color: #333333;
+  padding: 0 15px 0 15px;
+  display: block;
 }
-.party-result {
-  height: 18px;
-  border-bottom: 1px dotted #bfbfbf;
-}
-.party-flair {
+.body {
   position: relative;
-  border: white;
-  margin-top: 2px;
-  width: 30px;
-  height: 15px;
-}
-.party-name {
-  position: relative;
-  left: 35px;
-  bottom: 15px;
-  font-weight: bold;
-}
-.percent-result {
-  position: relative;
-  bottom: 30px;
-  text-align: right;
-}
-.turnout-info {
-  position: relative;
-  top: 10px;
-  text-align: right;
-  font-weight: bold;
+  background-color: whitesmoke;
+  display: block;
+  bottom: 12px;
 }
 
 /*CHART*/
@@ -102,29 +82,17 @@
 #graph_title {
   width: 470px;
 }
-#graph_title h2 {
-  color: white;
-  height: 30px;
-  line-height: 30px;
-  left: inherit;
-  background-color: #333333;
-  padding: 0 15px 0 15px;
-  display: block;
-}
 #graph_title span {
   font-weight: normal;
 }
+
 #graph_body {
-  position: relative;
-  bottom: 12px;
-  height: 450px;
+  height: 435px;
   width: 470px;
-  background-color: whitesmoke;
-  display: block;
 }
 #graph {
   position: relative;
-  top: 65px;
+  top: 50px;
 }
 
 /*COLOURS*/

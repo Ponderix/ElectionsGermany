@@ -58,6 +58,7 @@ var graph = {
 
     var eligibleVoters = result[0][3]
         votesCast = result[0][4];
+    var margin = functions.getMargin(rawVotes);
 
     functions.removeZero(partyArray, 1);
 
@@ -113,10 +114,31 @@ var graph = {
     //RESULTS & TURNOUT
     results_container.selectAll("div").remove();
 
+    var states = [
+      ["SH" , "Schleswig-Holstein"],
+      ["MV" , "Mecklenburg-Vorpommern"],
+      ["HH" , "Hamburg"],
+      ["NI" , "Niedersachsen"],
+      ["HB" , "Bremen"],
+      ["BB" , "Brandenburg"],
+      ["ST" , "Sachsen-Anhalt"],
+      ["BE" , "Berlin"],
+      ["NW" , "Nordrhein-Westpfalen"],
+      ["SN" , "Sachsen"],
+      ["HE" , "Hessen"],
+      ["TH" , "Thüringen"],
+      ["RP" , "Rhineland-Pfalz"],
+      ["BY" , "Bayern"],
+      ["BW" , "Baden-Württemberg"],
+      ["SL" , "Saarland"]
+    ]
+
+    var party_info = results_container.append("div")
+      .attr("class", "party-info");
 
     for (var i = 0; i < partyArray.length; i++) {
       var shortenedResult = functions.round(partyArray[i][1], 2);
-      var party = results_container.append("div");
+      var party = party_info.append("div");
 
       party.attr("id", partyArray[i][0])
         .attr("class", "party-result");
@@ -133,12 +155,25 @@ var graph = {
         .html(shortenedResult + " %");
     }
 
-    results_container.append("div")
-      .attr("class", "turnout-info")
+    party_info.append("div")
+      .attr("id", "turnout-info")
       .html("Turnout: " + functions.round((votesCast / eligibleVoters) * 100, 2) + "%");
 
-    results_container.append("div")
-      .attr("class", "seat-info")
-      .html(functions.getMargin(rawVotes));
+    var seat_info = results_container.append("div")
+      .attr("class", "seat-info");
+
+    seat_info.append("div")
+      .attr("id", "margin-info")
+      .html(`Margin of victory: <span>${margin} (${functions.round(margin / result[0][4] * 100, 2)}%)</span>`);
+
+    seat_info.append("div")
+      .attr("id", "state-info")
+      .html(() =>{
+        for (var i = 0; i < states.length; i++) {
+          if (result[0][2] == states[i][0]) {
+            return states[i][1];
+          }
+        }
+      });
   }
 }

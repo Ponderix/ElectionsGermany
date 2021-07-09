@@ -1,0 +1,54 @@
+
+/*Results*/
+#results_container {
+  position: absolute;
+  top: 45px;
+  margin-left: 15px;
+  margin-right: 15px;
+  height: 175px;
+  width: 440px;
+}
+
+.party-info {
+  position: relative;
+  width: 200px;
+  float: right;
+}
+.party-result {
+  height: 18px;
+  border-bottom: 1px dotted #bfbfbf;
+}
+.party-flair {
+  position: relative;
+  border: white;
+  margin-top: 2px;
+  width: 30px;
+  height: 15px;
+}
+.party-name {
+  position: relative;
+  left: 35px;
+  bottom: 15px;
+  font-weight: bold;
+}
+.percent-result {
+  position: relative;
+  bottom: 30px;
+  text-align: right;
+}
+#turnout-info {
+  position: relative;
+  text-align: right;
+  font-weight: bold;
+  float: right;
+  margin-top: 15px;
+}
+
+.seat-info {
+  width: 225px;
+  text-align: left;
+  font-weight: bold;
+}
+#margin-info span {
+  font-weight: normal;
+}

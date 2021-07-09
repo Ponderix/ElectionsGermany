@@ -40,15 +40,62 @@
 
     <div id="graph_container">
       <div id="graph_title">
-        <h2 id="name">--</h2>
+        <h2 id="name" class="title">--</h2>
       </div>
 
-      <div id="graph_body">
+      <div id="graph_body" class="body">
         <svg id="graph">
         </svg>
       </div>
-      
+
       <div id="results_container">
+      </div>
+    </div>
+
+    <div id="input_container">
+      <div id="input_title">
+        <h2 class="title">Your Prediction</h2>
+      </div>
+
+      <div id="input_body" class="body">
+
+        <div id="input_explainer">
+          Predict a hypothetical outcome of the 2017 election! Discover how the electoral districts change according to your own input. The value you see above the input fields are the result each party recieved as <span style="font-weight: bold;">first votes</span>. A more elaborate calculator which will include second votes and state predictions will come in a further release.
+        </div>
+
+        <span id="result-key">2017 RESULT:</span>
+        <span id="prediction-key">PREDICTION:</span>
+
+        <div id="input_national" class="user-input">
+          <div id="input_CDU" class="input-field">
+            <input type="text" value="0"/>
+          </div>
+          <div id="input_SPD" class="input-field">
+            <input type="text" value="0"/>
+          </div>
+          <div id="input_AfD" class="input-field">
+            <input type="text" value="0"/>
+          </div>
+          <div id="input_Linke" class="input-field">
+            <input type="text" value="0"/>
+          </div>
+          <div id="input_Grünen" class="input-field">
+            <input type="text" value="0"/>
+          </div>
+          <div id="input_CSU" class="input-field">
+            <input type="text" value="0"/>
+          </div>
+          <div id="input_FDP" class="input-field">
+            <input type="text" value="0"/>
+          </div>
+          <div id="input_Others" class="input-field">
+            <input type="text" value="0"/>
+          </div>
+
+        </div>
+
+        <button type="button" id="predict-button">PREDICT!</button>
+
       </div>
     </div>
 
@@ -56,10 +103,17 @@
     <script src="../script/functions.js" charset="utf-8"></script>
     <script src="../script/map.js" charset="utf-8"></script>
     <script src="../script/graph.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../script/constructor.js"></script>
+    <script src="../script/userinput.js" charset="utf-8"></script>
+
+    <!-- HAS TO BE DEFINED AFTER ALL OTHER SCRIPTS -->
+    <script src="../script/constructor.js" charset="utf-8"></script>
+    <!-- -->
+
     <link rel="stylesheet" href="../style/svg.css">
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/election_maps_style.css">
+    <link rel="stylesheet" href="../style/electionmaps/style.css">
+    <link rel="stylesheet" href="../style/electionmaps/results_container.css">
+    <link rel="stylesheet" href="../style/electionmaps/userinput.css">
   </body>
 
 </html>
