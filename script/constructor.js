@@ -1,6 +1,7 @@
 
 var btn = document.querySelector(".search_icon");
-var input = document.querySelector("#searchBar");
+var searchBar = document.querySelector("#searchBar");
+var predictButton = document.querySelector("#predict-button");
 var results_container = d3.select("#results_container");
 var defaultPartyOrder = ["CDU", "SPD", "Linke", "Grünen", "CSU", "FDP", "AfD", "Others"];
 
@@ -84,13 +85,14 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
   var dataArray = resultsData.map(Object.values);
 
-  //drawing boxes over input to indicate party
-  userinput.drawParties(d3.select("#input_national"), dataArray);
-
   d3.json("../data/Wahlkreise_map.topo.json").then(function(mapData) {
 
     var vote = 1;
     var jsonArray = mapData.objects.wahlkreise.geometries;
+    var swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"));
+
+    //drawing boxes over input to indicate party
+    userinput.drawParties(dataArray, "Country-Wide", vote, d3.select("#input_national"));
 
     mapGroup.selectAll("path")
          .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
@@ -99,7 +101,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
           .style("stroke-width", "0.4px")
           .style("stroke", "#bfbfbf")
           .attr("class", (d, i) =>{
-            return map.class(dataArray, jsonArray, vote, i);
+            return map.class(dataArray, jsonArray, vote, i, swingArray);
           })
           .html((d, i) =>{ //wahlkreis name on hover
             return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data
@@ -109,7 +111,27 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
               .html(() =>{
                 return "<span>" + i.properties.WKR_NR + ". </span>" + i.properties.WKR_NAME;
               });
-            graph.draw(dataArray, i.properties.WKR_NAME, vote, graphSVG, graphGroup, results_container);
+
+            //if (inputvaluesSUM > 0) AND (button event CLICKED) THEN {apply swing} && {draw graph} ELSE {draw graph}
+
+            var result = electionData.getDistrict(dataArray, i.properties.WKR_NAME);
+            var partyArray = electionData.getData(dataArray, i.properties.WKR_NAME, vote);
+
+            functions.removeZero(partyArray, 1); //first ordering to remove parties which dont run
+
+            /*
+              //adding swing to the party values on click
+              for (var index = 0; index < partyArray.length; index++) {
+                var filter = swingArray.filter((e, i) =>{
+                  return e[0].includes(partyArray[index][0]);
+                });
+
+                var prediction = partyArray[index][1] + filter[0][1];
+                partyArray[index].splice(1, 1, prediction);
+              }
+            */
+            
+            graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
           });
 
 
@@ -140,21 +162,21 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
     //on click graph
     btn.addEventListener("click", () =>{
-      if (input.value === "") {
+      if (searchBar.value === "") {
         return null;
       } else {
-        graph.draw(dataArray, input.value, vote, graphSVG, graphGroup, results_container);
-        graph.write(jsonArray, input.value, "#name");
+        graph.draw(dataArray, searchBar.value, vote, graphSVG, graphGroup, results_container, swingArray);
+        graph.write(jsonArray, searchBar.value, "#name");
       }
     });
 
-    input.addEventListener("keyup", function (event) {
+    searchBar.addEventListener("keyup", function (event) {
       if (event.keyCode === 13) {
-        if (input.value === "") {
+        if (searchBar.value === "") {
           return null;
         } else {
-          graph.draw(dataArray, input.value, vote, graphSVG, graphGroup, results_container);
-          graph.write(jsonArray, input.value, "#name");
+          graph.draw(dataArray, searchBar.value, vote, graphSVG, graphGroup, results_container, swingArray);
+          graph.write(jsonArray, searchBar.value, "#name");
         }
       }
     });

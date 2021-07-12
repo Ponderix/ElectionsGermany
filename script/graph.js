@@ -23,30 +23,7 @@ var graph = {
   },
 
   //drawing graph
-  draw : function(data, search, vote, svg, container, results_container) {
-    var result = data.filter(element =>{
-      return element.includes(search);
-    });
-
-    var cdu = result[0][10 + functions.whichVote(vote)] * 100
-        spd = result[0][14 + functions.whichVote(vote)] * 100
-        linke = result[0][18 + functions.whichVote(vote)] * 100
-        gruene = result[0][22 + functions.whichVote(vote)] * 100
-        csu = result[0][26 + functions.whichVote(vote)] * 100
-        fdp = result[0][30 + functions.whichVote(vote)] * 100
-        afd = result[0][34 + functions.whichVote(vote)] * 100
-        other = result[0][38 + functions.whichVote(vote)] * 100;
-
-    var partyArray = [
-      ["CDU", cdu],
-      ["SPD", spd],
-      ["Linke", linke],
-      ["Grünen", gruene],
-      ["CSU", csu],
-      ["FDP", fdp],
-      ["AfD", afd],
-      ["Others", other]
-    ];
+  draw : function(result, partyArray, svg, container, results_container) {
 
     var rawVotes = result[0].filter((e, index) =>{
       for (var i = 1; i < result[0].length; i++) {
@@ -60,10 +37,13 @@ var graph = {
         votesCast = result[0][4];
     var margin = functions.getMargin(rawVotes);
 
-    functions.removeZero(partyArray, 1);
+    functions.removeZero(partyArray, 1); //second ordering to remove parties which dont run
 
-    //from inner to outer bracket: 1. largest value, 2. largest value + 10, 3. rounded to nearest 10
+
+    //functions.removeZero(partyArray, 1); // second ordering to re-adjust the changed array
+
     var yMaxRounded = functions.round((Math.max(...functions.whichValue(partyArray, 1)) + 10), -1);
+
 
     //redefining chart axis on click according to data
     yScale = d3.scaleLinear()

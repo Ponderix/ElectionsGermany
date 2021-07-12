@@ -56,5 +56,5 @@ var functions = {
     var secondMax = Math.max(...array);
 
     return max - secondMax;
-  }
+  },
 }
