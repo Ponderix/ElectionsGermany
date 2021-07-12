@@ -3,6 +3,7 @@ var btn = document.querySelector(".search_icon");
 var searchBar = document.querySelector("#searchBar");
 var predictButton = document.querySelector("#predict-button");
 var results_container = d3.select("#results_container");
+var vote = 1;
 var defaultPartyOrder = ["CDU", "SPD", "Linke", "Grünen", "CSU", "FDP", "AfD", "Others"];
 
 var zoom = d3.zoom()
@@ -32,6 +33,14 @@ var graphGroup = graphSVG.append("g")
   .attr("height", graph.height)
   .attr("width", graph.width)
   .attr("transform", `translate(${dimensions.margins.left}, ${dimensions.margins.top})`);
+
+
+
+
+//============================================================
+//============================================================
+//============================================================
+
 
 
 
@@ -83,16 +92,40 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
 }).then(function(resultsData) {
 
-  var dataArray = resultsData.map(Object.values);
+  var rawDataArray = resultsData.map(Object.values); //RAW ARRAY WITH 2017 RESULTS
+  var dataArray = resultsData.map(Object.values); //ARRAY WITH PREDICTED RESULTS
+  var swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"));
+
+  //adding swing to the party values on click
+  for (var i = 0; i < dataArray.length; i++) {
+    var result = dataArray[i][0];
+    var partyArray = electionData.getData(dataArray, result, vote);
+    var dataIndex = electionData.getIndex(vote);
+
+    for (var index = 0; index < partyArray.length; index++) {
+      var prediction = partyArray[index][1] + swingArray[index][1]; //add national swing of party to result in district
+      partyArray[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
+    }
+
+    for (var ind = 0; ind < dataIndex.length; ind++) {
+      dataArray[i].splice(dataIndex[ind][1], 1, partyArray[ind][1] / 100); //replace the predicted numbers withe the original numbers in the master array and divide by 100 to counteract a calculation
+    }
+
+  }
+
+
+  //============================================================
+  //============================================================
+  //============================================================
+
+
 
   d3.json("../data/Wahlkreise_map.topo.json").then(function(mapData) {
 
-    var vote = 1;
     var jsonArray = mapData.objects.wahlkreise.geometries;
-    var swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"));
 
     //drawing boxes over input to indicate party
-    userinput.drawParties(dataArray, "Country-Wide", vote, d3.select("#input_national"));
+    userinput.drawParties(rawDataArray, "Country-Wide", vote, d3.select("#input_national"));
 
     mapGroup.selectAll("path")
          .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
@@ -112,27 +145,13 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 return "<span>" + i.properties.WKR_NR + ". </span>" + i.properties.WKR_NAME;
               });
 
-            //if (inputvaluesSUM > 0) AND (button event CLICKED) THEN {apply swing} && {draw graph} ELSE {draw graph}
-
             var result = electionData.getDistrict(dataArray, i.properties.WKR_NAME);
             var partyArray = electionData.getData(dataArray, i.properties.WKR_NAME, vote);
 
-            functions.removeZero(partyArray, 1); //first ordering to remove parties which dont run
-
-            /*
-              //adding swing to the party values on click
-              for (var index = 0; index < partyArray.length; index++) {
-                var filter = swingArray.filter((e, i) =>{
-                  return e[0].includes(partyArray[index][0]);
-                });
-
-                var prediction = partyArray[index][1] + filter[0][1];
-                partyArray[index].splice(1, 1, prediction);
-              }
-            */
-            
             graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
           });
+
+
 
 
     //GRAPH//
@@ -160,13 +179,20 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
       .attr("transform", `translate(20, ${graph.height})`)
       .call(d3.axisBottom(xScale));
 
+
+
+
+      
+
     //on click graph
     btn.addEventListener("click", () =>{
       if (searchBar.value === "") {
         return null;
       } else {
-        graph.draw(dataArray, searchBar.value, vote, graphSVG, graphGroup, results_container, swingArray);
-        graph.write(jsonArray, searchBar.value, "#name");
+        var result = electionData.getDistrict(dataArray, searchBar.value);
+        var partyArray = electionData.getData(dataArray, searchBar.value, vote);
+
+        graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
       }
     });
 
@@ -175,8 +201,10 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         if (searchBar.value === "") {
           return null;
         } else {
-          graph.draw(dataArray, searchBar.value, vote, graphSVG, graphGroup, results_container, swingArray);
-          graph.write(jsonArray, searchBar.value, "#name");
+          var result = electionData.getDistrict(dataArray, searchBar.value);
+          var partyArray = electionData.getData(dataArray, searchBar.value, vote);
+
+          graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
         }
       }
     });
