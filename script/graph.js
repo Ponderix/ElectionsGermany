@@ -37,8 +37,7 @@ var graph = {
         votesCast = result[0][4];
     var margin = functions.getMargin(rawVotes);
 
-    functions.removeZero(partyArray, 1); //second ordering to remove parties which dont run
-
+    functions.removeZero(partyArray, 1); //ordering to remove parties which dont run
 
     //functions.removeZero(partyArray, 1); // second ordering to re-adjust the changed array
 

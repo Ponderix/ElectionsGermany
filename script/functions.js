@@ -19,7 +19,7 @@ var functions = {
       return b[secondIndex] - a[secondIndex];
     });
     for (i = array.length - 1; i >= 0; --i) {
-      if (array[i].includes(0)) {
+      if (array[i][secondIndex] <= 0) {
         array.splice(i, array.length);
       }
     }

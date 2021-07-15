@@ -90,28 +90,12 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
     "Other % Zweit stimmen" : +d["Other % Zweit stimmen"]
   }
 
-}).then(function(resultsData) {
+}).then(function mainExecute(resultsData) {
 
   var rawDataArray = resultsData.map(Object.values); //RAW ARRAY WITH 2017 RESULTS
   var dataArray = resultsData.map(Object.values); //ARRAY WITH PREDICTED RESULTS
   var swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"));
-
-  //adding swing to the party values on click
-  for (var i = 0; i < dataArray.length; i++) {
-    var result = dataArray[i][0];
-    var partyArray = electionData.getData(dataArray, result, vote);
-    var dataIndex = electionData.getIndex(vote);
-
-    for (var index = 0; index < partyArray.length; index++) {
-      var prediction = partyArray[index][1] + swingArray[index][1]; //add national swing of party to result in district
-      partyArray[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
-    }
-
-    for (var ind = 0; ind < dataIndex.length; ind++) {
-      dataArray[i].splice(dataIndex[ind][1], 1, partyArray[ind][1] / 100); //replace the predicted numbers withe the original numbers in the master array and divide by 100 to counteract a calculation
-    }
-
-  }
+  var lastSwingArray = swingArray;
 
 
   //============================================================
@@ -127,30 +111,57 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
     //drawing boxes over input to indicate party
     userinput.drawParties(rawDataArray, "Country-Wide", vote, d3.select("#input_national"));
 
-    mapGroup.selectAll("path")
-         .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
-         .enter().append("path")
-          .attr("d", path)
-          .style("stroke-width", "0.4px")
-          .style("stroke", "#bfbfbf")
-          .attr("class", (d, i) =>{
-            return map.class(dataArray, jsonArray, vote, i, swingArray);
-          })
-          .html((d, i) =>{ //wahlkreis name on hover
-            return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data
-          })
-          .on("click", (d, i) =>{
-            d3.select("#name") //wahlkreis name on click
-              .html(() =>{
-                return "<span>" + i.properties.WKR_NR + ". </span>" + i.properties.WKR_NAME;
-              });
+    //adding swing to the party values on click
+    predictButton.addEventListener("click", () =>{
+      if (swingArray ===! lastSwingArray) {
+        console.log("yape");
+      } else {
+        for (var i = 0; i < dataArray.length; i++) {
+          var result = dataArray[i][0];
+          var partyArray = electionData.getData(dataArray, result, vote);
+          var dataIndex = electionData.getIndex(vote);
 
-            var result = electionData.getDistrict(dataArray, i.properties.WKR_NAME);
-            var partyArray = electionData.getData(dataArray, i.properties.WKR_NAME, vote);
+          for (var index = 0; index < partyArray.length; index++) {
+            var prediction = partyArray[index][1] + swingArray[index][1]; //add national swing of party to result in district
+            partyArray[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
+          }
 
-            graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
-          });
+          for (var ind = 0; ind < dataIndex.length; ind++) {
+            dataArray[i].splice(dataIndex[ind][1], 1, partyArray[ind][1] / 100); //replace the predicted numbers withe the original numbers in the master array and divide by 100 to counteract a calculation
+          }
+        }
 
+        mapGroup.selectAll("path").remove();
+        drawMap();
+      }
+    });
+
+    function drawMap() {
+      mapGroup.append("g").selectAll("path")
+           .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
+           .enter().append("path")
+            .attr("d", path)
+            .style("stroke-width", "0.4px")
+            .style("stroke", "#bfbfbf")
+            .attr("class", (d, i) =>{
+              return map.class(dataArray, jsonArray, vote, i, swingArray);
+            })
+            .html((d, i) =>{ //wahlkreis name on hover
+              return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data
+            })
+            .on("click", (d, i) =>{
+              d3.select("#name") //wahlkreis name on click
+                .html(() =>{
+                  return "<span>" + i.properties.WKR_NR + ". </span>" + i.properties.WKR_NAME;
+                });
+
+              var result = electionData.getDistrict(dataArray, i.properties.WKR_NAME);
+              var partyArray = electionData.getData(dataArray, i.properties.WKR_NAME, vote);
+
+              graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
+            });
+    }
+    drawMap();
 
 
 
@@ -182,7 +193,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
 
 
-      
+
 
     //on click graph
     btn.addEventListener("click", () =>{
