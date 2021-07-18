@@ -1,90 +1,96 @@
 #input_container {
-  position: relative;
-  left: 738px;
-  bottom: 840px;
-  overflow-y: hidden;
+    position: relative;
+    left: 738px;
+    bottom: 840px;
+    overflow-y: hidden;
 }
 
 #input_title {
-  width: 470px;
+    width: 470px;
 }
 
 #input_body {
-  height: 200px;
-  width: 470px;
+    height: 200px;
+    width: 470px;
 }
 
 #input_explainer {
-  position: relative;
-  margin-left: 15px;
-  margin-right: 15px;
-  top: 15px;
+    position: relative;
+    margin-left: 15px;
+    margin-right: 15px;
+    top: 15px;
 }
 
 
 #result-key {
-  position: relative;
-  margin-left: 15px;
-  top: 30px;
+    position: relative;
+    margin-left: 15px;
+    top: 30px;
 }
+
 #prediction-key {
-  position: relative;
-  left: -77px;
-  top: 58px;
+    position: relative;
+    left: -77px;
+    top: 58px;
 }
 
 .user-input {
-  position: relative;
-  max-width: 470px;
-  height: 20px;
-  left: 100px;
-  margin-right: 15px;
-  z-index: 2;
+    position: relative;
+    max-width: 470px;
+    height: 20px;
+    left: 100px;
+    margin-right: 15px;
+    z-index: 2;
 }
 
 #input_national {
-  top: 40px;
+    top: 40px;
 }
+
 .input-field {
-  display: inline-block;
+    display: inline-block;
 }
+
 .input-field input {
-  width: 30px;
-  text-align: center;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #333333;
+    width: 30px;
+    text-align: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #333333;
 }
+
 .input-flair {
-  position: relative;
-  bottom: 50px;
-  width: 32px;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  height: 23px;
-  padding: 0 3px 0 3px;
+    position: relative;
+    bottom: 50px;
+    width: 32px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    height: 23px;
+    padding: 0 3px 0 3px;
 }
+
 .input-flair span {
-  position: relative;
-  top: 3px;
+    position: relative;
+    top: 3px;
 }
 
 
 #predict-button {
-  position: relative;
-  border: none;
-  border-radius: 2px;
-  background-color: #4e6692;
-  font: inherit;
-  color: white;
-  cursor: pointer;
-  height: 20px;
-  width: 70px;
-  left: 100px;
-  top: 55px;
+    position: relative;
+    border: none;
+    border-radius: 2px;
+    background-color: #4e6692;
+    font: inherit;
+    color: white;
+    cursor: pointer;
+    height: 20px;
+    width: 70px;
+    left: 100px;
+    top: 55px;
 }
+
 #predict-button:hover {
-  background-color: #8597b9;
-  transition: 0.15s;
+    background-color: #8597b9;
+    transition: 0.15s;
 }

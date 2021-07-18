@@ -1,137 +1,145 @@
 /*ELEMENTS*/
 #reset {
-  position: absolute;
-  margin-top: 8px;
-  border: none;
-  background-color: #4e6692;
-  font: inherit;
-  color: white;
-  cursor: pointer;
-  height: 30px;
-  width: 100px;
+    position: absolute;
+    margin-top: 8px;
+    border: none;
+    background-color: #4e6692;
+    font: inherit;
+    color: white;
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
 }
+
 #reset:hover {
-  background-color: #8597b9;
-  transition: 0.15s;
+    background-color: #8597b9;
+    transition: 0.15s;
 }
 
 #searchBar {
-  border-width: 2px;
-  border-style: solid;
-  border-color: #4e6692;
-  text-align: center;
-  width: 155px;
-  font-size: 90%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #4e6692;
+    text-align: center;
+    width: 155px;
+    font-size: 90%;
 }
+
 #searchBar:hover {
-  border-color: #8597b9;
-  transition: 0.15s;
+    border-color: #8597b9;
+    transition: 0.15s;
 }
 
 .search {
-  position: absolute;
-  margin-top: 8px;
-  height: 30.0px;
-  font: inherit;
-  left: 117px;
-  display: flex;
-  justify-content: space-between;
+    position: absolute;
+    margin-top: 8px;
+    height: 30.0px;
+    font: inherit;
+    left: 117px;
+    display: flex;
+    justify-content: space-between;
 }
+
 .search_icon {
-  background-color: #4e6692;
-  width: 30px;
-  position: relative;
-  cursor: pointer;
+    background-color: #4e6692;
+    width: 30px;
+    position: relative;
+    cursor: pointer;
 }
+
 .search_icon:hover {
-  background-color: #8597b9;
-  transition: 0.15s;
+    background-color: #8597b9;
+    transition: 0.15s;
 }
+
 .search i {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /*class elements chart&input*/
 .title {
-  color: white;
-  height: 30px;
-  line-height: 30px;
-  left: inherit;
-  background-color: #333333;
-  padding: 0 15px 0 15px;
-  display: block;
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    left: inherit;
+    background-color: #333333;
+    padding: 0 15px 0 15px;
+    display: block;
 }
+
 .body {
-  position: relative;
-  background-color: whitesmoke;
-  display: block;
-  bottom: 12px;
+    position: relative;
+    background-color: whitesmoke;
+    display: block;
+    bottom: 12px;
 }
 
 /*CHART*/
 #graph_container {
-  position: relative;
-  left: 738px;
-  bottom: 837px;
+    position: relative;
+    left: 738px;
+    bottom: 837px;
 }
 
 #graph_title {
-  width: 470px;
+    width: 470px;
 }
+
 #graph_title span {
-  font-weight: normal;
+    font-weight: normal;
 }
 
 #graph_body {
-  height: 435px;
-  width: 470px;
+    height: 435px;
+    width: 470px;
 }
+
 #graph {
-  position: relative;
-  top: 50px;
+    position: relative;
+    top: 50px;
 }
 
 /*COLOURS*/
 .CDU {
-  fill: #000000;
-  background-color: #000000;
+    fill: #000000;
+    background-color: #000000;
 }
 
 .SPD {
-  fill: #EB001F;
-  background-color: #EB001F;
+    fill: #EB001F;
+    background-color: #EB001F;
 }
 
 .Linke {
-  fill: #BE3075;
-  background-color: #BE3075;
+    fill: #BE3075;
+    background-color: #BE3075;
 }
 
 .Grünen {
-  fill: #64A12D;
-  background-color: #64A12D;
+    fill: #64A12D;
+    background-color: #64A12D;
 }
 
 .CSU {
-  fill: #202257;
-  background-color: #202257;
+    fill: #202257;
+    background-color: #202257;
 }
 
 .FDP {
-  fill: #FFED00;
-  background-color: #FFED00;
+    fill: #FFED00;
+    background-color: #FFED00;
 }
 
 .AfD {
-  fill: #009EE0;
-  background-color: #009EE0;
+    fill: #009EE0;
+    background-color: #009EE0;
 }
 
 .Others {
-  fill: #5e5e5e;
-  background-color: #5e5e5e;
+    fill: #5e5e5e;
+    background-color: #5e5e5e;
 }
