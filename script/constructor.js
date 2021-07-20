@@ -93,8 +93,8 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
     var rawDataArray = resultsData.map(Object.values); //RAW ARRAY WITH 2017 RESULTS
     var dataArray = resultsData.map(Object.values); //ARRAY WITH PREDICTED RESULTS
-    var swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"));
-    var lastSwingArray = swingArray;
+    var nat_swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_", "CSU");
+    var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_", "CDU");
 
 
     //============================================================
@@ -108,31 +108,37 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         var jsonArray = mapData.objects.wahlkreise.geometries;
 
         //drawing boxes over input to indicate party
-        userinput.drawParties(rawDataArray, "Country-Wide", vote, d3.select("#input_national"));
+        userinput.drawParties(rawDataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_");
+        userinput.drawParties(rawDataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_");
 
         //adding swing to the party values on click
         predictButton.addEventListener("click", () => {
-            if (swingArray === !lastSwingArray) {
-                console.log("yape");
-            } else {
-                for (var i = 0; i < dataArray.length; i++) {
-                    var result = dataArray[i][0];
-                    var partyArray = electionData.getData(dataArray, result, vote);
-                    var dataIndex = electionData.getIndex(vote);
+            for (var i = 0; i < dataArray.length; i++) {
 
+                var result = dataArray[i][0];
+                var partyArray = electionData.getData(dataArray, result, vote);
+                var dataIndex = electionData.getIndex(vote);
+
+                if (dataArray[i][2] !== "BY") { // changes data in non BY states with non BY swing array
                     for (var index = 0; index < partyArray.length; index++) {
-                        var prediction = partyArray[index][1] + swingArray[index][1]; //add national swing of party to result in district
+                        let prediction = partyArray[index][1] + nat_swingArray[index][1]; //add national swing of party to result in district
                         partyArray[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
                     }
-
-                    for (var ind = 0; ind < dataIndex.length; ind++) {
-                        dataArray[i].splice(dataIndex[ind][1], 1, partyArray[ind][1] / 100); //replace the predicted numbers withe the original numbers in the master array and divide by 100 to counteract a calculation
+                } else { // changes data in  BY wahlkreise with BY swing array
+                    for (var index = 0; index < partyArray.length; index++) {
+                        let prediction = partyArray[index][1] + by_swingArray[index][1]; //add national swing of party to result in district
+                        partyArray[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
                     }
                 }
 
-                mapGroup.selectAll("path").remove();
-                drawMap();
+                for (var ind = 0; ind < dataIndex.length; ind++) {
+                    dataArray[i].splice(dataIndex[ind][1], 1, partyArray[ind][1] / 100); //replace the predicted numbers withe the original numbers in the master array and divide by 100 to counteract a calculation
+                }
+
             }
+
+            mapGroup.selectAll("path").remove();
+            drawMap(); //draw new map with changed data
         });
 
         function drawMap() {
@@ -143,7 +149,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 .style("stroke-width", "0.4px")
                 .style("stroke", "#bfbfbf")
                 .attr("class", (d, i) => {
-                    return map.class(dataArray, jsonArray, vote, i, swingArray);
+                    return map.class(dataArray, jsonArray, vote, i);
                 })
                 .html((d, i) => { //wahlkreis name on hover
                     return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data

@@ -10,7 +10,7 @@ var map = {
     width: 750 - margin.left - margin.right,
 
     //district style class
-    class: function(data, array, vote, index, swing) {
+    class: function(data, array, vote, index) {
         var wahlkreis = array[index].properties.WKR_NAME;
         var result = electionData.getDistrict(data, wahlkreis);
         var partyArray = electionData.getData(data, wahlkreis, vote);

@@ -10,7 +10,7 @@
 }
 
 #input_body {
-    height: 200px;
+    height: 300px;
     width: 470px;
 }
 
@@ -22,30 +22,15 @@
 }
 
 
-#result-key {
-    position: relative;
-    margin-left: 15px;
-    top: 30px;
-}
-
-#prediction-key {
-    position: relative;
-    left: -77px;
-    top: 58px;
-}
 
 .user-input {
     position: relative;
-    max-width: 470px;
-    height: 20px;
-    left: 100px;
-    margin-right: 15px;
+    max-width: 455px;
+    height: 50px;
+    margin-left: 15px;
     z-index: 2;
 }
 
-#input_national {
-    top: 40px;
-}
 
 .input-field {
     display: inline-block;
@@ -57,6 +42,12 @@
     border-width: 2px;
     border-style: solid;
     border-color: #333333;
+}
+
+.inputs {
+    position: relative;
+    left: 90px;
+    bottom: 30px;
 }
 
 .input-flair {
@@ -86,11 +77,49 @@
     cursor: pointer;
     height: 20px;
     width: 70px;
-    left: 100px;
-    top: 55px;
+    margin-left: 15px;
+    left: 80px;
+    top: 75px;
 }
 
 #predict-button:hover {
     background-color: #8597b9;
     transition: 0.15s;
+}
+
+/* INPUT NATIONAL */
+
+#input_national ul {
+    position: relative;
+    width: 80px;
+    padding-left: 0;
+    list-style-type: none;
+    text-align: right;
+}
+
+#nat_result-key {
+    margin-bottom: 12px;
+}
+
+#input_national {
+    position: relative;
+    top: 20px;
+}
+
+/* INPUT BAVARIA */
+#input_BY ul {
+    position: relative;
+    width: 80px;
+    padding-left: 0;
+    list-style-type: none;
+    text-align: right;
+}
+
+#BY_result-key {
+    margin-bottom: 12px;
+}
+
+#input_BY {
+    position: relative;
+    top: 50px;
 }
