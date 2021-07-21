@@ -3,6 +3,8 @@ A guide to functions used in this project. Useful for those who want to edit and
 - [Misc. Functions](#functions)
 - [Graph Functions](#graph)
 - [Map Functions](#map)
+- [Userinput Functions](#userinput)
+- [Data Functions](#Data)
 
 ## [Functions.js](script/functions.js) <a name="functions"></a>
 
@@ -130,3 +132,7 @@ OUTPUT:
 ## [Graph.js](script/graph.js) <a name="graph"></a>
 
 ## [Map.js](script/map.js) <a name="map"></a>
+
+## [Userinput.js](script/userinput.js) <a name="userinput"></a>
+
+## [Data.js](script/data.js) <a name="data"></a>
