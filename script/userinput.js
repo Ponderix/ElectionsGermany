@@ -49,4 +49,12 @@ var userinput = {
 
         return output;
     },
+
+    //apply swing to an array of party
+    applySwing : function(array, swing) {
+        for (var index = 0; index < array.length; index++) {
+            let prediction = array[index][1] + swing[index][1]; //add national swing of party to result in district
+            array[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
+        }
+    }
 }

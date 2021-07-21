@@ -93,9 +93,6 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
     var rawDataArray = resultsData.map(Object.values); //RAW ARRAY WITH 2017 RESULTS
     var dataArray = resultsData.map(Object.values); //ARRAY WITH PREDICTED RESULTS
-    var nat_swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_", "CSU");
-    var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_", "CDU");
-
 
     //============================================================
     //============================================================
@@ -113,22 +110,19 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
         //adding swing to the party values on click
         predictButton.addEventListener("click", () => {
+            var nat_swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_", "CSU");
+            var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_", "CDU");
+
             for (var i = 0; i < dataArray.length; i++) {
 
                 var result = dataArray[i][0];
                 var partyArray = electionData.getData(dataArray, result, vote);
                 var dataIndex = electionData.getIndex(vote);
 
-                if (dataArray[i][2] !== "BY") { // changes data in non BY states with non BY swing array
-                    for (var index = 0; index < partyArray.length; index++) {
-                        let prediction = partyArray[index][1] + nat_swingArray[index][1]; //add national swing of party to result in district
-                        partyArray[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
-                    }
+                if (dataArray[i][2] !== "BY" && dataArray[i][0] !== "Bayern (BY)" /*very important to include second if parameter because states do not have state IDs*/) { // changes data in non BY states with non BY swing array
+                    userinput.applySwing(partyArray, nat_swingArray);
                 } else { // changes data in  BY wahlkreise with BY swing array
-                    for (var index = 0; index < partyArray.length; index++) {
-                        let prediction = partyArray[index][1] + by_swingArray[index][1]; //add national swing of party to result in district
-                        partyArray[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
-                    }
+                    userinput.applySwing(partyArray, by_swingArray);
                 }
 
                 for (var ind = 0; ind < dataIndex.length; ind++) {
