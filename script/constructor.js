@@ -34,15 +34,6 @@ var graphGroup = graphSVG.append("g")
     .attr("transform", `translate(${dimensions.margins.left}, ${dimensions.margins.top})`);
 
 
-
-
-//============================================================
-//============================================================
-//============================================================
-
-
-
-
 // PROCESSING RESULTS AND MAP DATA //
 d3.csv("../data/wk_17_processed.csv", function(d) {
 
@@ -94,11 +85,6 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
     var rawDataArray = resultsData.map(Object.values); //RAW ARRAY WITH 2017 RESULTS
     var dataArray = resultsData.map(Object.values); //ARRAY WITH PREDICTED RESULTS
 
-    //============================================================
-    //============================================================
-    //============================================================
-
-
 
     d3.json("../data/Wahlkreise_map.topo.json").then(function(mapData) {
 
@@ -142,6 +128,9 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 .attr("d", path)
                 .style("stroke-width", "0.4px")
                 .style("stroke", "#bfbfbf")
+                .style("opacity", (d, i) => {
+                    //return map.opacity(dataArray, jsonArray, vote, i);
+                })
                 .attr("class", (d, i) => {
                     return map.class(dataArray, jsonArray, vote, i);
                 })
