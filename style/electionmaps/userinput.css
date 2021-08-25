@@ -41,12 +41,24 @@
     display: inline-block;
 }
 
+
 .input-field input {
     width: 30px;
     text-align: center;
     border-width: 2px;
     border-style: solid;
     border-color: #333333;
+}
+.input-field input:focus {
+    outline: none;
+}
+.input-other input {
+    width: 30px;
+    margin-bottom: 1.5px;
+    text-align: center;
+    text-decoration: underline;
+    border-width: 0;
+    border-style: solid;
 }
 
 .inputs {

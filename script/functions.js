@@ -57,4 +57,27 @@ var functions = {
 
         return max - secondMax;
     },
+
+    //check if all array values are 0 or if there is one string
+    checkValues : function(array) {
+        var arrayValuesZero = 0;
+        var arrayValuesString = 0;
+
+        for (var i = 0; i < array.length - 1; i++) {
+            if (isNaN(Number(array[i])) === true) {
+                arrayValuesString++;
+            } else {
+                if (array[i] == 0) {
+                    arrayValuesZero++;
+                }
+            }
+        }
+
+        //check if there is a value larger than zero or if array includes a string.
+        if (arrayValuesZero === array.length - 2 || arrayValuesString > 1) {
+            return true;
+        } else {
+            return false;
+        }
+    },
 }

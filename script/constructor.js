@@ -90,14 +90,17 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
         var jsonArray = mapData.objects.wahlkreise.geometries;
 
-        //drawing boxes over input to indicate party
+        //drawing colored boxes over input to indicate party
         userinput.drawParties(rawDataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_");
         userinput.drawParties(rawDataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_");
 
-        //adding swing to the party values on click
+        //applying swing to the election map, executing the prediction.
         predictButton.addEventListener("click", () => {
-            var nat_swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_", "CSU");
-            var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_", "CDU");
+            var nat_swingInputArray = userinput.getInputArray(d3.select("#input_national"), "nat_");
+            var by_swingInputArray = userinput.getInputArray(d3.select("#input_BY"), "BY_");
+
+            var nat_swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_", "CSU", nat_swingInputArray);
+            var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_", "CDU", by_swingInputArray);
 
             for (var i = 0; i < dataArray.length; i++) {
 
@@ -105,10 +108,15 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 var partyArray = electionData.getData(dataArray, result, vote);
                 var dataIndex = electionData.getIndex(vote);
 
+                //the following if statement applies national swing to all districts outside of bavaria and bavarian swing to all districts inside of bavaria
                 if (dataArray[i][2] !== "BY" && dataArray[i][0] !== "Bayern (BY)" /*very important to include second if parameter because states do not have state IDs*/) { // changes data in non BY states with non BY swing array
-                    userinput.applySwing(partyArray, nat_swingArray);
-                } else { // changes data in  BY wahlkreise with BY swing array
-                    userinput.applySwing(partyArray, by_swingArray);
+                    if (functions.checkZero(nat_swingInputArray) == false) {
+                        userinput.applySwing(partyArray, nat_swingArray);
+                    }
+                } else {
+                    if (functions.checkZero(by_swingInputArray) == false) {
+                        userinput.applySwing(partyArray, by_swingArray);
+                    }
                 }
 
                 for (var ind = 0; ind < dataIndex.length; ind++) {
@@ -129,7 +137,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 .style("stroke-width", "0.4px")
                 .style("stroke", "#bfbfbf")
                 .style("opacity", (d, i) => {
-                    //return map.opacity(dataArray, jsonArray, vote, i);
+                    return map.opacity(dataArray, jsonArray, vote, i);
                 })
                 .attr("class", (d, i) => {
                     return map.class(dataArray, jsonArray, vote, i);
@@ -189,6 +197,11 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 var result = electionData.getDistrict(dataArray, searchBar.value);
                 var partyArray = electionData.getData(dataArray, searchBar.value, vote);
 
+                d3.select("#name") //wahlkreis name on click
+                    .html(() => {
+                        return "<span>" + result[0][1] + ". </span>" + result[0][0]
+                    });
+
                 graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
             }
         });
@@ -200,6 +213,11 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 } else {
                     var result = electionData.getDistrict(dataArray, searchBar.value);
                     var partyArray = electionData.getData(dataArray, searchBar.value, vote);
+
+                    d3.select("#name") //wahlkreis name on click
+                        .html(() => {
+                            return "<span>" + result[0][1] + ". </span>" + result[0][0]
+                        });
 
                     graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
                 }
