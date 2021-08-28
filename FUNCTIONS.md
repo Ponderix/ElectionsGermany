@@ -3,6 +3,8 @@ A guide to functions used in this project. Useful for those who want to edit and
 - [Misc. Functions](#functions)
 - [Graph Functions](#graph)
 - [Map Functions](#map)
+- [Userinput Functions](#userinput)
+- [Data Functions](#Data)
 
 ## [Functions.js](script/functions.js) <a name="functions"></a>
 
@@ -114,6 +116,23 @@ OUTPUT:
 12.3
 ```
 
+### [#](#get_margin) *functions*.getMargin(array)
+A function to get the difference, aka the margin, between the largest and second largest value in an array. It can be applied universally and does not need any special inputs. The "array" parameter is the array the function should be applied to. The function first finds the largest value, removes this value from the array and finds the largest value from the remaining array, essentially getting the first and second largest values. It subtracts these values from each other to get the margin.
+<a name="get_margin"></a>
+```js
+var arr = [10, 13, 23, 28];
+
+functions.getMargin(arr);
+```
+OUTPUT:
+```js
+5 //28-23 = 5
+```
+
 ## [Graph.js](script/graph.js) <a name="graph"></a>
 
 ## [Map.js](script/map.js) <a name="map"></a>
+
+## [Userinput.js](script/userinput.js) <a name="userinput"></a>
+
+## [Data.js](script/data.js) <a name="data"></a>

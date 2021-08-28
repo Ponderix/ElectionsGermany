@@ -1,64 +1,166 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Election Maps</title>
     <link rel="icon" type="image/png" href="../assets/favicon.png">
     <script type="text/javascript" src="../libraries/d3.min.js"></script>
     <script type="text/javascript" src="../libraries/topojson.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-  </head>
+</head>
 
-  <body>
+<body>
     <header>
-  		<h1>German Election Map Simulator - <span id="PageTitle">2017 Election</span></h1>
-	  </header>
+        <h1>German Election Map Simulator - <span id="PageTitle">2017 Election</span></h1>
+    </header>
 
     <div id="NavBar">
-      <a href="../index.html">Home</a>
-      <a href="german_election_system.html">The German Election System</a>
-      <a class="active" href="election_maps.html">German Election Maps</a>
-      <a href="credits.html">Credits</a>
+        <a href="../index.html">Home</a>
+        <a href="german_election_system.html">The German Election System</a>
+        <a class="active" href="election_maps.html">German Election Maps</a>
+        <a href="credits.html">Credits</a>
     </div>
 
     <div class="button">
-      <button  id="reset">RESET ZOOM</button>
+        <button id="reset">RESET ZOOM</button>
     </div>
 
     <div class="search">
-      <input id="searchBar" type="text" placeholder="Search for a specific seat">
-      <div class="search_icon">
-          <i class="fas fa-search"></i>
-      </div>
+        <input id="searchBar" type="text" placeholder="Search for a specific seat">
+        <div class="search_icon">
+            <i class="fas fa-search"></i>
+        </div>
     </div>
 
     <div id="map_container">
-      <svg id="map">
-      </svg>
+        <svg id="map">
+        </svg>
     </div>
 
     <div id="graph_container">
-      <div id="graph_title">
-        <h2 id="name">--</h2>
-      </div>
-      <div id="graph_body">
-        <svg id="graph">
-        </svg>
-      </div>
-      <div id="results_container">
+        <div id="graph_title">
+            <h2 id="name" class="title">--</h2>
+        </div>
 
-      </div>
+        <div id="graph_body" class="body">
+            <svg id="graph">
+            </svg>
+        </div>
+
+        <div id="results_container">
+        </div>
+    </div>
+
+    <div id="input_container">
+        <div id="input_title">
+            <h2 class="title">Your Prediction</h2>
+        </div>
+
+        <div id="input_body" class="body">
+
+            <div id="input_explainer">
+                Predict a hypothetical outcome of the 2017 election! Discover how the electoral districts change according to your own input. The value you see above the input fields are the result each party recieved as <span style="font-weight: bold;">first votes</span>. A more elaborate calculator which will include second votes and state predictions will come in a further release.
+            </div>
+
+            <div id="input_national" class="user-input">
+
+                <span class="region">NATIONAL</span>
+
+                <ul>
+                    <li id="nat_result-key">2017 RESULT:</li>
+                    <li id="nat_prediction-key">PREDICTION:</li>
+                </ul>
+
+                <div class="inputs">
+                    <div id="nat_input_CDU" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                    </div>
+                    <div id="nat_input_SPD" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                    </div>
+                    <div id="nat_input_AfD" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                    </div>
+                    <div id="nat_input_Linke" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                    </div>
+                    <div id="nat_input_Grünen" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                    </div>
+                    <div id="nat_input_CSU" class="input-field">
+                        <input type="text" value="N/A" readonly/>
+                    </div>
+                    <div id="nat_input_FDP" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                    </div>
+                    <div id="nat_input_Others" class="input-field input-other">
+                        <input type="text" value="100" readonly/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="input_BY" class="user-input">
+
+                <span class="region">BAVARIA</span>
+
+                <ul>
+                    <li id="BY_result-key">2017 RESULT:</li>
+                    <li id="BY_prediction-key">PREDICTION:</li>
+                </ul>
+
+                <div class="inputs">
+                    <div id="BY_input_CDU" class="input-field">
+                        <input type="text" value="N/A" readonly/>
+                    </div>
+                    <div id="BY_input_SPD" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                    </div>
+                    <div id="BY_input_AfD" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                    </div>
+                    <div id="BY_input_Linke" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                    </div>
+                    <div id="BY_input_Grünen" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                    </div>
+                    <div id="BY_input_CSU" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                    </div>
+                    <div id="BY_input_FDP" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                    </div>
+                    <div id="BY_input_Others" class="input-field input-other">
+                        <input type="text" value="100" readonly/>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="button" id="predict-button">PREDICT!</button>
+            <div id="input-warning"></div>
+
+        </div>
     </div>
 
 
     <script src="../script/functions.js" charset="utf-8"></script>
+    <script src="../script/data.js" charset="utf-8"></script>
     <script src="../script/map.js" charset="utf-8"></script>
     <script src="../script/graph.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../script/constructor.js"></script>
-    <link rel="stylesheet" href="../style/svg.css">
+    <script src="../script/userinput.js" charset="utf-8"></script>
+
+    <!-- HAS TO BE DEFINED AFTER ALL OTHER SCRIPTS -->
+    <script src="../script/constructor.js" charset="utf-8"></script>
+    <!-- -->
+
+    <link rel="stylesheet" href="../style/electionmaps/svg.css">
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/election_maps_style.css">
-  </body>
+    <link rel="stylesheet" href="../style/electionmaps/style.css">
+    <link rel="stylesheet" href="../style/electionmaps/results_container.css">
+    <link rel="stylesheet" href="../style/electionmaps/userinput.css">
+</body>
 
 </html>

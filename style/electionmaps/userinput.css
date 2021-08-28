@@ -1,0 +1,153 @@
+#input_container {
+    position: relative;
+    left: 738px;
+    bottom: 840px;
+    overflow-y: hidden;
+}
+
+#input_title {
+    width: 470px;
+}
+
+#input_body {
+    height: 330px;
+    width: 470px;
+}
+
+#input_explainer {
+    position: relative;
+    margin-left: 15px;
+    margin-right: 15px;
+    top: 15px;
+}
+
+
+.region {
+    position: relative;
+    font-weight: bold;
+}
+
+.user-input {
+    position: relative;
+    max-width: 455px;
+    height: 50px;
+    margin-left: 15px;
+    margin-top: 10px;
+    z-index: 2;
+}
+
+
+.input-field {
+    display: inline-block;
+}
+
+
+.input-field input {
+    width: 30px;
+    text-align: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #333333;
+}
+.input-field input:focus {
+    outline: none;
+}
+.input-other input {
+    width: 30px;
+    margin-bottom: 1.5px;
+    text-align: center;
+    text-decoration: underline;
+    border-width: 0;
+    border-style: solid;
+    background-color: whitesmoke;
+}
+
+.inputs {
+    position: relative;
+    left: 90px;
+    bottom: 30px;
+}
+
+.input-flair {
+    position: relative;
+    bottom: 50px;
+    width: 32px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    height: 23px;
+    padding: 0 3px 0 3px;
+}
+
+.input-flair span {
+    position: relative;
+    top: 3px;
+}
+
+
+#predict-button {
+    position: relative;
+    border: none;
+    border-radius: 2px;
+    background-color: #4e6692;
+    font: inherit;
+    color: white;
+    cursor: pointer;
+    height: 20px;
+    width: 70px;
+    left: 104px;
+    top: 90px;
+}
+
+#predict-button:hover {
+    background-color: #8597b9;
+    transition: 0.15s;
+}
+#input-warning {
+    position: relative;
+    text-align: left;
+    color: red;
+    font-weight: bold;
+    top: 68px;
+    left: 185px;
+    width: 200px;
+    height: 40px;
+    font-size: 75%;
+}
+
+/* INPUT NATIONAL */
+
+#input_national ul {
+    position: relative;
+    width: 80px;
+    padding-left: 0;
+    list-style-type: none;
+    text-align: right;
+}
+
+#nat_result-key {
+    margin-bottom: 12px;
+}
+
+#input_national {
+    position: relative;
+    top: 20px;
+}
+
+/* INPUT BAVARIA */
+#input_BY ul {
+    position: relative;
+    width: 80px;
+    padding-left: 0;
+    list-style-type: none;
+    text-align: right;
+}
+
+#BY_result-key {
+    margin-bottom: 12px;
+}
+
+#input_BY {
+    position: relative;
+    top: 50px;
+}

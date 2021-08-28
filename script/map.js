@@ -1,38 +1,34 @@
-var margin = {top: 0, left: 0, bottom: 20, right: 20};
+var margin = {
+    top: 0,
+    left: 0,
+    bottom: 20,
+    right: 20
+};
 
 var map = {
-  height : 850 - margin.top - margin.bottom,
-  width : 750 - margin.left - margin.right,
+    height: 850 - margin.top - margin.bottom,
+    width: 750 - margin.left - margin.right,
 
-  //district style class
-  class : function(data, array, vote, index) {
-      var wahlkreis = array[index].properties.WKR_NAME;
-      var result = data.filter(element =>{
-        return element.includes(wahlkreis);
-      });
+    //district style class
+    class: function(data, array, vote, index) {
+        var wahlkreis = array[index].properties.WKR_NAME;
+        var partyArray = electionData.getData(data, wahlkreis, vote);
 
-      var cdu = result[0][10 + functions.whichVote(vote)] * 100
-          spd = result[0][14 + functions.whichVote(vote)] * 100
-          linke = result[0][18 + functions.whichVote(vote)] * 100
-          gruene = result[0][22 + functions.whichVote(vote)] * 100
-          csu = result[0][26 + functions.whichVote(vote)] * 100
-          fdp = result[0][30 + functions.whichVote(vote)] * 100
-          afd = result[0][34 + functions.whichVote(vote)] * 100
-          other = result[0][38 + functions.whichVote(vote)] * 100;
+        functions.removeZero(partyArray, 1);
 
-      var partyArray = [
-        ["CDU", cdu],
-        ["SPD", spd],
-        ["Linke", linke],
-        ["Grünen", gruene],
-        ["CSU", csu],
-        ["FDP", fdp],
-        ["AfD", afd],
-        ["Others", other]
-      ];
+        return partyArray[0][0];
+    },
 
-      functions.removeZero(partyArray, 1);
+    opacity: function(data, array, vote, index) {
+        var wahlkreis = array[index].properties.WKR_NAME;
+        var partyArray = electionData.getData(data, wahlkreis, vote);
 
-      return partyArray[0][0];
-  }
+        functions.removeZero(partyArray, 1);
+
+        if (partyArray.length >= 2) { //if there is only one party running the function would fail since there owuld be no second largest party
+            return (partyArray[0][1] - partyArray[1][1] + 10) * 3 / 100;
+        } else {
+            return (partyArray[0][1] + 10) / 100;
+        }
+    }
 }
