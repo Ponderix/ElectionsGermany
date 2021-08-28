@@ -59,6 +59,7 @@
     text-decoration: underline;
     border-width: 0;
     border-style: solid;
+    background-color: whitesmoke;
 }
 
 .inputs {
@@ -95,12 +96,23 @@
     height: 20px;
     width: 70px;
     left: 104px;
-    top: 100px;
+    top: 90px;
 }
 
 #predict-button:hover {
     background-color: #8597b9;
     transition: 0.15s;
+}
+#input-warning {
+    position: relative;
+    text-align: left;
+    color: red;
+    font-weight: bold;
+    top: 68px;
+    left: 185px;
+    width: 200px;
+    height: 40px;
+    font-size: 75%;
 }
 
 /* INPUT NATIONAL */

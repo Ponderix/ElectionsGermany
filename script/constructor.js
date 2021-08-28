@@ -106,21 +106,23 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
                 var result = dataArray[i][0];
                 var partyArray = electionData.getData(dataArray, result, vote);
-                var dataIndex = electionData.getIndex(vote);
+                var dataIndex = electionData.getIndex(vote); // important so that it is known where to replace the results
 
                 //the following if statement applies national swing to all districts outside of bavaria and bavarian swing to all districts inside of bavaria
                 if (dataArray[i][2] !== "BY" && dataArray[i][0] !== "Bayern (BY)" /*very important to include second if parameter because states do not have state IDs*/) { // changes data in non BY states with non BY swing array
-                    if (functions.checkZero(nat_swingInputArray) == false) {
+                    if (userinput.checkValues(nat_swingInputArray, d3.select("#input-warning")) == false) {
                         userinput.applySwing(partyArray, nat_swingArray);
                     }
                 } else {
-                    if (functions.checkZero(by_swingInputArray) == false) {
+                    if (userinput.checkValues(by_swingInputArray, d3.select("#input-warning")) == false) {
                         userinput.applySwing(partyArray, by_swingArray);
                     }
                 }
 
+                var checkedPartyArray = userinput.checkSum(partyArray);
+
                 for (var ind = 0; ind < dataIndex.length; ind++) {
-                    dataArray[i].splice(dataIndex[ind][1], 1, partyArray[ind][1] / 100); //replace the predicted numbers withe the original numbers in the master array and divide by 100 to counteract a calculation
+                    dataArray[i].splice(dataIndex[ind][1], 1, checkedPartyArray[ind][1] / 100); //replace the original numbers withe the predicted numbers in the master array and divide by 100 to counteract a calculation
                 }
 
             }
