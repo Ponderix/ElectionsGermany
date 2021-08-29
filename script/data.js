@@ -34,16 +34,16 @@ var electionData = {
     },
 
     //getting the index of the value ON THE MAIN DATA ARRAY
-    getIndex: function(vote) {
+    getIndex: function(constant) {
         var array = [
-            ["CDU", 10 + functions.whichVote(vote)],
-            ["SPD", 14 + functions.whichVote(vote)],
-            ["Linke", 18 + functions.whichVote(vote)],
-            ["Grünen", 22 + functions.whichVote(vote)],
-            ["CSU", 26 + functions.whichVote(vote)],
-            ["FDP", 30 + functions.whichVote(vote)],
-            ["AfD", 34 + functions.whichVote(vote)],
-            ["Others", 38 + functions.whichVote(vote)]
+            ["CDU", 10 + constant],
+            ["SPD", 14 + constant],
+            ["Linke", 18 + constant],
+            ["Grünen", 22 + constant],
+            ["CSU", 26 + constant],
+            ["FDP", 30 + constant],
+            ["AfD", 34 + constant],
+            ["Others", 38 + constant]
         ];
 
         return array;

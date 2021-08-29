@@ -90,42 +90,65 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
         var jsonArray = mapData.objects.wahlkreise.geometries;
 
+        var lastInputArray = [];
+        var thisInputArray = [];
+
         //drawing colored boxes over input to indicate party
         userinput.drawParties(rawDataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_");
         userinput.drawParties(rawDataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_");
 
         //applying swing to the election map, executing the prediction.
         predictButton.addEventListener("click", () => {
-            var nat_swingInputArray = userinput.getInputArray(d3.select("#input_national"), "nat_");
-            var by_swingInputArray = userinput.getInputArray(d3.select("#input_BY"), "BY_");
 
-            var nat_swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_", "CSU", nat_swingInputArray);
-            var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_", "CDU", by_swingInputArray);
+            var nat_InputArray = userinput.getInputArray(d3.select("#input_national"), "nat_");
+            var by_InputArray = userinput.getInputArray(d3.select("#input_BY"), "BY_");
+
+            var nat_swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_", "CSU", nat_InputArray);
+            var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_", "CDU", by_InputArray);
+
+            thisInputArray.push(nat_InputArray);
+            thisInputArray.push(by_InputArray);
 
             for (var i = 0; i < dataArray.length; i++) {
-
                 var result = dataArray[i][0];
                 var partyArray = electionData.getData(dataArray, result, vote);
-                var dataIndex = electionData.getIndex(vote); // important so that it is known where to replace the results
+
+                var percentDataIndex = electionData.getIndex(functions.whichVote(vote)); // important so that it is known where to replace the results
+                var votesDataIndex = electionData.getIndex(-2) // same as above except for voting tallys instead of the percent results
 
                 //the following if statement applies national swing to all districts outside of bavaria and bavarian swing to all districts inside of bavaria
                 if (dataArray[i][2] !== "BY" && dataArray[i][0] !== "Bayern (BY)" /*very important to include second if parameter because states do not have state IDs*/) { // changes data in non BY states with non BY swing array
-                    if (userinput.checkValues(nat_swingInputArray, d3.select("#input-warning")) == false) {
+                    if (userinput.checkValues(nat_InputArray, d3.select("#input-warning")) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
                         userinput.applySwing(partyArray, nat_swingArray);
                     }
                 } else {
-                    if (userinput.checkValues(by_swingInputArray, d3.select("#input-warning")) == false) {
+                    if (userinput.checkValues(by_InputArray, d3.select("#input-warning")) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
                         userinput.applySwing(partyArray, by_swingArray);
                     }
                 }
 
                 var checkedPartyArray = userinput.checkSum(partyArray);
 
-                for (var ind = 0; ind < dataIndex.length; ind++) {
-                    dataArray[i].splice(dataIndex[ind][1], 1, checkedPartyArray[ind][1] / 100); //replace the original numbers withe the predicted numbers in the master array and divide by 100 to counteract a calculation
+                for (var ind = 0; ind < percentDataIndex.length; ind++) { //replacing the original PERCENT values prediction in the master array
+                    dataArray[i].splice(percentDataIndex[ind][1], 1, checkedPartyArray[ind][1] / 100);
                 }
 
+                for (var ind = 0; ind < votesDataIndex.length; ind++) { // replacing  the original VOTE TALLIES with thee predicted vote tallies
+                    var partyVotes = Math.round((checkedPartyArray[ind][1] / 100) * dataArray[i][4]);
+
+                    if (partyVotes > 0) {
+                        dataArray[i].splice(votesDataIndex[ind][1], 1, partyVotes);
+                    } else {
+                        dataArray[i].splice(votesDataIndex[ind][1], 1, 0);
+                    }
+                }
             }
+
+            lastInputArray = [];
+            thisInputArray = [];
+
+            lastInputArray.push(nat_InputArray);
+            lastInputArray.push(by_InputArray)
 
             mapGroup.selectAll("path").remove();
             drawMap(); //draw new map with changed data

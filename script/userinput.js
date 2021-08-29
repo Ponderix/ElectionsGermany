@@ -187,4 +187,32 @@ var userinput = {
             return array;
         }
     },
+
+    //checks if this prediction is the same as last prediction
+    isSame : function(prediction1, prediction2) {
+        var samevalue = 0;
+
+        if (prediction1.length !== 0 && prediction2.length !== 0) {
+            for (var i = 0; i < prediction1[0].length; i++) {
+                if (prediction1[0][i] === prediction2[0][i]) {
+                    samevalue++;
+                }
+            }
+
+            for (var i = 0; i < prediction1[1].length; i++) {
+                if (prediction1[1][i] === prediction2[1][i]) {
+                    samevalue++;
+                }
+            }
+        } else {
+            return false;
+        }
+
+
+        if (samevalue === prediction1[0].length + prediction1[1].length - 2) {
+            return true;
+        } else {
+            return false;
+        }
+    },
 }
