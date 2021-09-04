@@ -1,0 +1,49 @@
+#results_table_container {
+    position: relative;
+    bottom: 1680px;
+    width: 302px;
+}
+#table_title h2 {
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    left: inherit;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: bold;
+    background-color: #4e6692;
+    padding: 0 15px 0 15px;
+    display: block;
+}
+#table_body {
+    height: 400px;
+}
+.bodyactive {
+    display: block;
+}
+.bodyinactive {
+    display: none;
+}
+
+#expand_btn {
+    position: relative;
+    width: 13px;
+    height: 13px;
+    top: -35px;
+    right: 30px;
+    float: right;
+    cursor: pointer;
+}
+
+.arrow {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+.left {
+    transform: rotate(135deg);
+}
+.down {
+    transform: rotate(45deg);
+}

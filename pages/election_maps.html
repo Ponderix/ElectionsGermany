@@ -28,7 +28,7 @@
 
     <div class="search">
         <input id="searchBar" type="text" placeholder="Search for a specific seat">
-        <div class="search_icon">
+        <div id="search_icon">
             <i class="fas fa-search"></i>
         </div>
     </div>
@@ -60,7 +60,7 @@
         <div id="input_body" class="body">
 
             <div id="input_explainer">
-                Predict a hypothetical outcome of the 2017 election! Discover how the electoral districts change according to your own input. The value you see above the input fields are the result each party recieved as <span style="font-weight: bold;">first votes</span>. A more elaborate calculator which will include second votes and state predictions will come in a further release.
+                Predict a hypothetical outcome of the 2017 election! Discover how the electoral districts change according to your own input. The value you see above the input fields are the result each party recieved as <span style="font-weight: bold;">second votes</span>. A more elaborate calculator, which will include predictions for all the states, will come in a further release.
             </div>
 
             <div id="input_national" class="user-input">
@@ -145,22 +145,37 @@
         </div>
     </div>
 
+    <div id="results_table_container">
+        <div id="table_title">
+            <h2>ELECTION RESULTS</h2>
+            <div id="expand_btn" class="active">
+                <i class="arrow down"></i>
+            </div>
+        </div>
+
+        <div id="table_body" class="bodyactive body">
+
+        </div>
+    </div>
+
 
     <script src="../script/functions.js" charset="utf-8"></script>
     <script src="../script/data.js" charset="utf-8"></script>
     <script src="../script/map.js" charset="utf-8"></script>
     <script src="../script/graph.js" charset="utf-8"></script>
     <script src="../script/userinput.js" charset="utf-8"></script>
+    <script src="../script/table.js" charset="utf-8"></script>
 
     <!-- HAS TO BE DEFINED AFTER ALL OTHER SCRIPTS -->
     <script src="../script/constructor.js" charset="utf-8"></script>
     <!-- -->
 
-    <link rel="stylesheet" href="../style/electionmaps/svg.css">
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/electionmaps/svg.css">
     <link rel="stylesheet" href="../style/electionmaps/style.css">
     <link rel="stylesheet" href="../style/electionmaps/results_container.css">
     <link rel="stylesheet" href="../style/electionmaps/userinput.css">
+    <link rel="stylesheet" href="../style/electionmaps/results_table.css">
 </body>
 
 </html>

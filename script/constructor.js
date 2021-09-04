@@ -1,6 +1,7 @@
-var btn = document.querySelector(".search_icon");
+var searchBtn = document.querySelector("#search_icon");
 var searchBar = document.querySelector("#searchBar");
 var predictButton = document.querySelector("#predict-button");
+var expandBtn = document.querySelector("#expand_btn");
 var results_container = d3.select("#results_container");
 var vote = 1;
 var defaultPartyOrder = ["CDU", "SPD", "Linke", "Grünen", "CSU", "FDP", "AfD", "Others"];
@@ -13,7 +14,7 @@ var mapSVG = d3.select("#map")
     .attr("height", map.height)
     .attr("width", map.width)
     .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "760 -3850 " + map.width + " " + map.height);
+    .attr("viewBox", "500 -3825 " + map.width + " " + map.height);
 var mapGroup = mapSVG.append("g")
     .attr("id", "wahlkreise");
 
@@ -32,6 +33,10 @@ var graphGroup = graphSVG.append("g")
     .attr("height", graph.height)
     .attr("width", graph.width)
     .attr("transform", `translate(${dimensions.margins.left}, ${dimensions.margins.top})`);
+
+expandBtn.addEventListener("click", () =>{
+    table.expand(expandBtn, document.querySelector("#table_body"));
+});
 
 
 // PROCESSING RESULTS AND MAP DATA //
@@ -94,8 +99,8 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         var thisInputArray = [];
 
         //drawing colored boxes over input to indicate party
-        userinput.drawParties(rawDataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_");
-        userinput.drawParties(rawDataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_");
+        userinput.drawParties(rawDataArray, "Country-Wide", 2, d3.select("#input_national"), "nat_");
+        userinput.drawParties(rawDataArray, "Bayern (BY)", 2, d3.select("#input_BY"), "BY_");
 
         //applying swing to the election map, executing the prediction.
         predictButton.addEventListener("click", () => {
@@ -103,43 +108,48 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
             var nat_InputArray = userinput.getInputArray(d3.select("#input_national"), "nat_");
             var by_InputArray = userinput.getInputArray(d3.select("#input_BY"), "BY_");
 
-            var nat_swingArray = userinput.swing(dataArray, "Country-Wide", vote, d3.select("#input_national"), "nat_", "CSU", nat_InputArray);
-            var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", vote, d3.select("#input_BY"), "BY_", "CDU", by_InputArray);
+            var nat_swingArray = userinput.swing(dataArray, "Country-Wide", 2, d3.select("#input_national"), "nat_", "CSU", nat_InputArray);
+            var by_swingArray = userinput.swing(dataArray, "Bayern (BY)", 2, d3.select("#input_BY"), "BY_", "CDU", by_InputArray);
 
             thisInputArray.push(nat_InputArray);
             thisInputArray.push(by_InputArray);
 
-            for (var i = 0; i < dataArray.length; i++) {
-                var result = dataArray[i][0];
-                var partyArray = electionData.getData(dataArray, result, vote);
+            applyPrediction(1, -2);
+            applyPrediction(2, -1);
 
-                var percentDataIndex = electionData.getIndex(functions.whichVote(vote)); // important so that it is known where to replace the results
-                var votesDataIndex = electionData.getIndex(-2) // same as above except for voting tallys instead of the percent results
+            function applyPrediction(vote, constant) {
+                for (var i = 0; i < dataArray.length; i++) {
+                    var result = dataArray[i][0];
+                    var partyArray = electionData.getData(dataArray, result, vote);
 
-                //the following if statement applies national swing to all districts outside of bavaria and bavarian swing to all districts inside of bavaria
-                if (dataArray[i][2] !== "BY" && dataArray[i][0] !== "Bayern (BY)" /*very important to include second if parameter because states do not have state IDs*/) { // changes data in non BY states with non BY swing array
-                    if (userinput.checkValues(nat_InputArray, d3.select("#input-warning")) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
-                        userinput.applySwing(partyArray, nat_swingArray);
-                    }
-                } else {
-                    if (userinput.checkValues(by_InputArray, d3.select("#input-warning")) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
-                        userinput.applySwing(partyArray, by_swingArray);
-                    }
-                }
+                    var percentDataIndex = electionData.getIndex(functions.whichVote(vote)); // important so that it is known where to replace the results
+                    var votesDataIndex = electionData.getIndex(constant) // same as above except for voting tallys instead of the percent results
 
-                var checkedPartyArray = userinput.checkSum(partyArray);
-
-                for (var ind = 0; ind < percentDataIndex.length; ind++) { //replacing the original PERCENT values prediction in the master array
-                    dataArray[i].splice(percentDataIndex[ind][1], 1, checkedPartyArray[ind][1] / 100);
-                }
-
-                for (var ind = 0; ind < votesDataIndex.length; ind++) { // replacing  the original VOTE TALLIES with thee predicted vote tallies
-                    var partyVotes = Math.round((checkedPartyArray[ind][1] / 100) * dataArray[i][4]);
-
-                    if (partyVotes > 0) {
-                        dataArray[i].splice(votesDataIndex[ind][1], 1, partyVotes);
+                    //the following if statement applies national swing to all districts outside of bavaria and bavarian swing to all districts inside of bavaria
+                    if (dataArray[i][2] !== "BY" && dataArray[i][0] !== "Bayern (BY)" /*very important to include second if parameter because states do not have state IDs*/) { // changes data in non BY states with non BY swing array
+                        if (userinput.checkValues(nat_InputArray, d3.select("#input-warning")) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
+                            userinput.applySwing(partyArray, nat_swingArray);
+                        }
                     } else {
-                        dataArray[i].splice(votesDataIndex[ind][1], 1, 0);
+                        if (userinput.checkValues(by_InputArray, d3.select("#input-warning")) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
+                            userinput.applySwing(partyArray, by_swingArray);
+                        }
+                    }
+
+                    var checkedPartyArray = userinput.checkSum(partyArray);
+
+                    for (var ind = 0; ind < percentDataIndex.length; ind++) { //replacing the original PERCENT values prediction in the master array
+                        dataArray[i].splice(percentDataIndex[ind][1], 1, checkedPartyArray[ind][1] / 100);
+                    }
+
+                    for (var ind = 0; ind < votesDataIndex.length; ind++) { // replacing  the original VOTE TALLIES with thee predicted vote tallies
+                        var partyVotes = Math.round((checkedPartyArray[ind][1] / 100) * dataArray[i][4]);
+
+                        if (partyVotes > 0) {
+                            dataArray[i].splice(votesDataIndex[ind][1], 1, partyVotes);
+                        } else {
+                            dataArray[i].splice(votesDataIndex[ind][1], 1, 0);
+                        }
                     }
                 }
             }
@@ -178,13 +188,14 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
                     var result = electionData.getDistrict(dataArray, i.properties.WKR_NAME);
                     var partyArray = electionData.getData(dataArray, i.properties.WKR_NAME, vote);
+                    var lastElectionArray = electionData.getData(rawDataArray, i.properties.WKR_NAME, vote);
 
-                    graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
+                    graph.draw(result, partyArray, graphSVG, graphGroup, results_container, vote, lastElectionArray);
                 });
         }
         drawMap();
 
-
+        table.drawTable();
 
         //GRAPH//
 
@@ -215,19 +226,21 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
 
         //on click graph
-        btn.addEventListener("click", () => {
+        searchBtn.addEventListener("click", () => {
             if (searchBar.value === "") {
                 return null;
             } else {
                 var result = electionData.getDistrict(dataArray, searchBar.value);
                 var partyArray = electionData.getData(dataArray, searchBar.value, vote);
+                var lastElectionArray = electionData.getData(rawDataArray, searchBar.value, vote);
 
                 d3.select("#name") //wahlkreis name on click
                     .html(() => {
                         return "<span>" + result[0][1] + ". </span>" + result[0][0]
                     });
 
-                graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
+                graph.draw(result, partyArray, graphSVG, graphGroup, results_container, vote, lastElectionArray);
+
             }
         });
 
@@ -238,13 +251,14 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 } else {
                     var result = electionData.getDistrict(dataArray, searchBar.value);
                     var partyArray = electionData.getData(dataArray, searchBar.value, vote);
+                    var lastElectionArray = electionData.getData(rawDataArray, searchBar.value, vote);
 
                     d3.select("#name") //wahlkreis name on click
                         .html(() => {
                             return "<span>" + result[0][1] + ". </span>" + result[0][0]
                         });
 
-                    graph.draw(result, partyArray, graphSVG, graphGroup, results_container);
+                    graph.draw(result, partyArray, graphSVG, graphGroup, results_container, vote, lastElectionArray);
                 }
             }
         });

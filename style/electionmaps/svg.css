@@ -1,4 +1,9 @@
 /* ELECTION MAPS SVG */
+#map_container {
+    position: relative;
+    left: 0px;
+}
+
 #graph rect:hover {
     opacity: 0.6;
     transition: 0.15s;

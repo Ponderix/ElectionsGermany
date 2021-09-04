@@ -9,6 +9,7 @@
     cursor: pointer;
     height: 30px;
     width: 100px;
+    z-index: 1;
 }
 
 #reset:hover {
@@ -23,10 +24,16 @@
     text-align: center;
     width: 155px;
     font-size: 90%;
+    z-index: 1;
 }
 
 #searchBar:hover {
     border-color: #8597b9;
+    transition: 0.15s;
+}
+
+#search_icon:hover {
+    background-color: #8597b9;
     transition: 0.15s;
 }
 
@@ -40,11 +47,12 @@
     justify-content: space-between;
 }
 
-.search_icon {
+#search_icon {
     background-color: #4e6692;
     width: 30px;
     position: relative;
     cursor: pointer;
+    z-index: 1;
 }
 
 .search_icon:hover {
@@ -69,6 +77,7 @@
     background-color: #333333;
     padding: 0 15px 0 15px;
     display: block;
+    font-weight: normal;
 }
 
 .body {
@@ -81,7 +90,7 @@
 /*CHART*/
 #graph_container {
     position: relative;
-    left: 738px;
+    left: 938px;
     bottom: 837px;
 }
 
@@ -90,17 +99,17 @@
 }
 
 #graph_title span {
-    font-weight: normal;
+    font-weight: bold;
 }
 
 #graph_body {
-    height: 435px;
+    height: 450px;
     width: 470px;
 }
 
 #graph {
     position: relative;
-    top: 50px;
+    top: 65px;
 }
 
 /*COLOURS*/
