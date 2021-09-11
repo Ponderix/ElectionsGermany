@@ -4,7 +4,8 @@ A guide to functions used in this project. Useful for those who want to edit and
 - [Graph Functions](#graph)
 - [Map Functions](#map)
 - [Userinput Functions](#userinput)
-- [Data Functions](#Data)
+- [Data Functions](#data)
+- [Table Functions] (#table)
 
 ## [Functions.js](script/functions.js) <a name="functions"></a>
 
@@ -136,3 +137,5 @@ OUTPUT:
 ## [Userinput.js](script/userinput.js) <a name="userinput"></a>
 
 ## [Data.js](script/data.js) <a name="data"></a>
+
+## [Table.js](script/table.js) <a name="table"></a>
