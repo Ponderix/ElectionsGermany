@@ -139,8 +139,8 @@
 }
 
 .FDP {
-    fill: #FFED00;
-    background-color: #FFED00;
+    fill: #FFD700;
+    background-color: #FFD700;
 }
 
 .AfD {
@@ -151,4 +151,40 @@
 .Others {
     fill: orange;
     background-color: #5e5e5e;
+}
+
+
+
+
+/* border colors */
+.border-CDU {
+    border-color: #000000;
+}
+
+.border-SPD {
+    border-color: #EB001F;
+}
+
+.border-Linke {
+    border-color: #BE3075;
+}
+
+.border-Grünen {
+    border-color: #64A12D;
+}
+
+.border-CSU {
+    border-color: #202257;
+}
+
+.border-FDP {
+    border-color: #FFD700;
+}
+
+.border-AfD {
+    border-color: #009EE0;
+}
+
+.border-Others {
+    border-color: #5e5e5e;
 }

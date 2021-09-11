@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Election Maps</title>
-    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="icon" type="image/png" href="../assets/favicon2017.png">
     <script type="text/javascript" src="../libraries/d3.min.js"></script>
     <script type="text/javascript" src="../libraries/topojson.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -82,6 +82,9 @@
                     <div id="nat_input_AfD" class="input-field">
                         <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
                     </div>
+                    <div id="nat_input_FDP" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                    </div>
                     <div id="nat_input_Linke" class="input-field">
                         <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
                     </div>
@@ -90,9 +93,6 @@
                     </div>
                     <div id="nat_input_CSU" class="input-field">
                         <input type="text" value="N/A" readonly/>
-                    </div>
-                    <div id="nat_input_FDP" class="input-field">
-                        <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
                     </div>
                     <div id="nat_input_Others" class="input-field input-other">
                         <input type="text" value="100" readonly/>
@@ -111,8 +111,8 @@
                 </ul>
 
                 <div class="inputs">
-                    <div id="BY_input_CDU" class="input-field">
-                        <input type="text" value="N/A" readonly/>
+                    <div id="BY_input_CSU" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
                     </div>
                     <div id="BY_input_SPD" class="input-field">
                         <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
@@ -120,17 +120,17 @@
                     <div id="BY_input_AfD" class="input-field">
                         <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
                     </div>
-                    <div id="BY_input_Linke" class="input-field">
-                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
-                    </div>
                     <div id="BY_input_Grünen" class="input-field">
-                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
-                    </div>
-                    <div id="BY_input_CSU" class="input-field">
                         <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
                     </div>
                     <div id="BY_input_FDP" class="input-field">
                         <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                    </div>
+                    <div id="BY_input_Linke" class="input-field">
+                        <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                    </div>
+                    <div id="BY_input_CDU" class="input-field">
+                        <input type="text" value="N/A" readonly/>
                     </div>
                     <div id="BY_input_Others" class="input-field input-other">
                         <input type="text" value="100" readonly/>
@@ -154,7 +154,9 @@
         </div>
 
         <div id="table_body" class="bodyactive body">
+            <div id="national-results">
 
+            </div>
         </div>
     </div>
 

@@ -15,15 +15,6 @@
     padding: 0 15px 0 15px;
     display: block;
 }
-#table_body {
-    height: 400px;
-}
-.bodyactive {
-    display: block;
-}
-.bodyinactive {
-    display: none;
-}
 
 #expand_btn {
     position: relative;
@@ -46,4 +37,47 @@
 }
 .down {
     transform: rotate(45deg);
+}
+
+
+
+#table_body {
+    height: 420px;
+}
+.bodyactive {
+    display: block;
+}
+.bodyinactive {
+    display: none;
+}
+
+#national-results {
+    padding-top: 20px;
+}
+.table-party {
+    position: relative;
+    margin: 5px 15px 0 15px;
+    height: 40px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-radius: 5px;
+}
+.party-logo {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(0, -50%);
+    height: 30px;
+    width: 30px;
+    cursor: default;
+}
+
+
+#other-parties-visual {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(0, -50%);
+    font-weight: bold;
+    text-decoration: underline;
 }

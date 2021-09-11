@@ -2,16 +2,16 @@ var userinput = {
     //drawing boxes above each inoput indicating party and party 1st votes in 2017 election
     drawParties : function(data, search, vote, container, region) {
         //this will automatically be ordered according to the order of the inputs on the html file
-        var results = electionData.getData(data, search, vote);
+        var partyArray = electionData.getData(data, search, vote);
 
-        for (var i = 0; i < results.length; i++) {
-            container.select(`#${region}input_` + results[i][0])
+        for (var i = 0; i < partyArray.length; i++) {
+            container.select(`#${region}input_` + partyArray[i][0])
                 .append("div")
-                .attr("class", `input-flair ${results[i][0]}`)
+                .attr("class", `input-flair ${partyArray[i][0]}`)
                 .append("span")
                 .html(() => {
-                    if (results[i][1] !== 0) {
-                        return functions.round(results[i][1], 0) + "%";
+                    if (partyArray[i][1] !== 0) {
+                        return functions.round(partyArray[i][1], 0) + "%";
                     } else {
                         return "N/A";
                     }

@@ -102,6 +102,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         userinput.drawParties(rawDataArray, "Country-Wide", 2, d3.select("#input_national"), "nat_");
         userinput.drawParties(rawDataArray, "Bayern (BY)", 2, d3.select("#input_BY"), "BY_");
 
+
         //applying swing to the election map, executing the prediction.
         predictButton.addEventListener("click", () => {
 
@@ -162,7 +163,9 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
             mapGroup.selectAll("path").remove();
             drawMap(); //draw new map with changed data
+            drawTable(); //draw new results table with changed data
         });
+
 
         function drawMap() {
             mapGroup.append("g").selectAll("path")
@@ -195,34 +198,41 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         }
         drawMap();
 
-        table.drawTable();
 
-        //GRAPH//
+        function drawTable() {
+            d3.select("#national-results").selectAll("div").remove(); //redrawing the table according to new result
 
-        //default x and y scales
-        var yScale = d3.scaleLinear()
-            .range([graph.height, 0])
-            .domain([0, 50]);
+            var tableVote = 2; // default results on table
 
-        var xScale = d3.scaleBand()
-            .range([0, graph.width])
-            .domain(defaultPartyOrder)
-            .padding(0.2);
-
-        //drawing initial blank chart
-        graphGroup.append("g")
-            .attr("id", "yAxis")
-            .attr("class", "axis")
-            .attr("transform", `translate(20, 0)`)
-            .call(d3.axisLeft(yScale));
-
-        graphGroup.append("g")
-            .attr("id", "xAxis")
-            .attr("class", "axis")
-            .attr("transform", `translate(20, ${graph.height})`)
-            .call(d3.axisBottom(xScale));
+            table.drawResults(dataArray, "#national-results", "Country-Wide", tableVote);
+        }
+        drawTable();
 
 
+        function drawDefault() {
+            var yScale = d3.scaleLinear()
+                .range([graph.height, 0])
+                .domain([0, 50]);
+
+            var xScale = d3.scaleBand()
+                .range([0, graph.width])
+                .domain(defaultPartyOrder)
+                .padding(0.2);
+
+            //drawing initial blank chart
+            graphGroup.append("g")
+                .attr("id", "yAxis")
+                .attr("class", "axis")
+                .attr("transform", `translate(20, 0)`)
+                .call(d3.axisLeft(yScale));
+
+            graphGroup.append("g")
+                .attr("id", "xAxis")
+                .attr("class", "axis")
+                .attr("transform", `translate(20, ${graph.height})`)
+                .call(d3.axisBottom(xScale));
+        }
+        drawDefault();//drawing default graph axis
 
 
         //on click graph
