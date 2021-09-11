@@ -1,10 +1,11 @@
 # Functions Guide
-A guide to functions used in this project. Useful for those who want to edit and/or improve this project. To successfully follow this guide you will need a mediocore understanding of JavaScript arrays and basic knowledge about [d3.js](https://d3js.org/).
+A guide to functions used in this project. Useful for those who want to edit and/or improve this project and for myself to keep track of all the code. To successfully follow this guide you will need a mediocore understanding of JavaScript arrays and basic knowledge about [d3.js](https://d3js.org/).
 - [Misc. Functions](#functions)
 - [Graph Functions](#graph)
 - [Map Functions](#map)
 - [Userinput Functions](#userinput)
-- [Data Functions](#Data)
+- [Data Functions](#data)
+- [Table Functions](#table)
 
 ## [Functions.js](script/functions.js) <a name="functions"></a>
 
@@ -136,3 +137,5 @@ OUTPUT:
 ## [Userinput.js](script/userinput.js) <a name="userinput"></a>
 
 ## [Data.js](script/data.js) <a name="data"></a>
+
+## [Table.js](script/table.js) <a name="table"></a>

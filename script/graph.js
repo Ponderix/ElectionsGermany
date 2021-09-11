@@ -31,11 +31,11 @@ var graph = {
     },
 
     //drawing graph
-    draw: function(result, partyArray, svg, container, results_container) {
+    draw: function(result, partyArray, svg, container, results_container, vote, lastElectionArray) {
 
         var rawVotes = result[0].filter((e, index) => {
             for (var i = 1; i < result[0].length; i++) {
-                if (index == i * 4 + 4) {
+                if (index == i * 4 + 3 + vote) {
                     return e;
                 }
             }
@@ -46,6 +46,7 @@ var graph = {
         var margin = functions.getMargin(rawVotes);
 
         functions.removeZero(partyArray, 1); //ordering to remove parties which dont run
+        functions.removeZero(lastElectionArray, 1); // this array is only needed to get the swing from 2017 to the predicted
 
         var yMaxRounded = functions.round((Math.max(...functions.whichValue(partyArray, 1)) + 10), -1);
 
@@ -105,19 +106,19 @@ var graph = {
 
         var states = [
             ["SH", "Schleswig-Holstein"],
-            ["MV", "Mecklenburg-Vorpommern"],
+            ["MV", "Mecklenburg-Vorpommern (Mecklenburg-Western Pomerania)"],
             ["HH", "Hamburg"],
-            ["NI", "Niedersachsen"],
+            ["NI", "Niedersachsen (Lower-Saxony)"],
             ["HB", "Bremen"],
             ["BB", "Brandenburg"],
-            ["ST", "Sachsen-Anhalt"],
+            ["ST", "Sachsen-Anhalt (Saxony-Anhalt)"],
             ["BE", "Berlin"],
-            ["NW", "Nordrhein-Westpfalen"],
-            ["SN", "Sachsen"],
-            ["HE", "Hessen"],
-            ["TH", "Thüringen"],
-            ["RP", "Rhineland-Pfalz"],
-            ["BY", "Bayern"],
+            ["NW", "Nordrhein-Westpfalen (North Rhine-Westphalia)"],
+            ["SN", "Sachsen (Saxony)"],
+            ["HE", "Hessen (Hesse)"],
+            ["TH", "Thüringen (Thuringa)"],
+            ["RP", "Rhineland-Pfalz (Rhineland-Palatinate)"],
+            ["BY", "Bayern (Bavaria)"],
             ["BW", "Baden-Württemberg"],
             ["SL", "Saarland"]
         ]
@@ -128,6 +129,7 @@ var graph = {
         for (var i = 0; i < partyArray.length; i++) {
             var shortenedResult = functions.round(partyArray[i][1], 2);
             var party = party_info.append("div");
+            //var swing = functions.round(shortenedResult - functions.round(lastElectionArray[i][1], 2), 2);
 
             party.attr("id", partyArray[i][0])
                 .attr("class", "party-result");
@@ -140,8 +142,12 @@ var graph = {
                 .html(partyArray[i][0]);
 
             party.append("div")
+                .attr("class", "election-swing")
+                .html(null);
+
+            party.append("div")
                 .attr("class", "percent-result")
-                .html(shortenedResult + " %");
+                .html(`${shortenedResult} %`);
         }
 
         party_info.append("div")

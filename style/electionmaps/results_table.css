@@ -1,0 +1,83 @@
+#results_table_container {
+    position: relative;
+    bottom: 1680px;
+    width: 302px;
+}
+#table_title h2 {
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    left: inherit;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: bold;
+    background-color: #4e6692;
+    padding: 0 15px 0 15px;
+    display: block;
+}
+
+#expand_btn {
+    position: relative;
+    width: 13px;
+    height: 13px;
+    top: -35px;
+    right: 30px;
+    float: right;
+    cursor: pointer;
+}
+
+.arrow {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+.left {
+    transform: rotate(135deg);
+}
+.down {
+    transform: rotate(45deg);
+}
+
+
+
+#table_body {
+    height: 420px;
+}
+.bodyactive {
+    display: block;
+}
+.bodyinactive {
+    display: none;
+}
+
+#national-results {
+    padding-top: 20px;
+}
+.table-party {
+    position: relative;
+    margin: 5px 15px 0 15px;
+    height: 40px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-radius: 5px;
+}
+.party-logo {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(0, -50%);
+    height: 30px;
+    width: 30px;
+    cursor: default;
+}
+
+
+#other-parties-visual {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(0, -50%);
+    font-weight: bold;
+    text-decoration: underline;
+}

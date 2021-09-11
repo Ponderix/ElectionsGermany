@@ -7,7 +7,7 @@ var margin = {
 
 var map = {
     height: 850 - margin.top - margin.bottom,
-    width: 750 - margin.left - margin.right,
+    width: 950 - margin.left - margin.right,
 
     //district style class
     class: function(data, array, vote, index) {

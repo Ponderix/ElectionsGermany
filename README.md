@@ -1,6 +1,6 @@
 # German Election Map Simulator
 
-<a href="null"><img src="assets/favicon.png" align="left" hspace="10" vspace="6" height="100px"></a>
+<a href="null"><img src="assets/favicon2017.png" align="left" hspace="10" vspace="6" height="100px"></a>
 
 This is a website with interactive maps and data about German politics. This website attempts to inform people about the German election system and politics in Germany. This Website is a static website due to the limitations of Github pages. Feel free to use code from this website for your own projects or create your own projects based off this one, just look at the [license](LICENSE) first.
 
@@ -8,7 +8,7 @@ This is a website with interactive maps and data about German politics. This web
 
 
 ## Resources and Links
-- [Social Media](null)
+- [Social Media](https://twitter.com/electionsger)
 - [Functions Guide](FUNCTIONS.md)
 
 ## Purpouse
