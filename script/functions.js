@@ -57,4 +57,31 @@ var functions = {
 
         return max - secondMax;
     },
+
+    //find the most under/overrepresented party and give/take a the seat
+    assignSeat : function(seatArray, representation) {
+        var sorted = seatArray.slice().sort((a, b) => {
+            return a[2] - b[2]
+        });
+
+        if (representation > 0 || representation == "OVER") {
+            var index = seatArray.indexOf(sorted[7])//find index of party which under/overrepresnted
+            if (seatArray[index][3] != 0) {
+                seatArray[index].splice(1, 1, seatArray[index][1] - 1);//add/subtrat 1 seat to the party
+            }
+        } else {
+            if (representation < 0 || representation == "UNDER") {
+                var index = seatArray.indexOf(sorted[0])//find index of party which under/overrepresnted
+                if (seatArray[index][3] != 0) {
+                    seatArray[index].splice(1, 1, seatArray[index][1] + 1);//add/subtrat 1 seat to the party
+                }
+            }
+        }
+
+        var sum = 0; // append sum of all seats just in case
+        for (var i = 0; i < seatArray.length - 2; i++) {
+            sum+=seatArray[i][1];
+        }
+        seatArray[8].splice(1, 1, sum);
+    },
 }

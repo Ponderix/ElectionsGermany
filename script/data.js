@@ -47,5 +47,5 @@ var electionData = {
         ];
 
         return array;
-    }
+    },
 }

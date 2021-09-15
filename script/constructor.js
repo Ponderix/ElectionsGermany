@@ -203,8 +203,10 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
             d3.select("#national-results").selectAll("div").remove(); //redrawing the table according to new result
 
             var tableVote = 2; // default results on table
+            var wahlkreiseArray = table.getWahlkreise(dataArray, "ALL");
+            var totalSeats = table.getSeats(dataArray, wahlkreiseArray);
 
-            table.drawResults(dataArray, "#national-results", "Country-Wide", tableVote);
+            table.drawResults(dataArray, "#national-results", "Country-Wide", wahlkreiseArray, tableVote);
         }
         drawTable();
 

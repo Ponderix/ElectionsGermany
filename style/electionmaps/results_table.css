@@ -1,7 +1,7 @@
 #results_table_container {
     position: relative;
     bottom: 1680px;
-    width: 302px;
+    width: 320px;
 }
 #table_title h2 {
     color: white;
@@ -25,24 +25,23 @@
     float: right;
     cursor: pointer;
 }
-
-.arrow {
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-}
-.left {
-    transform: rotate(135deg);
-}
-.down {
-    transform: rotate(45deg);
-}
+    .arrow {
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .left {
+        transform: rotate(135deg);
+    }
+    .down {
+        transform: rotate(45deg);
+    }
 
 
 
 #table_body {
-    height: 420px;
+    height: 430px;
 }
 .bodyactive {
     display: block;
@@ -51,9 +50,22 @@
     display: none;
 }
 
+
+
 #national-results {
-    padding-top: 20px;
+    font-size: 10.5px;
 }
+#national-results ul {
+    padding: 15px 0 0 85px;
+    margin: 0;
+}
+#national-results li {
+    list-style: none;
+    display: inline;
+    font-weight: bold;
+    cursor: default;
+}
+
 .table-party {
     position: relative;
     margin: 5px 15px 0 15px;
@@ -64,12 +76,26 @@
 }
 .party-logo {
     position: absolute;
-    top: 50%;
     left: 5px;
-    transform: translate(0, -50%);
+    cursor: default;
     height: 30px;
     width: 30px;
-    cursor: default;
+}
+.table-percent-result {
+    position: absolute;
+    left: 65px;
+}
+    .table-percent-result span {
+        font-weight: bold;
+    }
+.table-wahlkreise-result {
+    position: absolute;
+    left: 150px;
+}
+
+.party-info-value {
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
 
