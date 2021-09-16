@@ -130,6 +130,13 @@ OUTPUT:
 5 //28-23 = 5
 ```
 
+### [#](#assign_seat) *functions*.assignSeat(array, representation)
+TEXT
+<a name="assign_seat"></a>
+```js
+null
+```
+
 ## [Graph.js](script/graph.js) <a name="graph"></a>
 
 ## [Map.js](script/map.js) <a name="map"></a>
