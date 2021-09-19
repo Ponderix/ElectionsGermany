@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Election Maps</title>
+    <title>2017 General Election</title>
     <link rel="icon" type="image/png" href="../assets/favicon2017.png">
     <script type="text/javascript" src="../libraries/d3.min.js"></script>
     <script type="text/javascript" src="../libraries/topojson.min.js"></script>
@@ -12,7 +12,8 @@
 
 <body>
     <header>
-        <h1>German Election Map Simulator - <span id="PageTitle">2017 Election</span></h1>
+        <img src="../assets/favicon2017.png" class="electionsgermany-logo">
+        <h1>ElectionsGermany - <span id="PageTitle">2017 Election</span></h1>
     </header>
 
     <div id="NavBar">
@@ -155,10 +156,15 @@
 
         <div id="table_body" class="bodyactive body">
             <div id="national-results">
-                <ul>
+                <ul id="titles">
                     <li style="position:relative; left:20px" title="% result">%</li>
-                    <li style="position:relative; left:55px" title="Districts/wahlkreise won">DISTRICTS</li>
-                    <li style="position:relative; left:65px" title="Total seats including districts">TOT. SEATS</li>
+                    <li style="position:relative; left:55px" title="Districts/wahlkreise won">WAHLKREISE</li>
+                    <li style="position:relative; left:75px" title="Total seats including districts">SEATS</li>
+                </ul>
+                <ul id="totals">
+                    <li style="left: 20px;">TOTALS:</li>
+                    <li>299</li>
+                    <li id="totals-seats" style="left: 250px;"></li>
                 </ul>
             </div>
         </div>

@@ -131,11 +131,7 @@ OUTPUT:
 ```
 
 ### [#](#assign_seat) *functions*.assignSeat(array, representation)
-TEXT
-<a name="assign_seat"></a>
-```js
-null
-```
+A function which detects if certain array has more or less "seats" than they deserve. Through calculating the remainders; the function subtracts a seat from the party which received too many seats on average if there are too many seats in total, and adds a seat to the party which received too little if there are too few seats in total.
 
 ## [Graph.js](script/graph.js) <a name="graph"></a>
 

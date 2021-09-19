@@ -87,6 +87,44 @@ var userinput = {
         }
     },
 
+    //calculates the national results by adding up the results of the state results
+    calculateNational : function(data, percentDataIndex, votesDataIndex, vote) {
+        var array = [
+            ["CDU", ],
+            ["SPD", ],
+            ["Linke", ],
+            ["Grünen", ],
+            ["CSU", ],
+            ["FDP", ],
+            ["AfD", ],
+            ["Others", ]
+        ];
+        var turnout = data[0][4];
+
+        for (var i = 0; i < array.length; i++) {//for each party
+            var totalVotes = 0;
+
+            for (var ind = 1; ind < 17; ind++) {//for each state
+                totalVotes+=data[ind][i*4+7+vote];//add votes of party to total votes
+            }
+
+            array[i].push(totalVotes)
+            totalVotes = 0;
+        }
+
+        //replacing the relevant data
+        for (var i = 0; i < percentDataIndex.length; i++) {
+            data[0].splice(percentDataIndex[i][1], 1, array[i][1] / turnout);
+        }
+        for (var i = 0; i < votesDataIndex.length; i++) {
+            if (array[i][1] > 0) {
+                data[0].splice(votesDataIndex[i][1], 1, array[i][1]);
+            } else {
+                data[0].splice(votesDataIndex[i][1], 1, 0); //incase of minus numbers
+            }
+        }
+    },
+
     inputOnChange : function(region) {
         var container = event.target.parentElement.parentElement.parentElement;
         var inputArray = userinput.getInputArray(d3.select("#" + container.id), region);
@@ -113,13 +151,14 @@ var userinput = {
     },
 
     //check if all array values are 0 or if there is one string and invalidate the applyswing accordingly
-    checkValues : function(array, warningContainer) {
+    checkValues : function(array, warningContainer, ignore) {
+        //ignore is important since BY input has 1 nan automatically but Nat input array has 0
         var isZero = 0;
         var isString = 0;
         var isLessZero = 0
         var sum = 0;
 
-        for (var i = 0; i < array.length - 1; i++) {
+        for (var i = 0; i < array.length - ignore; i++) {
             if (isNaN(Number(array[i])) === true) {
                 isString++;
             } else {
@@ -136,7 +175,7 @@ var userinput = {
         }
 
         //check if there is a value larger than zero or if array includes a string.
-        if (isZero === array.length - 2 || isString > 1 || sum > 100 || isLessZero > 0) {
+        if (isZero == array.length - 2 || isString > ignore || sum > 100 || isLessZero > 0) {
             /* warningContainer.html("")
 
             if (isString > 1) {
@@ -148,10 +187,12 @@ var userinput = {
             if (sum < 0) {
                 warningContainer.html("ERROR: one of the prediction is less than 0%!")
             } */
+            console.log(isString);
 
             return true;
         } else {
             /* warningContainer.html("") */
+
             return false;
         }
     },
@@ -192,7 +233,7 @@ var userinput = {
     isSame : function(prediction1, prediction2) {
         var samevalue = 0;
 
-        if (prediction1.length !== 0 && prediction2.length !== 0) {
+        if (prediction1.length > 0 && prediction2.length > 0) {
             for (var i = 0; i < prediction1[0].length; i++) {
                 if (prediction1[0][i] === prediction2[0][i]) {
                     samevalue++;
@@ -209,7 +250,7 @@ var userinput = {
         }
 
 
-        if (samevalue === prediction1[0].length + prediction1[1].length - 2) {
+        if (samevalue === prediction1[0].length + prediction1[1].length - 1) {
             return true;
         } else {
             return false;

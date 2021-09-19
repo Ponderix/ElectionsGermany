@@ -119,20 +119,20 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
             applyPrediction(2, -1);
 
             function applyPrediction(vote, constant) {
+                var percentDataIndex = electionData.getIndex(functions.whichVote(vote)); // important so that it is known where to replace the results
+                var votesDataIndex = electionData.getIndex(constant) // same as above except for voting tallys instead of the percent results
+
                 for (var i = 0; i < dataArray.length; i++) {
                     var result = dataArray[i][0];
                     var partyArray = electionData.getData(dataArray, result, vote);
 
-                    var percentDataIndex = electionData.getIndex(functions.whichVote(vote)); // important so that it is known where to replace the results
-                    var votesDataIndex = electionData.getIndex(constant) // same as above except for voting tallys instead of the percent results
-
                     //the following if statement applies national swing to all districts outside of bavaria and bavarian swing to all districts inside of bavaria
-                    if (dataArray[i][2] !== "BY" && dataArray[i][0] !== "Bayern (BY)" /*very important to include second if parameter because states do not have state IDs*/) { // changes data in non BY states with non BY swing array
-                        if (userinput.checkValues(nat_InputArray, d3.select("#input-warning")) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
+                    if (dataArray[i][2] !== "BY" && result !== "Bayern (BY)" /*very important to include second if parameter because states do not have state IDs*/) { // changes data in non BY states with non BY swing array
+                        if (userinput.checkValues(nat_InputArray, d3.select("#input-warning"), 0) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
                             userinput.applySwing(partyArray, nat_swingArray);
                         }
                     } else {
-                        if (userinput.checkValues(by_InputArray, d3.select("#input-warning")) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
+                        if (userinput.checkValues(by_InputArray, d3.select("#input-warning"), 1) == false && userinput.isSame(thisInputArray, lastInputArray) == false) {
                             userinput.applySwing(partyArray, by_swingArray);
                         }
                     }
@@ -153,6 +153,9 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                         }
                     }
                 }
+
+                //calculating the national results by adding up all the regional results
+                userinput.calculateNational(dataArray, percentDataIndex, votesDataIndex, vote);
             }
 
             lastInputArray = [];
@@ -204,9 +207,9 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
             var tableVote = 2; // default results on table
             var wahlkreiseArray = table.getWahlkreise(dataArray, "ALL");
-            var totalSeats = table.getSeats(dataArray, wahlkreiseArray);
+            var minimumSeatsArray = table.minimumSeats(dataArray, wahlkreiseArray);
 
-            table.drawResults(dataArray, "#national-results", "Country-Wide", wahlkreiseArray, tableVote);
+            table.drawResults(dataArray, rawDataArray, "#national-results", "Country-Wide", wahlkreiseArray, minimumSeatsArray, tableVote);
         }
         drawTable();
 

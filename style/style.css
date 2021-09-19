@@ -10,17 +10,24 @@ body {
 
 header {
     width: 100%;
-    height: 70px;
+    height: 75px;
     color: #ffffff;
     background-color: #ff7575;
     cursor: default;
 }
+header img {
+    position: absolute;
+    height: 40px;
+    padding: 13px 0 10px 0;
+    margin-left: 25px;
+}
 
-header>h1 {
+header h1 {
     width: 100%;
     position: relative;
     font-weight: bold;
-    top: 20px;
+    top: 25px;
+    left: 55px;
     margin-left: 25px;
     margin-right: 25px;
     letter-spacing: 1px;
@@ -47,12 +54,6 @@ h2 {
 .background {
     fill: none;
     pointer-events: all;
-}
-
-.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
 }
 
 #NavBar {
@@ -82,4 +83,33 @@ h2 {
 #NavBar a.active {
     background-color: #ff7575;
     color: white;
+}
+
+.under_construction {
+    background-color: white;
+    display: block;
+    position: relative;
+    top: 200px;
+    height: 100px;
+    padding-top: 20px;
+    border-radius: 10px;
+    margin: auto;
+    width: 50%;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: #ff7575;
+}
+.under_construction div {
+    position: inherit;
+    top: 10px;
+    font-size: 12px;
+    color: #333333;
+    letter-spacing: 1px;
+    padding: 0 80px 0 80px;
+}
+
+.under_construction a {
+    color: #333333;
 }
