@@ -25,10 +25,28 @@ var map = {
 
         functions.removeZero(partyArray, 1);
 
-        if (partyArray.length >= 2) { //if there is only one party running the function would fail since there owuld be no second largest party
-            return (partyArray[0][1] - partyArray[1][1] + 10) * 3 / 100;
+        if (partyArray[0][0] == "Others") {
+            return 1;
         } else {
-            return (partyArray[0][1] + 10) / 100;
+            if (partyArray.length >= 2) { //if there is only one party running the function would fail since there owuld be no second largest party
+                return (partyArray[0][1] - partyArray[1][1] + 10) * 3 / 100;
+            } else {
+                return (partyArray[0][1] + 10) / 100;
+            }
+        }
+
+    },
+
+    stroke : function(data, array, vote, index) { //different stroke for others since they can be confised with cdu
+        var wahlkreis = array[index].properties.WKR_NAME;
+        var partyArray = electionData.getData(data, wahlkreis, vote);
+
+        functions.removeZero(partyArray, 1);
+
+        if (partyArray[0][0] == "Others") {
+            return "orange";
+        } else {
+            return "#bfbfbf";
         }
     }
 }

@@ -176,7 +176,9 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 .enter().append("path")
                 .attr("d", path)
                 .style("stroke-width", "0.4px")
-                .style("stroke", "#bfbfbf")
+                .style("stroke", (d, i) => {
+                    return map.stroke(dataArray, jsonArray, vote, i);
+                })
                 .style("opacity", (d, i) => {
                     return map.opacity(dataArray, jsonArray, vote, i);
                 })

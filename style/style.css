@@ -51,10 +51,18 @@ h2 {
     color: black;
 }
 
-.background {
-    fill: none;
-    pointer-events: all;
+#contact-info {
+    float: right;
+    position: relative;
+    right: 30px;
 }
+.socialmedia-icon {
+}
+    .socialmedia-icon img {
+        height: 20px;
+        padding: 11px 0 9px 0;
+        margin-left: 20px;
+    }
 
 #NavBar {
     overflow: hidden;
@@ -63,27 +71,25 @@ h2 {
     cursor: default;
 }
 
-#NavBar a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    cursor: pointer;
-    outline: none;
-}
-
-#NavBar a:hover {
-    transition: 0.15s;
-    background-color: #ffb3b3;
-    color: #333333;
-}
-
-#NavBar a.active {
-    background-color: #ff7575;
-    color: white;
-}
+    #NavBar .page {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        cursor: pointer;
+        outline: none;
+    }
+        #NavBar .page:hover {
+            transition: 0.15s;
+            background-color: #ffb3b3;
+            color: #333333;
+        }
+        #NavBar .active {
+            background-color: #ff7575;
+            color: white;
+        }
 
 .under_construction {
     background-color: white;
@@ -112,4 +118,8 @@ h2 {
 
 .under_construction a {
     color: #333333;
+}
+
+#copyright a {
+    color: #333;
 }
