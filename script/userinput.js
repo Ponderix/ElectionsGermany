@@ -187,7 +187,6 @@ var userinput = {
             if (sum < 0) {
                 warningContainer.html("ERROR: one of the prediction is less than 0%!")
             } */
-            console.log(isString);
 
             return true;
         } else {
