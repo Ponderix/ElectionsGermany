@@ -5,7 +5,6 @@ var table = {
             arrow.children[0].classList = "arrow left";
             element.classList = "bodyinactive body";
         } else {
-            console.log(element.classList);
             arrow.children[0].classList = "arrow down";
             element.classList = "bodyactive body";
         }
