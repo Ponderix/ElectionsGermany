@@ -10,17 +10,24 @@ body {
 
 header {
     width: 100%;
-    height: 70px;
+    height: 75px;
     color: #ffffff;
     background-color: #ff7575;
     cursor: default;
 }
+header img {
+    position: absolute;
+    height: 40px;
+    padding: 13px 0 10px 0;
+    margin-left: 25px;
+}
 
-header>h1 {
+header h1 {
     width: 100%;
     position: relative;
     font-weight: bold;
-    top: 20px;
+    top: 25px;
+    left: 55px;
     margin-left: 25px;
     margin-right: 25px;
     letter-spacing: 1px;
@@ -44,16 +51,18 @@ h2 {
     color: black;
 }
 
-.background {
-    fill: none;
-    pointer-events: all;
+#contact-info {
+    float: right;
+    position: relative;
+    right: 30px;
 }
-
-.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
+.socialmedia-icon {
 }
+    .socialmedia-icon img {
+        height: 20px;
+        padding: 11px 0 9px 0;
+        margin-left: 20px;
+    }
 
 #NavBar {
     overflow: hidden;
@@ -62,24 +71,55 @@ h2 {
     cursor: default;
 }
 
-#NavBar a {
-    float: left;
+    #NavBar .page {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        cursor: pointer;
+        outline: none;
+    }
+        #NavBar .page:hover {
+            transition: 0.15s;
+            background-color: #ffb3b3;
+            color: #333333;
+        }
+        #NavBar .active {
+            background-color: #ff7575;
+            color: white;
+        }
+
+.under_construction {
+    background-color: white;
     display: block;
-    color: white;
+    position: relative;
+    top: 200px;
+    height: 100px;
+    padding-top: 20px;
+    border-radius: 10px;
+    margin: auto;
+    width: 50%;
+    font-weight: bold;
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    cursor: pointer;
-    outline: none;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: #ff7575;
+}
+.under_construction div {
+    position: inherit;
+    top: 10px;
+    font-size: 12px;
+    color: #333333;
+    letter-spacing: 1px;
+    padding: 0 80px 0 80px;
 }
 
-#NavBar a:hover {
-    transition: 0.15s;
-    background-color: #ffb3b3;
+.under_construction a {
     color: #333333;
 }
 
-#NavBar a.active {
-    background-color: #ff7575;
-    color: white;
+#copyright a {
+    color: #333;
 }

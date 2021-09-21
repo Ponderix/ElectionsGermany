@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Election Maps</title>
+    <meta name="description" content="Explore the 2017 German election result on an interactive election map.">
+    <meta name="keywords" content="Germany, Election Map, 2017">
+
+    <title>2017 General Election</title>
     <link rel="icon" type="image/png" href="../assets/favicon2017.png">
     <script type="text/javascript" src="../libraries/d3.min.js"></script>
     <script type="text/javascript" src="../libraries/topojson.min.js"></script>
@@ -12,14 +15,27 @@
 
 <body>
     <header>
-        <h1>German Election Map Simulator - <span id="PageTitle">2017 Election</span></h1>
+        <a href="../index.html"><img src="../assets/favicon2017.png" class="electionsgermany-logo"></a>
+        <h1>ElectionsGermany - <span id="PageTitle">2017 Election</span></h1>
     </header>
 
     <div id="NavBar">
-        <a href="../index.html">Home</a>
-        <a href="german_election_system.html">The German Election System</a>
-        <a class="active" href="election_maps.html">German Election Maps</a>
-        <a href="credits.html">Credits</a>
+        <a class="page" href="../index.html">Home</a>
+        <a class="page" href="german_election_system.html">The German Election System</a>
+        <a class="active page" href="election_maps.html">German Election Maps</a>
+        <a class="page" href="credits.html">Credits</a>
+
+        <div id="contact-info">
+            <a class="socialmedia-icon" href="https://github.com/Ponderix/ElectionsGermany" title="GitHub">
+                <img src="../assets/icons/Github-icon-light.png">
+            </a>
+            <a class="socialmedia-icon" href="https://twitter.com/electionsger" title="Twitter">
+                <img src="../assets/icons/Twitter-logo-blue.png">
+            </a>
+            <a class="socialmedia-icon" href="mailto:electionsgermany@gmail.com" title="Mail">
+                <img src="../assets/icons/mail-icon-white.svg">
+            </a>
+        </div>
     </div>
 
     <div class="button">
@@ -92,10 +108,10 @@
                         <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
                     </div>
                     <div id="nat_input_CSU" class="input-field">
-                        <input type="text" value="N/A" readonly/>
+                        <input type="text" value="6" readonly/>
                     </div>
                     <div id="nat_input_Others" class="input-field input-other">
-                        <input type="text" value="100" readonly/>
+                        <input type="text" value="96" readonly/>
                     </div>
                 </div>
 
@@ -155,11 +171,27 @@
 
         <div id="table_body" class="bodyactive body">
             <div id="national-results">
-
+                <ul id="titles">
+                    <li style="position:relative; left:20px" title="% result">%</li>
+                    <li style="position:relative; left:55px" title="Districts/wahlkreise won">WAHLKREISE</li>
+                    <li style="position:relative; left:75px" title="Total seats including districts">SEATS</li>
+                </ul>
+                <ul id="totals">
+                    <li style="left: 20px;">TOTALS:</li>
+                    <li>299</li>
+                    <li id="totals-seats" style="left: 250px;"></li>
+                </ul>
             </div>
         </div>
     </div>
 
+    <div id="copyright">
+        <a href="https://www.bundeswahlleiter.de/en/info/impressum.html">© Der Bundeswahlleiter, Wiesbaden 2021</a>
+        <br/>
+        <a href="https://github.com/Ponderix/ElectionsGermany/blob/main/LICENSE">© 2021 Ponderix</a>
+        <br/>
+        Special thanks to <a href="https://principalfish.co.uk">principalfish.co.uk</a> for inspiring me and providing so much open source material.
+    </div>
 
     <script src="../script/functions.js" charset="utf-8"></script>
     <script src="../script/data.js" charset="utf-8"></script>
@@ -175,7 +207,7 @@
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/electionmaps/svg.css">
     <link rel="stylesheet" href="../style/electionmaps/style.css">
-    <link rel="stylesheet" href="../style/electionmaps/results_container.css">
+    <link rel="stylesheet" href="../style/electionmaps/graph.css">
     <link rel="stylesheet" href="../style/electionmaps/userinput.css">
     <link rel="stylesheet" href="../style/electionmaps/results_table.css">
 </body>

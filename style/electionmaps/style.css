@@ -22,7 +22,7 @@
     border-style: solid;
     border-color: #4e6692;
     text-align: center;
-    width: 155px;
+    width: 173px;
     font-size: 90%;
     z-index: 1;
 }
@@ -87,30 +87,6 @@
     bottom: 12px;
 }
 
-/*CHART*/
-#graph_container {
-    position: relative;
-    left: 938px;
-    bottom: 837px;
-}
-
-#graph_title {
-    width: 470px;
-}
-
-#graph_title span {
-    font-weight: bold;
-}
-
-#graph_body {
-    height: 450px;
-    width: 470px;
-}
-
-#graph {
-    position: relative;
-    top: 65px;
-}
 
 /*COLOURS*/
 .CDU {
@@ -149,10 +125,22 @@
 }
 
 .Others {
-    fill: orange;
+    fill: #5e5e5e;
     background-color: #5e5e5e;
 }
+    #wahlkreise .Others {
+        fill: #5e5e5e;
+        stroke: black;
+    }
 
+#copyright {
+    float: right;
+    text-align: right;
+    position: relative;
+    max-width: 250px;
+    bottom: 1350px;
+    font-size: 10px;
+}
 
 
 
