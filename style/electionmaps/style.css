@@ -11,7 +11,6 @@
     width: 100px;
     z-index: 1;
 }
-
 #reset:hover {
     background-color: #8597b9;
     transition: 0.15s;
@@ -26,12 +25,10 @@
     font-size: 90%;
     z-index: 1;
 }
-
 #searchBar:hover {
     border-color: #8597b9;
     transition: 0.15s;
 }
-
 #search_icon:hover {
     background-color: #8597b9;
     transition: 0.15s;
@@ -46,7 +43,6 @@
     display: flex;
     justify-content: space-between;
 }
-
 #search_icon {
     background-color: #4e6692;
     width: 30px;
@@ -54,18 +50,40 @@
     cursor: pointer;
     z-index: 1;
 }
-
 .search_icon:hover {
     background-color: #8597b9;
     transition: 0.15s;
 }
-
 .search i {
     position: absolute;
     z-index: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+
+#vote-selector {
+    position: absolute;
+    left: 339px;
+    margin-top: 8px;
+    z-index: 1;
+}
+    #vote-selector select {
+        border: none;
+        height: 30px;
+        background-color: #4e6692;
+        color: white;
+        width: 140px;
+    }
+    #vote-selector option {
+        border: none;
+    }
+
+.select {
+    cursor: pointer;
+    text-align: center;
+    font: inherit;
 }
 
 /*class elements chart&input*/
@@ -134,11 +152,12 @@
     }
 
 #copyright {
-    float: right;
+    right: 0;
+    margin-right: 20px;
+    top: 1025px;
     text-align: right;
-    position: relative;
+    position: absolute;
     max-width: 250px;
-    bottom: 1350px;
     font-size: 10px;
 }
 
