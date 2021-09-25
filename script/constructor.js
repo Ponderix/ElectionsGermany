@@ -164,26 +164,69 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
             lastInputArray.push(nat_InputArray);
             lastInputArray.push(by_InputArray)
 
-            mapGroup.selectAll("path").remove();
-            drawMap(); //draw new map with changed data
-            drawTable(); //draw new results table with changed data
+            //draw new map/table with changed data depending on vote selected
+            function drawVoteNew(element) {
+                var selected_vote_map = document.querySelector(`#${element}-select`).value;
+
+                if (element == "map") {
+
+                    if (selected_vote_map == "SECOND VOTE") {
+                        mapGroup.selectAll("path").remove();
+                        drawMap(2);
+                    } else {
+                        if (selected_vote_map == "FIRST VOTE") {
+                            mapGroup.selectAll("path").remove();
+                            drawMap(1);
+                        }
+                    }
+
+                } else {
+
+                    if (element == "table") {
+                        if (selected_vote_map == "SECOND VOTE") {
+                            drawTable(2)
+                        } else {
+                            if (selected_vote_map == "FIRST VOTE") {
+                                drawTable(1)
+                            }
+                        }
+                    }
+
+                }
+            }
+            drawVoteNew("map");
+            drawVoteNew("table");
         });
 
+        //on map vote change, draw new map according to which vote selected
+        document.querySelector("#map-select").addEventListener("change", () =>{
+            var selected_vote_map = event.target.value;
 
-        function drawMap() {
+            if (selected_vote_map == "SECOND VOTE") {
+                mapGroup.selectAll("path").remove();
+                drawMap(2);
+            } else {
+                if (selected_vote_map == "FIRST VOTE") {
+                    mapGroup.selectAll("path").remove();
+                    drawMap(1);
+                }
+            }
+        });
+
+        function drawMap(function_vote) {
             mapGroup.append("g").selectAll("path")
                 .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
                 .enter().append("path")
                 .attr("d", path)
                 .style("stroke-width", "0.4px")
                 .style("stroke", (d, i) => {
-                    return map.stroke(dataArray, jsonArray, vote, i);
+                    return map.stroke(dataArray, jsonArray, function_vote, i);
                 })
                 .style("opacity", (d, i) => {
-                    return map.opacity(dataArray, jsonArray, vote, i);
+                    return map.opacity(dataArray, jsonArray, function_vote, i);
                 })
                 .attr("class", (d, i) => {
-                    return map.class(dataArray, jsonArray, vote, i);
+                    return map.class(dataArray, jsonArray, function_vote, i);
                 })
                 .html((d, i) => { //wahlkreis name on hover
                     return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data
@@ -195,25 +238,36 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                         });
 
                     var result = electionData.getDistrict(dataArray, i.properties.WKR_NAME);
-                    var partyArray = electionData.getData(dataArray, i.properties.WKR_NAME, vote);
-                    var lastElectionArray = electionData.getData(rawDataArray, i.properties.WKR_NAME, vote);
+                    var partyArray = electionData.getData(dataArray, i.properties.WKR_NAME, function_vote);
+                    var lastElectionArray = electionData.getData(rawDataArray, i.properties.WKR_NAME, function_vote);
 
-                    graph.draw(result, partyArray, graphSVG, graphGroup, results_container, vote, lastElectionArray);
+                    graph.draw(result, partyArray, graphSVG, graphGroup, results_container, function_vote, lastElectionArray);
                 });
         }
-        drawMap();
+        drawMap(vote);
 
 
-        function drawTable() {
+        function drawTable(function_vote) {
             d3.select("#national-results").selectAll("div").remove(); //redrawing the table according to new result
 
-            var tableVote = 2; // default results on table
             var wahlkreiseArray = table.getWahlkreise(dataArray, "ALL");
             var minimumSeatsArray = table.minimumSeats(dataArray, wahlkreiseArray);
 
-            table.drawResults(dataArray, rawDataArray, "#national-results", "Country-Wide", wahlkreiseArray, minimumSeatsArray, tableVote);
+            table.drawResults(dataArray, rawDataArray, "#national-results", "Country-Wide", wahlkreiseArray, minimumSeatsArray, function_vote);
         }
-        drawTable();
+        drawTable(2);
+        //on table vote change, draw new map according to which vote selected
+        document.querySelector("#table-select").addEventListener("change", () =>{
+            var selected_vote_map = event.target.value;
+
+            if (selected_vote_map == "SECOND VOTE") {
+                drawTable(2)
+            } else {
+                if (selected_vote_map == "FIRST VOTE") {
+                    drawTable(1)
+                }
+            }
+        });
 
 
         function drawDefault() {

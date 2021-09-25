@@ -9,10 +9,6 @@
     transition: 0.15s;
 }
 
-#wahlkreise path:hover {
-    opacity: 0.8;
-}
-
 .axis {
     color: #333333;
     font-weight: bold;
