@@ -86,6 +86,29 @@
     font: inherit;
 }
 
+#opacity-check {
+    position: absolute;
+    left: 491px;
+    margin-top: 8px;
+    z-index: 1;
+    background-color: #4e6692;
+    height: 30px;
+    width: 140px;
+}
+    #opacity-check input {
+        position: relative;
+        margin: auto;
+        height: 30px;
+        left: 10px;
+    }
+    #opacity-check label {
+        position: absolute;
+        top: 48%;
+        left: 35px;
+        color: white;
+        transform: translate(0, -50%);
+    }
+
 /*class elements chart&input*/
 .title {
     color: white;

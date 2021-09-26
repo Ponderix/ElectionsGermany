@@ -48,5 +48,30 @@ var map = {
         } else {
             return "#bfbfbf";
         }
-    }
+    },
+
+    //draw map according to settings
+    drawSetting : function(opacity_setting, vote_setting, map, draw_function) {
+        if (opacity_setting == false) {
+            if (vote_setting == "SECOND VOTE") {
+                map.selectAll("path").remove();
+                draw_function(2, "SOLID");
+            } else {
+                if (vote_setting == "FIRST VOTE") {
+                    map.selectAll("path").remove();
+                    draw_function(1, "SOLID");
+                }
+            }
+        } else {
+            if (vote_setting == "SECOND VOTE") {
+                map.selectAll("path").remove();
+                draw_function(2, "DYNAMIC");
+            } else {
+                if (vote_setting == "FIRST VOTE") {
+                    map.selectAll("path").remove();
+                    draw_function(1, "DYNAMIC");
+                }
+            }
+        }
+    },
 }

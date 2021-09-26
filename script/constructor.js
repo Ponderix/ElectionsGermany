@@ -164,29 +164,20 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
             lastInputArray.push(nat_InputArray);
             lastInputArray.push(by_InputArray)
 
-            //draw new map/table with changed data depending on vote selected
-            function drawVoteNew(element) {
-                var selected_vote_map = document.querySelector(`#${element}-select`).value;
+            //draw new map/table with changed data depending on vote and maptype selected
+            function drawSettingPrediction(element) {
+                var selected_opacity = document.querySelector("#opacity-select").checked;
+                var selected_vote = document.querySelector("#map-select").value;
 
                 if (element == "map") {
-
-                    if (selected_vote_map == "SECOND VOTE") {
-                        mapGroup.selectAll("path").remove();
-                        drawMap(2);
-                    } else {
-                        if (selected_vote_map == "FIRST VOTE") {
-                            mapGroup.selectAll("path").remove();
-                            drawMap(1);
-                        }
-                    }
-
+                    map.drawSetting(selected_opacity, selected_vote, mapGroup, drawMap);
                 } else {
 
                     if (element == "table") {
-                        if (selected_vote_map == "SECOND VOTE") {
+                        if (selected_vote == "SECOND VOTE") {
                             drawTable(2)
                         } else {
-                            if (selected_vote_map == "FIRST VOTE") {
+                            if (selected_vote == "FIRST VOTE") {
                                 drawTable(1)
                             }
                         }
@@ -194,26 +185,28 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
                 }
             }
-            drawVoteNew("map");
-            drawVoteNew("table");
+            drawSettingPrediction("map");
+            drawSettingPrediction("table");
         });
 
-        //on map vote change, draw new map according to which vote selected
+
+        //on map opacity change, draw new map according to which opacity is selected
+        document.querySelector("#opacity-select").addEventListener("change", () =>{
+            var selected_opacity = event.target.checked;
+            var selected_vote = document.querySelector("#map-select").value;
+
+            map.drawSetting(selected_opacity, selected_vote, mapGroup, drawMap);
+        });
+        //on map vote change, draw new map according to which vote is selected
         document.querySelector("#map-select").addEventListener("change", () =>{
-            var selected_vote_map = event.target.value;
+            var selected_opacity = document.querySelector("#opacity-select").checked;
+            var selected_vote = event.target.value;
 
-            if (selected_vote_map == "SECOND VOTE") {
-                mapGroup.selectAll("path").remove();
-                drawMap(2);
-            } else {
-                if (selected_vote_map == "FIRST VOTE") {
-                    mapGroup.selectAll("path").remove();
-                    drawMap(1);
-                }
-            }
+            map.drawSetting(selected_opacity, selected_vote, mapGroup, drawMap);
         });
 
-        function drawMap(function_vote) {
+
+        function drawMap(function_vote, opacity) {//opacity can be SOLID or DYNAMIC
             mapGroup.append("g").selectAll("path")
                 .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
                 .enter().append("path")
@@ -223,7 +216,13 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                     return map.stroke(dataArray, jsonArray, function_vote, i);
                 })
                 .style("opacity", (d, i) => {
-                    return map.opacity(dataArray, jsonArray, function_vote, i);
+                    if (opacity == "SOLID") {
+                        return 1;
+                    } else {
+                        if (opacity == "DYNAMIC") {
+                            return map.opacity(dataArray, jsonArray, function_vote, i);
+                        }
+                    }
                 })
                 .attr("class", (d, i) => {
                     return map.class(dataArray, jsonArray, function_vote, i);
@@ -244,7 +243,13 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                     graph.draw(result, partyArray, graphSVG, graphGroup, results_container, function_vote, lastElectionArray);
                 });
         }
-        drawMap(vote);
+        (function() {//on page load draw map with selected vote and map type
+            var selected_opacity = document.querySelector("#opacity-select").checked;
+            var selected_vote = document.querySelector("#map-select").value;
+            console.log(selected_opacity);
+            console.log(selected_vote);
+            map.drawSetting(selected_opacity, selected_vote, mapGroup, drawMap);
+        })();
 
 
         function drawTable(function_vote) {
