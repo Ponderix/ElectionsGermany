@@ -169,7 +169,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 if (element == "map") {
                     var selected_opacity = document.querySelector("#opacity-select").checked;
                     var selected_vote = document.querySelector("#map-select").value;
-                    
+
                     map.drawSetting(selected_opacity, selected_vote, mapGroup, drawMap);
                 } else {
                     var selected_vote = document.querySelector("#table-select").value;
