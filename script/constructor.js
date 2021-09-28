@@ -166,13 +166,15 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
 
             //draw new map/table with changed data depending on vote and maptype selected
             function drawSettingPrediction(element) {
-                var selected_opacity = document.querySelector("#opacity-select").checked;
-                var selected_vote = document.querySelector("#map-select").value;
-
                 if (element == "map") {
+                    var selected_opacity = document.querySelector("#opacity-select").checked;
+                    var selected_vote = document.querySelector("#map-select").value;
+
                     map.drawSetting(selected_opacity, selected_vote, mapGroup, drawMap);
                 } else {
+                    var selected_vote = document.querySelector("#table-select").value;
 
+                    console.log(selected_vote);
                     if (element == "table") {
                         if (selected_vote == "SECOND VOTE") {
                             drawTable(2)
