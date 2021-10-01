@@ -3,13 +3,11 @@ body {
     font-family: Tahoma, sans-serif;
     font-size: 12px;
     font-weight: normal;
-    background-color: #bfbfbf;
-    margin-top: 5px;
-    margin-bottom: 0px;
+    margin: 5px 0 0 0;
+    background-color: #bfbfbf
 }
 
 header {
-    width: 100%;
     height: 75px;
     color: #ffffff;
     background-color: #ff7575;
@@ -19,7 +17,7 @@ header img {
     position: absolute;
     height: 40px;
     padding: 13px 0 10px 0;
-    margin-left: 25px;
+    margin-left: 125px;
 }
 
 header h1 {
@@ -27,7 +25,7 @@ header h1 {
     position: relative;
     font-weight: bold;
     top: 25px;
-    left: 55px;
+    left: 155px;
     margin-left: 25px;
     margin-right: 25px;
     letter-spacing: 1px;
@@ -51,26 +49,29 @@ h2 {
     color: black;
 }
 
+.content {
+    margin: 0 8px 0 8px;
+}
+
 #contact-info {
     float: right;
     position: relative;
-    right: 30px;
+    right: 110px;
 }
 .socialmedia-icon {
 }
     .socialmedia-icon img {
         height: 20px;
         padding: 11px 0 9px 0;
-        margin-left: 20px;
+        margin-left: 30px;
     }
 
 #NavBar {
     overflow: hidden;
     background-color: #333333;
-    font-size: 12px;
+    font-size: 13px;
     cursor: default;
 }
-
     #NavBar .page {
         float: left;
         display: block;
@@ -81,14 +82,17 @@ h2 {
         cursor: pointer;
         outline: none;
     }
+        #NavBar .page:first-child {
+            margin-left: 110px;
+        }
         #NavBar .page:hover {
             transition: 0.15s;
-            background-color: #ffb3b3;
-            color: #333333;
+            background-color: #ff7575;
         }
         #NavBar .active {
-            background-color: #ff7575;
             color: white;
+            text-decoration: underline;
+            font-weight: bold;
         }
 
 .under_construction {
@@ -122,4 +126,9 @@ h2 {
 
 #copyright a {
     color: #333;
+}
+
+.infobox {
+    background-color: #bfbfbf;
+    width: 100%
 }
