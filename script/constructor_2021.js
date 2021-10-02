@@ -40,7 +40,7 @@ expandBtn.addEventListener("click", () =>{
 
 
 // PROCESSING RESULTS AND MAP DATA //
-d3.csv("../data/wk_17_processed.csv", function(d) {
+d3.csv("../data/2021/wk_21_processed.csv", function(d) {
 
     return {
         "Name": d["Name"],
@@ -91,7 +91,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
     var dataArray = resultsData.map(Object.values); //ARRAY WITH PREDICTED RESULTS
 
 
-    d3.json("../data/Wahlkreise_map.topo.json").then(function(mapData) {
+    d3.json("../data/2017/wahlkreise2017.topo.json").then(function(mapData) {
 
         var jsonArray = mapData.objects.wahlkreise.geometries;
 
@@ -247,8 +247,7 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
         (function() {//on page load draw map with selected vote and map type
             var selected_opacity = document.querySelector("#opacity-select").checked;
             var selected_vote = document.querySelector("#map-select").value;
-            console.log(selected_opacity);
-            console.log(selected_vote);
+
             map.drawSetting(selected_opacity, selected_vote, mapGroup, drawMap);
         })();
 
@@ -307,17 +306,27 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
             if (searchBar.value === "") {
                 return null;
             } else {
+                var selected_vote = document.querySelector("#map-select").value;
                 var result = electionData.getDistrict(dataArray, searchBar.value);
-                var partyArray = electionData.getData(dataArray, searchBar.value, vote);
-                var lastElectionArray = electionData.getData(rawDataArray, searchBar.value, vote);
 
                 d3.select("#name") //wahlkreis name on click
                     .html(() => {
                         return "<span>" + result[0][1] + ". </span>" + result[0][0]
                     });
 
-                graph.draw(result, partyArray, graphSVG, graphGroup, results_container, vote, lastElectionArray);
+                if (selected_vote == "SECOND VOTE") {
+                    var partyArray = electionData.getData(dataArray, searchBar.value, 2);
+                    var lastElectionArray = electionData.getData(rawDataArray, searchBar.value, 2);
 
+                    graph.draw(result, partyArray, graphSVG, graphGroup, results_container, 2, lastElectionArray);
+                } else {
+                    if (selected_vote == "FIRST VOTE") {
+                        var partyArray = electionData.getData(dataArray, searchBar.value, 1);
+                        var lastElectionArray = electionData.getData(rawDataArray, searchBar.value, 1);
+
+                        graph.draw(result, partyArray, graphSVG, graphGroup, results_container, 1, lastElectionArray);
+                    }
+                }
             }
         });
 
@@ -326,16 +335,27 @@ d3.csv("../data/wk_17_processed.csv", function(d) {
                 if (searchBar.value === "") {
                     return null;
                 } else {
+                    var selected_vote = document.querySelector("#map-select").value;
                     var result = electionData.getDistrict(dataArray, searchBar.value);
-                    var partyArray = electionData.getData(dataArray, searchBar.value, vote);
-                    var lastElectionArray = electionData.getData(rawDataArray, searchBar.value, vote);
 
                     d3.select("#name") //wahlkreis name on click
                         .html(() => {
                             return "<span>" + result[0][1] + ". </span>" + result[0][0]
                         });
 
-                    graph.draw(result, partyArray, graphSVG, graphGroup, results_container, vote, lastElectionArray);
+                    if (selected_vote == "SECOND VOTE") {
+                        var partyArray = electionData.getData(dataArray, searchBar.value, 2);
+                        var lastElectionArray = electionData.getData(rawDataArray, searchBar.value, 2);
+
+                        graph.draw(result, partyArray, graphSVG, graphGroup, results_container, 2, lastElectionArray);
+                    } else {
+                        if (selected_vote == "FIRST VOTE") {
+                            var partyArray = electionData.getData(dataArray, searchBar.value, 1);
+                            var lastElectionArray = electionData.getData(rawDataArray, searchBar.value, 1);
+
+                            graph.draw(result, partyArray, graphSVG, graphGroup, results_container, 1, lastElectionArray);
+                        }
+                    }
                 }
             }
         });

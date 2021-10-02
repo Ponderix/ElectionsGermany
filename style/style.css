@@ -72,6 +72,9 @@ h2 {
     font-size: 13px;
     cursor: default;
 }
+#NavBar i {
+    margin-left: 5px;
+}
     #NavBar .page {
         float: left;
         display: block;
@@ -82,7 +85,7 @@ h2 {
         cursor: pointer;
         outline: none;
     }
-        #NavBar .page:first-child {
+        #NavBar .firstmost {
             margin-left: 110px;
         }
         #NavBar .page:hover {
@@ -94,6 +97,42 @@ h2 {
             text-decoration: underline;
             font-weight: bold;
         }
+/* DROPFOWN MENU */
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+.dropdown-content {
+      display: none;
+      position: absolute;
+      margin-top: 44.5px;;
+      background-color: #333;
+      min-width: 152px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 2;
+}
+
+.dropdown-content a:hover{background-color: #ff7575; transition: 0.15s;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown-content a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown .dropbtn {
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  font-family: inherit;
+  background-color: #333;
+  margin: 0;
+}
+/* DROPFOWN MENU */
+
 
 .under_construction {
     background-color: white;
@@ -131,4 +170,21 @@ h2 {
 .infobox {
     background-color: #bfbfbf;
     width: 100%
+}
+
+
+/* icon */
+
+.arrow {
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    display: inline-block;
+    margin-bottom: 1px;
+    padding: 3px;
+}
+.left {
+    transform: rotate(135deg);
+}
+.down {
+    transform: rotate(45deg);
 }

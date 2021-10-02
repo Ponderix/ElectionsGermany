@@ -8,7 +8,7 @@
     <meta name="description" content="Explore the 2017 German election result on an interactive election map.">
     <meta name="keywords" content="Germany, Election Map, 2017">
 
-    <title>2017 General Election</title>
+    <title>2021 General Election</title>
     <link rel="icon" type="image/png" href="../assets/favicon2021.png">
     <script type="text/javascript" src="../libraries/d3.min.js"></script>
     <script type="text/javascript" src="../libraries/topojson.min.js"></script>
@@ -18,13 +18,23 @@
 <body>
     <header>
         <a href="../index.html"><img src="../assets/favicon2021.png" class="electionsgermany-logo"></a>
-        <h1>ElectionsGermany - <span id="PageTitle">2017 Election</span></h1>
+        <h1>ElectionsGermany - <span id="PageTitle">2021 Election</span></h1>
     </header>
 
     <div id="NavBar">
-        <a class="page" href="../index.html">Home</a>
+        <a class="page firstmost" href="../index.html">Home</a>
         <a class="page" href="german_election_system.html">The German Election System</a>
-        <a class="active page" href="election_maps.html">German Election Maps</a>
+
+        <div class="dropdown">
+            <button class="page dropbtn">German Elections
+                <i class="arrow down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="2017_election.html">2017 Election</a>
+                <a class="active" href="2021_election.html">2021 Election</a>
+            </div>
+        </div>
+
         <a class="page" href="credits.html">Credits</a>
 
         <div id="contact-info">
@@ -91,7 +101,7 @@
             <div id="input_body" class="body">
 
                 <div id="input_explainer">
-                    Predict a hypothetical outcome of the 2017 election! Discover how the electoral districts change according to your own input. The value you see above the input fields are the result each party recieved as <span style="font-weight: bold;">second votes</span>. A more elaborate calculator, which will include predictions for all the states, will come in a further release.
+                    Predict a hypothetical outcome of the 2021 election! Discover how the electoral districts change according to your own input. The value you see above the input fields are the result each party recieved as <span style="font-weight: bold;">second votes</span>. A more elaborate calculator, which will include predictions for all the states, will come in a further release.
                 </div>
 
                 <div id="input_national" class="user-input">
@@ -99,34 +109,34 @@
                     <span class="region">NATIONAL</span>
 
                     <ul>
-                        <li id="nat_result-key">2017 RESULT:</li>
+                        <li id="nat_result-key">2021 RESULT:</li>
                         <li id="nat_prediction-key">PREDICTION:</li>
                     </ul>
 
                     <div class="inputs">
-                        <div id="nat_input_CDU" class="input-field">
-                            <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
-                        </div>
                         <div id="nat_input_SPD" class="input-field">
                             <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
                         </div>
-                        <div id="nat_input_AfD" class="input-field">
-                            <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
-                        </div>
-                        <div id="nat_input_FDP" class="input-field">
-                            <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
-                        </div>
-                        <div id="nat_input_Linke" class="input-field">
+                        <div id="nat_input_CDU" class="input-field">
                             <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
                         </div>
                         <div id="nat_input_Grünen" class="input-field">
                             <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
                         </div>
+                        <div id="nat_input_FDP" class="input-field">
+                            <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                        </div>
+                        <div id="nat_input_AfD" class="input-field">
+                            <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
+                        </div>
                         <div id="nat_input_CSU" class="input-field">
-                            <input type="text" value="6" readonly/>
+                            <input type="text" value="5" readonly/>
+                        </div>
+                        <div id="nat_input_Linke" class="input-field">
+                            <input type="text" value="0" onchange="userinput.inputOnChange('nat_')"/>
                         </div>
                         <div id="nat_input_Others" class="input-field input-other">
-                            <input type="text" value="96" readonly/>
+                            <input type="text" value="95" readonly/>
                         </div>
                     </div>
 
@@ -137,7 +147,7 @@
                     <span class="region">BAVARIA</span>
 
                     <ul>
-                        <li id="BY_result-key">2017 RESULT:</li>
+                        <li id="BY_result-key">2021 RESULT:</li>
                         <li id="BY_prediction-key">PREDICTION:</li>
                     </ul>
 
@@ -148,13 +158,13 @@
                         <div id="BY_input_SPD" class="input-field">
                             <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
                         </div>
-                        <div id="BY_input_AfD" class="input-field">
-                            <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
-                        </div>
                         <div id="BY_input_Grünen" class="input-field">
                             <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
                         </div>
                         <div id="BY_input_FDP" class="input-field">
+                            <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
+                        </div>
+                        <div id="BY_input_AfD" class="input-field">
                             <input type="text" value="0" onchange="userinput.inputOnChange('BY_')"/>
                         </div>
                         <div id="BY_input_Linke" class="input-field">
@@ -226,7 +236,7 @@
     <script src="../script/table.js" charset="utf-8"></script>
 
     <!-- HAS TO BE DEFINED AFTER ALL OTHER SCRIPTS -->
-    <script src="../script/constructor.js" charset="utf-8"></script>
+    <script src="../script/constructor_2021.js" charset="utf-8"></script>
     <!-- -->
 
     <link rel="stylesheet" href="../style/style.css">
