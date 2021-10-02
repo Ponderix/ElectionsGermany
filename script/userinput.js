@@ -81,9 +81,14 @@ var userinput = {
 
     //apply swing to an array of party
     applySwing : function(array, swing) {
-        for (var index = 0; index < array.length; index++) {
-            let prediction = array[index][1] + swing[index][1]; //add national swing of party to result in district
-            array[index].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
+        for (var i = 0; i < array.length; i++) {
+            let prediction = array[i][1] + swing[i][1]; //add national swing of party to result in district
+
+            if (array[i][1] == 0) {
+                array[i].splice(1, 1, 0); // if party did not run, do not add votes
+            } else {
+                array[i].splice(1, 1, prediction); //replace the predicted numbers with the originial numbers
+            }
         }
     },
 
