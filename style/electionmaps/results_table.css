@@ -29,7 +29,7 @@
 
 
 #table_body {
-    height: 485px;
+    height: 500px;
 }
 .bodyactive {
     display: block;
@@ -61,9 +61,19 @@
     color: #333;
     cursor: default;
     left: 170px;
-    bottom: 10px;
     text-decoration: underline;
 }
+#totals-seats {
+    width: 90px;
+    text-align: center;
+    bottom: 4px;
+}
+    #totals-seats span {
+        text-decoration: none;
+        font-weight: normal;
+        font-size: 9px;
+        color: red;
+    }
 
 #table-select {
     left: 50%;

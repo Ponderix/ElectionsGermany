@@ -93,7 +93,7 @@ var cdu = data[0][10 + functions.whichVote(vote)] * 100
         afd = data[0][34 + functions.whichVote(vote)] * 100
         other = data[0][38 + functions.whichVote(vote)] * 100;
 ```
-Still confused? Contact me at germanelectionmaps@gmail.com or [twitter]()
+Still confused? Contact me at germanelectionmaps@gmail.com or on [twitter](https://twitter.com/electionsger)
 
 
 ### [#](#round) *functions*.round(num, decimal)

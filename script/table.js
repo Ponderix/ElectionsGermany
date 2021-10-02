@@ -295,7 +295,7 @@ var table = {
         }
 
         var totals = d3.select("#totals-seats");
-        totals.html(seats[8][1])
+        totals.html(seats[8][1] + " <br><span>EXPERIMENTAL! Does not fully work yet.</span>")
             .style("left", 20)
     },
 }

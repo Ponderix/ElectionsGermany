@@ -91,7 +91,7 @@ d3.csv("../data/2021/wk_21_processed.csv", function(d) {
     var dataArray = resultsData.map(Object.values); //ARRAY WITH PREDICTED RESULTS
 
 
-    d3.json("../data/2017/wahlkreise2017.topo.json").then(function(mapData) {
+    d3.json("../data/2021/wahlkreise2021.topo.json").then(function(mapData) {
 
         var jsonArray = mapData.objects.wahlkreise.geometries;
 
