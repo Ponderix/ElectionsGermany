@@ -33,6 +33,7 @@ var map = {
             } else {
                 return (partyArray[0][1] + 10) / 100;
             }
+
         }
 
     },

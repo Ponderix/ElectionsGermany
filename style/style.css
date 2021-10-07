@@ -19,7 +19,6 @@ header img {
     padding: 13px 0 10px 0;
     margin-left: 125px;
 }
-
 header h1 {
     width: 100%;
     position: relative;
@@ -41,6 +40,9 @@ header h1 {
     -ms-user-select: none;
     /* Internet Explorer/Edge */
 }
+#header-content {
+    
+}
 
 h2 {
     position: relative;
@@ -49,8 +51,27 @@ h2 {
     color: black;
 }
 
+/* text content class */
+    .paragraphs {
+        margin: auto;
+        width: 85%;
+        font-size: 18px;
+        color: black;
+        letter-spacing: 0.75px;
+        line-height: 30px;
+        position: relative;
+        margin-top: 90px;
+        text-align: justify;
+    }
+
+    .text-hyperlink {
+        color: #333;
+    }
+/* --- */
+
 .content {
     margin: 0 8px 0 8px;
+    position: absolute;
 }
 
 #contact-info {
@@ -71,6 +92,7 @@ h2 {
     background-color: #333333;
     font-size: 13px;
     cursor: default;
+    min-width: 875px;
 }
 #NavBar i {
     margin-left: 5px;
