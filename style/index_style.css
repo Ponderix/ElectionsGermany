@@ -12,22 +12,16 @@
         font-weight: bold;
     }
 
-#text-body {
-    position: relative;
-    width: 100%;
-    background-color: white;
-    height: 100vh;
-}
-
 #welcome {
     margin: auto;
     position: relative;
-    top: 60px;
+    top: 70px;
     text-align: center;
 }
     #welcome img {
         margin: auto;
         width: 20%;
+        max-width: 300px;
         margin-top: 20px;
     }
     #welcome h3 {

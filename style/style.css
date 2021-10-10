@@ -3,7 +3,7 @@ body {
     font-family: Tahoma, sans-serif;
     font-size: 12px;
     font-weight: normal;
-    margin: 5px 0 0 0;
+    margin: 0;
     background-color: #bfbfbf
 }
 
@@ -17,16 +17,13 @@ header img {
     position: absolute;
     height: 40px;
     padding: 13px 0 10px 0;
-    margin-left: 125px;
 }
 header h1 {
     width: 100%;
     position: relative;
     font-weight: bold;
     top: 25px;
-    left: 155px;
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-left: 60px;
     letter-spacing: 1px;
     font-size: 25px;
     user-select: none;
@@ -41,7 +38,8 @@ header h1 {
     /* Internet Explorer/Edge */
 }
 #header-content {
-    
+    position: relative;
+    left: 8%;
 }
 
 h2 {
@@ -50,17 +48,29 @@ h2 {
     font-size: 15px;
     color: black;
 }
+h5 {
+    margin: 40px 0 0 0;
+    font-size: 20px;
+}
 
 /* text content class */
+.text-body {
+    position: relative;
+    background-color: white;
+    margin: 0 0.4% 0 0.4%;
+}
     .paragraphs {
         margin: auto;
         width: 85%;
+        max-width: 1500px;
         font-size: 18px;
         color: black;
         letter-spacing: 0.75px;
         line-height: 30px;
         position: relative;
-        margin-top: 90px;
+        margin-top: 100px;
+        top: 5%;
+        padding-bottom: 50px;
         text-align: justify;
     }
 
@@ -70,14 +80,15 @@ h2 {
 /* --- */
 
 .content {
-    margin: 0 8px 0 8px;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
 }
 
 #contact-info {
     float: right;
     position: relative;
-    right: 110px;
+    right: 8%;
 }
 .socialmedia-icon {
 }
@@ -87,6 +98,7 @@ h2 {
         margin-left: 30px;
     }
 
+/* navbar */
 #NavBar {
     overflow: hidden;
     background-color: #333333;
@@ -108,7 +120,7 @@ h2 {
         outline: none;
     }
         #NavBar .firstmost {
-            margin-left: 110px;
+            margin-left: 7%;
         }
         #NavBar .page:hover {
             transition: 0.15s;
@@ -119,7 +131,8 @@ h2 {
             text-decoration: underline;
             font-weight: bold;
         }
-/* DROPFOWN MENU */
+
+/* DROPDOWN MENU */
 .dropdown {
     float: left;
     overflow: hidden;
@@ -129,7 +142,7 @@ h2 {
       position: absolute;
       margin-top: 44.5px;;
       background-color: #333;
-      min-width: 152px;
+      width: 120px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 2;
 }
@@ -138,7 +151,7 @@ h2 {
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown-content a {
     color: white;
-    padding: 14px 16px;
+    padding: 14px 0px;
     text-decoration: none;
     display: block;
     text-align: center;
@@ -150,6 +163,7 @@ h2 {
   color: white;
   padding: 14px 16px;
   font-family: inherit;
+  width: 120px;
   background-color: #333;
   margin: 0;
 }
