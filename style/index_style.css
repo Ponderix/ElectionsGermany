@@ -12,9 +12,26 @@
         font-weight: bold;
     }
 
-#text-body {
+#welcome {
+    margin: auto;
     position: relative;
-    width: 100%;
-    background-color: white;
-    height: 100vh;
+    top: 70px;
+    text-align: center;
 }
+    #welcome img {
+        margin: auto;
+        width: 20%;
+        max-width: 300px;
+        margin-top: 20px;
+    }
+    #welcome h3 {
+        font-size: 40px;
+        margin: 10px;
+    }
+    #welcome h4 {
+        font-size: 20px;
+        margin: 5px;
+        font-weight: normal;
+        color: #333;
+        font-style: italic;
+    }
