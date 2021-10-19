@@ -48,19 +48,36 @@ h2 {
     font-size: 15px;
     color: black;
 }
+h3 {
+    font-size: 40px;
+    margin: 10px;
+}
+h4 {
+    font-size: 20px;
+    margin: 5px;
+    font-weight: normal;
+    color: #333;
+    font-style: italic;
+}
 h5 {
     margin: 40px 0 0 0;
     font-size: 20px;
+}
+h6 {
+    font-size: 18px;
+    font-weight: normal;
+    text-decoration: underline;
+    margin: 25px 0 0 0;
 }
 
 /* text content class */
 .text-body {
     position: relative;
     background-color: white;
-    margin: 0 0.4% 0 0.4%;
+    margin: 0 8px 0 8px;
 }
     .paragraphs {
-        margin: auto;
+        margin: 100px auto auto;
         width: 85%;
         max-width: 1500px;
         font-size: 18px;
@@ -68,7 +85,6 @@ h5 {
         letter-spacing: 0.75px;
         line-height: 30px;
         position: relative;
-        margin-top: 100px;
         top: 5%;
         padding-bottom: 50px;
         text-align: justify;
@@ -76,7 +92,14 @@ h5 {
 
     .text-hyperlink {
         color: #333;
+        text-decoration: underline;
     }
+
+    .caption {
+        font-size: 70%;
+        text-decoration: italic;
+    }
+
 /* --- */
 
 .content {
@@ -91,6 +114,7 @@ h5 {
     right: 8%;
 }
 .socialmedia-icon {
+    text-decoration: none;
 }
     .socialmedia-icon img {
         height: 20px;
@@ -223,4 +247,87 @@ h5 {
 }
 .down {
     transform: rotate(45deg);
+}
+
+/* party colors */
+.CDU {
+    fill: #000000;
+    background-color: #000000;
+}
+
+.SPD {
+    fill: #EB001F;
+    background-color: #EB001F;
+}
+
+.Linke {
+    fill: #BE3075;
+    background-color: #BE3075;
+}
+
+.Grünen {
+    fill: #64A12D;
+    background-color: #64A12D;
+}
+
+.CSU {
+    fill: #202257;
+    background-color: #202257;
+}
+
+.FDP {
+    fill: #FFD700;
+    background-color: #FFD700;
+}
+
+.AfD {
+    fill: #009EE0;
+    background-color: #009EE0;
+}
+
+.SSW {
+    fill: #003C8F;
+    background-color: #003C8F;
+}
+
+.Others {
+    fill: #5e5e5e;
+    background-color: #5e5e5e;
+}
+
+/* border colors */
+.border-CDU {
+    border-color: #000000;
+}
+
+.border-SPD {
+    border-color: #EB001F;
+}
+
+.border-Linke {
+    border-color: #BE3075;
+}
+
+.border-Grünen {
+    border-color: #64A12D;
+}
+
+.border-CSU {
+    border-color: #202257;
+}
+
+.border-FDP {
+    border-color: #FFD700;
+}
+
+.border-AfD {
+    border-color: #009EE0;
+}
+
+.border-SSW {
+    border-color: #003C8F;
+}
+
+.border-Others {
+    border-color: #5e5e5e;
 }

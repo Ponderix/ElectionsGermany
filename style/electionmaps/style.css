@@ -2,6 +2,10 @@ body {
     background-color: #bfbfbf;
 }
 
+.interactive {
+    margin: 0 0.4% 0 0.4%;
+}
+
 /*ELEMENTS*/
 #reset {
     position: absolute;
@@ -133,46 +137,8 @@ body {
 }
 
 
-/*COLOURS*/
-.CDU {
-    fill: #000000;
-    background-color: #000000;
-}
+/*other*/
 
-.SPD {
-    fill: #EB001F;
-    background-color: #EB001F;
-}
-
-.Linke {
-    fill: #BE3075;
-    background-color: #BE3075;
-}
-
-.Grünen {
-    fill: #64A12D;
-    background-color: #64A12D;
-}
-
-.CSU {
-    fill: #202257;
-    background-color: #202257;
-}
-
-.FDP {
-    fill: #FFD700;
-    background-color: #FFD700;
-}
-
-.AfD {
-    fill: #009EE0;
-    background-color: #009EE0;
-}
-
-.Others {
-    fill: #5e5e5e;
-    background-color: #5e5e5e;
-}
     #wahlkreise .Others {
         fill: #5e5e5e;
         stroke: black;
@@ -186,39 +152,4 @@ body {
     position: absolute;
     max-width: 250px;
     font-size: 10px;
-}
-
-
-
-/* border colors */
-.border-CDU {
-    border-color: #000000;
-}
-
-.border-SPD {
-    border-color: #EB001F;
-}
-
-.border-Linke {
-    border-color: #BE3075;
-}
-
-.border-Grünen {
-    border-color: #64A12D;
-}
-
-.border-CSU {
-    border-color: #202257;
-}
-
-.border-FDP {
-    border-color: #FFD700;
-}
-
-.border-AfD {
-    border-color: #009EE0;
-}
-
-.border-Others {
-    border-color: #5e5e5e;
 }

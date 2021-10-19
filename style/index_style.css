@@ -1,6 +1,6 @@
 #btw21 {
     font-size: 20px;
-    height: 500px;
+    height: 400px;
     margin: auto;
 }
     #btw21 span {
@@ -23,15 +23,4 @@
         width: 20%;
         max-width: 300px;
         margin-top: 20px;
-    }
-    #welcome h3 {
-        font-size: 40px;
-        margin: 10px;
-    }
-    #welcome h4 {
-        font-size: 20px;
-        margin: 5px;
-        font-weight: normal;
-        color: #333;
-        font-style: italic;
     }

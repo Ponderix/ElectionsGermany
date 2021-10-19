@@ -42,7 +42,7 @@ var graph = {
         });
 
         var eligibleVoters = result[0][3]
-        votesCast = result[0][4];
+            votesCast = result[0][4];
         var margin = functions.getMargin(rawVotes);
 
         functions.removeZero(partyArray, 1); //ordering to remove parties which dont run
