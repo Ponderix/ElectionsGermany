@@ -94,47 +94,40 @@
     border-style: solid;
     border-width: 1.5px;
     border-radius: 5px;
+
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+    align-items: center;
 }
+
 .party-logo {
-    position: absolute;
-    left: 5px;
+    position: relative;
     cursor: default;
     height: 30px;
     width: 30px;
+    left: 5px;
 }
+
 .table-percent-result {
-    left: 60px;
     font-weight: bold;
 }
     .table-percent-result span {
         font-weight: normal;
         font-size: 80%;
     }
-.table-wahlkreise-result {
-    left: 155px;
-}
+
     .table-wahlkreise-result span {
         font-size: 80%;
     }
-.table-seat-result {
-    left: 230px;
-}
     .table-seat-result span {
         font-size: 80%;
     }
 
-.party-info-value {
-    top: 50%;
-    position: absolute;
-    transform: translate(0, -50%);
-}
-
 
 #other-parties-visual {
-    position: absolute;
-    top: 50%;
+    position: relative;
     left: 5px;
-    transform: translate(0, -50%);
     font-weight: bold;
     text-decoration: underline;
 }
