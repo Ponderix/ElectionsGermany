@@ -1,10 +1,12 @@
+
+
 body {
     overflow-x: hidden;
     font-family: Tahoma, sans-serif;
     font-size: 12px;
     font-weight: normal;
     margin: 0;
-    background-color: #bfbfbf
+    background-color: #bfbfbf;
 }
 
 header {
@@ -227,11 +229,6 @@ h6 {
     color: #333;
 }
 
-.infobox {
-    background-color: #bfbfbf;
-    width: 100%
-}
-
 
 /* icon */
 
@@ -330,4 +327,35 @@ h6 {
 
 .border-Others {
     border-color: #5e5e5e;
+}
+
+/* on screen change */
+@media (max-width:700px) {
+    .paragraphs {
+        font-size: 11px;
+        line-height: 20px;
+    }
+    .text-body {
+        margin: 0 4px 0 4px;
+    }
+    iframe {
+        width: 300px;
+        height: 220px;
+    }
+    h2 {
+        font-size: 10px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    h4 {
+        font-size: 13px;
+    }
+    h5 {
+        font-size: 13px;
+    }
+    h6 {
+        font-size: 12px;
+    }
+
 }

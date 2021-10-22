@@ -1,0 +1,25 @@
+
+
+#page_title {
+    text-align: center;
+    margin: auto;
+    min-width: 250px;
+    top: 40px;
+    position: relative;
+}
+
+.paragraphs #states_img {
+    width: 35%;
+    max-width: 300px;
+    margin-left: 25px;
+    float: right;
+}
+.paragraphs #wahlkreise_img {
+    width: 40%;
+    max-width: 400px;
+    margin-right: 25px;
+    float: left;
+}
+.paragraph_img {
+    position: relative;
+}

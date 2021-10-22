@@ -1,0 +1,73 @@
+/* party slides */
+
+    /* slide navbar */
+    .slide-nav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 30px 40px 0;
+        justify-content: space-between;
+        width: 12.5%;
+        font-size: 13px;
+        font-family: Monospace;
+    }
+        .slide-nav a {
+            text-decoration: underline;
+        }
+        @media (max-width:700px) {
+            .slide-nav {
+                font-size: 7px;
+                width: 30%;
+            }
+        }
+
+    /* active or non active */
+
+
+#party_infoboxes {
+    text-align: left;
+    color: white;
+}
+#party_infoboxes .FDP {
+    color: #333;
+}
+
+#union_infobox {
+    padding-bottom: 20px;
+    margin: 20px 0;
+    border: dashed 1px black;
+    border-radius: 7px;
+}
+    #union_infobox h5 {
+        margin-top: 20px;
+    }
+    #union_infobox .union {
+        padding: 0 40px;
+        color: black;
+    }
+    #union_infobox .slide-nav {
+        color: #333;
+    }
+
+
+.infobox-title {
+    text-align: left;
+    padding: 30px 40px 0;
+}
+    .infobox-title h5 {
+        margin-top: 0;
+        width: 90%;
+    }
+.infobox-main {
+    padding: 20px 40px 60px;
+}
+    .main-img img {
+        position: relative;
+        width: 20%;
+        max-width: 200px;
+        min-width: 100px;
+        margin: 10px 0 40px;
+    }
+    .main-text span {
+        font-weight: bold;
+    }
