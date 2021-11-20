@@ -6,10 +6,6 @@ var results_container = d3.select("#results_container");
 var vote = 1;
 var defaultPartyOrder = ["CDU", "SPD", "Linke", "Grünen", "CSU", "FDP", "AfD", "Others"];
 
-var zoom = d3.zoom()
-    .scaleExtent([0.7, 15])
-    .on("zoom", functions.zoomed);
-
 var mapSVG = d3.select("#map")
     .attr("height", map.height)
     .attr("width", map.width)
@@ -18,7 +14,24 @@ var mapSVG = d3.select("#map")
 var mapGroup = mapSVG.append("g")
     .attr("id", "wahlkreise");
 
-mapSVG.call(zoom).on("dblclick.zoom", null);
+var zoom = d3.zoom()
+    .scaleExtent([0.7, 15])
+    .on("zoom", functions.zoomed);
+
+    mapSVG.call(zoom).on("dblclick.zoom", null);
+    d3.select("#reset").on("click", () =>{
+        if (map.activeNode.node != null) {
+            console.log(map.activeNode.opacity);
+            d3.select("#" + (map.activeNode.node).id).transition()
+                .style("opacity", map.activeNode.opacity);
+        }
+        map.activeNode.node = null;
+        map.activeNode.opacity = null;
+
+        mapSVG.transition()
+            .duration(1000)
+            .call(zoom.transform, d3.zoomIdentity);
+        });
 
 var projection = d3.geoMercator()
     .scale(3500);
@@ -208,7 +221,10 @@ d3.csv("../data/2017/wk_17_processed.csv", function(d) {
 
 
         function drawMap(function_vote, opacity) {//opacity can be SOLID or DYNAMIC
-            mapGroup.append("g").selectAll("path")
+            map.activeNode.node = null;
+            map.activeNode.opacity = null;
+            
+            mapGroup.selectAll("path")
                 .data(topojson.feature(mapData, mapData.objects.wahlkreise).features) //retrieve wahlkreise boundary data
                 .enter().append("path")
                 .attr("d", path)
@@ -228,18 +244,33 @@ d3.csv("../data/2017/wk_17_processed.csv", function(d) {
                 .attr("class", (d, i) => {
                     return map.class(dataArray, jsonArray, function_vote, i);
                 })
+                .attr("id", (d, i) =>{
+                    return "wk_" + jsonArray[i].properties.WKR_NR;
+                })
                 .html((d, i) => { //wahlkreis name on hover
                     return "<title>" + jsonArray[i].properties.WKR_NR + ". " + jsonArray[i].properties.WKR_NAME + "</title>" //retrieve nth name from wahlkreise data
                 })
-                .on("click", (d, i) => {
+                .on("click", (event, d) => {
+                    if (map.activeNode.node != null) {
+                        console.log(map.activeNode.opacity);
+                        d3.select("#" + (map.activeNode.node).id).transition()
+                            .style("opacity", map.activeNode.opacity);
+                    }
+
+                    map.activeNode.node = event.target;
+                    map.activeNode.opacity = event.target.style.opacity;
+
+                    map.zoomTo(path, d, zoom);
+                    map.flashSeat(event);
+
                     d3.select("#name") //wahlkreis name on click
                         .html(() => {
-                            return "<span>" + i.properties.WKR_NR + ". </span>" + i.properties.WKR_NAME;
+                            return "<span>" + d.properties.WKR_NR + ". </span>" + d.properties.WKR_NAME;
                         });
 
-                    var result = electionData.getDistrict(dataArray, i.properties.WKR_NAME);
-                    var partyArray = electionData.getData(dataArray, i.properties.WKR_NAME, function_vote);
-                    var lastElectionArray = electionData.getData(rawDataArray, i.properties.WKR_NAME, function_vote);
+                    var result = electionData.getDistrict(dataArray, d.properties.WKR_NAME);
+                    var partyArray = electionData.getData(dataArray, d.properties.WKR_NAME, function_vote);
+                    var lastElectionArray = electionData.getData(rawDataArray, d.properties.WKR_NAME, function_vote);
 
                     graph.draw(result, partyArray, graphSVG, graphGroup, results_container, function_vote, lastElectionArray);
                 });

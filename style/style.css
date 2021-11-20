@@ -73,6 +73,13 @@ h6 {
 }
 
 /* text content class */
+#page_title {
+    text-align: center;
+    margin: auto;
+    min-width: 250px;
+    top: 40px;
+    position: relative;
+}
 .text-body {
     position: relative;
     background-color: white;
