@@ -2,15 +2,33 @@
     font-size: 20px;
     height: 400px;
     margin: auto;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 0 2vw;
+    text-align: center;
+    font-family: 'Trebuchet MS', sans-serif;
+    margin-top: 10px;
+    background-color: #4e6692;
+    border-radius: 3px;
+    box-shadow: 3px 3px 8px grey;
 }
-    #btw21 span {
-        text-align: center;
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        top: 50%;
-        font-weight: bold;
+    #btw21 h5 {
+        margin-top: 18px;
     }
+    #btw21 span {
+        font-size: 15px;
+    }
+    #btw21 .text-hyperlink {
+        color: white;
+    }
+    #btw21 #arc_container {
+    }
+        .slice text {
+            fill: white;
+            font-size: 15px;
+        }
 
 #welcome {
     margin: auto;

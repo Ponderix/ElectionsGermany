@@ -5,14 +5,6 @@ var functions = {
         mapGroup.attr("transform", transform.toString());
     },
 
-    //on click zoom to path
-    zoomTo: function(path, zoom) {
-        path.transition()
-            .delay(100)
-            .duration(1000)
-            .call(zoom.scaleTo, 2);
-    },
-
     //removing all values of 0 IF ordered from large -> small
     removeZero: function(array, secondIndex) {
         array.sort((a, b) => {
