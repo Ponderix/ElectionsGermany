@@ -1,6 +1,6 @@
 #btw21 {
     font-size: 20px;
-    height: 400px;
+    height: 425px;
     margin: auto;
     width: 450px;
     display: flex;
@@ -16,6 +16,7 @@
 }
     #btw21 h5 {
         margin-top: 18px;
+        font-size: 20px;
     }
     #btw21 span {
         font-size: 15px;
@@ -29,6 +30,58 @@
             fill: white;
             font-size: 15px;
         }
+
+#tooltip {
+    opacity: 0;
+    width: 5vw;
+    top: 150px;
+    max-height: 80px;
+    max-width: 63px;
+    padding: 10px;
+    position: absolute;
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+.ttp-logo {
+    max-height: 75%;
+}
+    .ttp-logo img {
+        width: 100%;
+        max-width: 55px;
+        margin-bottom: 5px;
+        position: relative;
+    }
+.ttp-main {
+    color: #4e6692;
+    font-weight: bold;
+    font-size: 50%;
+}
+
+@media (max-width:544px) {
+    #btw21 {
+        width: 225px;
+        height: 225px;
+    }
+    #btw21 h5 {
+        margin-top: 18px;
+        font-size: 10px;
+    }
+    #btw21 span {
+        font-size: 8px;
+    }
+
+    #tooltip {
+        padding: 1%;
+    }
+        .ttp-main {
+            font-size: 1vw;
+        }
+
+    .slice text {
+        fill: white;
+        font-size: 7.5px;
+    }
+}
 
 #welcome {
     margin: auto;

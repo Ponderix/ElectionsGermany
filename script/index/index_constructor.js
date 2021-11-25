@@ -9,67 +9,99 @@ var data = [
     {party : "AfD", percent : 10.3, seats : 83},
 ];
 
-const width = 400;
-const height = 275;
-const radius = width / 2;
+if (window.innerWidth > 544) {
+    drawPie(400, 275);
+} else {
+    drawPie(250, 171.875);
+}
 
-var arc = d3.arc().innerRadius(50).outerRadius(radius);
-var pie = d3.pie().startAngle(-95 * (Math.PI/180))
-    .endAngle(95 * (Math.PI/180))
-    .padAngle(0) // some space between slices
-    .sort(null)
-    .value((d) =>{
-        return d.seats;
-    });
+window.addEventListener('resize', () =>{
+    if (window.innerWidth > 544) {
+        drawPie(400, 275);
+    } else {
+        drawPie(200, 137.5);
+    }
+});
 
 
-const svg = d3.select("#arc_container").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-        .attr('transform', `translate(${width / 2}, ${height - 50})`); // move chart from (0,0) to radius
+function drawPie(width, height) {
+    d3.select("#arc_container").selectAll("svg").remove();
 
-const slices = svg.selectAll("g.slice")
-    .data(pie(data))
-    .enter()
-    .append("g")
-    .attr("class", "slice");
+    const radius = width / 2;
+    const tooltip = d3.select("#tooltip");
 
-slices.append("path")
-    .attr("class", (d) => {
-        return d.data.party;
-    })
-    .attr("d", arc)
-    /*.transition()
-        .duration(1000)
-        .attrTween("d", (d) =>{
-            let originalEnd = d.endAngle;
 
-            return (t) => {
-                let currentAngle = d3.interpolate(t);
-                if (currentAngle < d.startAngle) {
-                    return "";
+    var arc = d3.arc().innerRadius(radius / 4).outerRadius(radius);
+    var pie = d3.pie().startAngle(-95 * (Math.PI/180))
+        .endAngle(95 * (Math.PI/180))
+        .padAngle(0) // some space between slices
+        .sort(null)
+        .value((d) =>{
+            return d.seats;
+        });
+
+
+    const svg = d3.select("#arc_container").append("svg")
+        .attr("width", width)
+        .attr("height", height + 25)
+        .append("g")
+            .attr('transform', `translate(${width / 2}, ${height + 25 - radius / 4})`); // move chart from (0,0) to radius
+
+    const slices = svg.selectAll("g.slice")
+        .data(pie(data))
+        .enter()
+        .append("g")
+        .attr("class", "slice");
+
+    slices.append("path")
+        .attr("class", (d) => {
+            return d.data.party;
+        })
+        .attr("d", arc)
+        .on("mouseover", (event, d) =>{
+            tooltip.select(".ttp-logo").selectAll("img").remove();
+            tooltip.select(".ttp-logo").append("img").attr("src", `assets/logos/${d.data.party}.svg`);
+
+            tooltip.select(".ttp-main").html(`${d.data.seats} seats<br>${d.data.percent}%`);
+
+            tooltip.transition()
+                .duration(750)
+                .style("opacity", 1)
+        })
+        .on("mouseout", () =>{
+            tooltip.transition().delay(200).duration(300).style("opacity", 0);
+        })
+        /*.transition()
+            .duration(1000)
+            .attrTween("d", (d) =>{
+                let originalEnd = d.endAngle;
+
+                return (t) => {
+                    let currentAngle = d3.interpolate(t);
+                    if (currentAngle < d.startAngle) {
+                        return "";
+                    }
+
+                    d.endAngle = Math.min(currentAngle, originalEnd);
+
+                    return arc(d);
                 }
 
-                d.endAngle = Math.min(currentAngle, originalEnd);
+            });*/
 
-                return arc(d);
+    /*slices.append("text")
+        .attr("transform", (d) =>{
+            if (d.data.party != "AfD" && d.data.party != "CSU") { // CSU and AfD dont align correctly, this fixes it
+                return `translate(${arc.centroid(d)})`;
+            } else {
+                var c = arc.centroid(d);
+                c.splice(1, 1, arc.centroid(d)[1] + 6);
+
+                return `translate(${c})`;
             }
-
+        })
+        .attr("text-anchor", "middle")
+        .text((d) =>{
+            return d.data.seats;
         });*/
-
-slices.append("text")
-    .attr("transform", (d) =>{
-        if (d.data.party != "AfD" && d.data.party != "CSU") { // CSU and AfD dont align correctly, this fixes it
-            return `translate(${arc.centroid(d)})`;
-        } else {
-            var c = arc.centroid(d);
-            c.splice(1, 1, arc.centroid(d)[1] + 6);
-
-            return `translate(${c})`;
-        }
-    })
-    .attr("text-anchor", "middle")
-    .text((d) =>{
-        return d.data.seats;
-    });
+}

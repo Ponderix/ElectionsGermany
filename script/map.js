@@ -70,15 +70,15 @@ var map = {
     },
 
     //on click flash seat credit (c) 2021 principalfish
-    flashSeat: function(event) {
+    flashSeat: function() {
         repeat();
         function repeat() {
-            d3.select(event.target).transition()
+            d3.select(map.activeNode.node).transition()
                 .duration(1000)
                 .style("opacity", 0.2)
             .transition()
                 .duration(1000)
-                .style("opacity", event.target.style.opacity)
+                .style("opacity", map.activeNode.opacity)
                 .on("end", repeat);
         }
     },

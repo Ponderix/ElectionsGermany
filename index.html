@@ -15,45 +15,44 @@
 
   <body>
     <header>
-        <div id="header-content">
-            <img src="assets/favicon2021.png" class="electionsgermany-logo">
-      		<h1>ElectionsGermany - <span id="PageTitle">Home</span></h1>
-        </div>
-	</header>
+        <div class="header-content">
+            <a href="index.html">
+                <img id="header-logo" src="assets/favicon2021.png"/>
+            </a>
 
-    <div id="NavBar">
-        <a class="page active firstmost" href="index.html">Home</a>
-        <a class="page" href="pages/german_politics.html">German Politics</a>
-
-        <div class="dropdown">
-            <button class="page dropbtn">Elections
-                <i class="arrow down"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="pages/2017_election.html">2017 Election</a>
-                <a href="pages/2021_election.html">2021 Election</a>
+            <div class="header-title">
+                <span>ElectionsGermany:</span> Home
             </div>
-        </div>
 
-        <a class="page" href="pages/acknowledgements.html">Acknowledgements</a>
-
-      <div id="contact-info">
-          <a class="socialmedia-icon" href="https://github.com/Ponderix/ElectionsGermany" title="GitHub">
-              <img src="assets/icons/GitHub-icon-light.png">
-          </a>
-          <a class="socialmedia-icon" href="https://twitter.com/electionsger" title="Twitter">
-              <img src="assets/icons/Twitter-logo-blue.png">
-          </a>
-          <a class="socialmedia-icon" href="mailto:electionsgermany@gmail.com" title="Mail">
-              <img src="assets/icons/mail-icon-white.svg">
-          </a>
-      </div>
-    </div>
+            <div class="header-nav">
+                <a class="page active" href="index.html">Home</a>
+                <a class="page" href="pages/german_politics.html">German Politics</a>
+                <a class="page" href="pages/acknowledgements.html">Acknowledgements</a>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        Elections
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="pages/2017_election.html" class="page">2017 Election</a>
+                        <a href="pages/2021_election.html" class="page">2021 Election</a>
+                    </div>
+                </div>
+            </div>
+    </header>
 
     <div class="content">
         <div id="btw21" class="infobox">
             <h5>2021 German Election</h5>
             <div id="arc_container">
+
+                <div id="tooltip">
+                    <div class="ttp-logo">
+                        <img src="assets/logos/X.svg">
+                    </div>
+                    <div class="ttp-main">
+                        X seats <br> X%
+                    </div>
+                </div>
 
             </div>
             <span>On September 26th 2021, Germany elected its 20th Bundestag resulting in a parliament of 736 representatives <a href="pages/2021_election.html" class="text-hyperlink">more....</a> </span>
@@ -88,8 +87,10 @@
     </div>
 
     <script src="script/index/index_constructor.js" charset="utf-8"></script>
+    <script src="script/header.js" charset="utf-8"></script>
 
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/index_style.css">
   </body>
 

@@ -13,40 +13,31 @@
 
 <body>
     <header>
-        <div id="header-content">
-            <img src="../assets/favicon2021.png" class="electionsgermany-logo">
-      		<h1>ElectionsGermany - <span id="PageTitle">Acknowledgements</span></h1>
-        </div>
-    </header>
+        <div class="header-content">
+            <a href="../index.html">
+                <img id="header-logo" src="../assets/favicon2021.png"/>
+            </a>
 
-    <div id="NavBar">
-        <a class="page firstmost" href="../index.html">Home</a>
-        <a class="page" href="german_politics.html">German Politics</a>
+            <div class="header-title">
+                <span>ElectionsGermany:</span> Acknowledgements
+            </div>
 
-        <div class="dropdown">
-            <button class="page dropbtn">Elections
-                <i class="arrow down"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="2017_election.html">2017 Election</a>
-                <a href="2021_election.html">2021 Election</a>
+            <div class="header-nav">
+                <a class="page" href="../index.html">Home</a>
+                <a class="page" href="german_politics.html">German Politics</a>
+                <a class="page active" href="acknowledgements.html">Acknowledgements</a>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        Elections
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="2017_election.html" class="page">2017 Election</a>
+                        <a href="2021_election.html" class="page">2021 Election</a>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <a class="page active" href="acknowledgements.html">Acknowledgements</a>
-
-        <div id="contact-info">
-            <a class="socialmedia-icon" href="https://github.com/Ponderix/ElectionsGermany" title="GitHub">
-                <img src="../assets/icons/GitHub-icon-light.png">
-            </a>
-            <a class="socialmedia-icon" href="https://twitter.com/electionsger" title="Twitter">
-                <img src="../assets/icons/Twitter-logo-blue.png">
-            </a>
-            <a class="socialmedia-icon" href="mailto:electionsgermany@gmail.com" title="Mail">
-                <img src="../assets/icons/mail-icon-white.svg">
-            </a>
-        </div>
-    </div>
+    </header>
 
     <div class="content">
         <div class="text-body">
@@ -65,7 +56,7 @@
                     The German election commission website provided all the data which was required for the maps on this website. The data is provided in a load of different formats and it is very detailed and easy to use.
                 </p>
                 <p>
-                    3. <a href="https://d3js.org/" class="a_link">d3.js</a> <a href="https://observablehq.com/@d3/gallery" class="text-hyperlink">(obersvablehq)</a> <br>
+                    3. <a href="https://d3js.org/" class="a_link">d3.js</a> <a href="https://observablehq.com/@d3/gallery" class="text-hyperlink">(observablehq)</a> <br>
                     This is the JavaScript I used to create all the visualizations on this site, it is a massive library which makes it super easy to create very complex visualizations with just a few lines of code. Without this library much of the graphs you see on the internet would not be possible. This helped me especially when trying to convert all the election data into a format which could be handled by my own code.
                 </p>
                 <p>
@@ -76,7 +67,10 @@
         </div>
     </div>
 
+    <script src="../script/header.js" charset="utf-8"></script>
+
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/header.css">
     <link rel="stylesheet" href="../style/acknowledgements_style.css">
 </body>
 
