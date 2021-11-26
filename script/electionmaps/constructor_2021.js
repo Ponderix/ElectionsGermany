@@ -21,7 +21,6 @@ var zoom = d3.zoom()
     mapSVG.call(zoom).on("dblclick.zoom", null);
     d3.select("#reset").on("click", () =>{
         if (map.activeNode.node != null) {
-            console.log(map.activeNode.opacity);
             d3.select("#" + (map.activeNode.node).id).transition()
                 .style("opacity", map.activeNode.opacity);
         }
@@ -252,16 +251,16 @@ d3.csv("../data/2021/wk_21_processed.csv", function(d) {
                 })
                 .on("click", (event, d) => {
                     if (map.activeNode.node != null) {
-                        console.log(map.activeNode.opacity);
                         d3.select("#" + (map.activeNode.node).id).transition()
                             .style("opacity", map.activeNode.opacity);
                     }
-
-                    map.activeNode.node = event.target;
-                    map.activeNode.opacity = event.target.style.opacity;
+                    if (map.activeNode.node != event.target) {
+                        map.activeNode.node = event.target;
+                        map.activeNode.opacity = event.target.style.opacity;
+                    }
 
                     map.zoomTo(path, d, zoom);
-                    map.flashSeat(event);
+                    map.flashSeat();
 
                     d3.select("#name") //wahlkreis name on click
                         .html(() => {
