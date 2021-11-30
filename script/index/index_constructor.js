@@ -10,9 +10,9 @@ var data = [
 ];
 
 if (window.innerWidth > 544) {
-    drawPie(400, 275);
+    drawPie(420, 295);
 } else {
-    drawPie(250, 171.875);
+    drawPie(270, 191.875);
 }
 
 window.addEventListener('resize', () =>{
@@ -27,7 +27,7 @@ window.addEventListener('resize', () =>{
 function drawPie(width, height) {
     d3.select("#arc_container").selectAll("svg").remove();
 
-    const radius = width / 2;
+    const radius = width / 2 - 20; // the -20 is needed to fit the slices with the on hover animation
     const tooltip = d3.select("#tooltip");
 
 
@@ -45,7 +45,7 @@ function drawPie(width, height) {
         .attr("width", width)
         .attr("height", height + 25)
         .append("g")
-            .attr('transform', `translate(${width / 2}, ${height + 25 - radius / 4})`); // move chart from (0,0) to radius
+            .attr('transform', `translate(${width / 2}, ${height - radius / 4})`); // move chart from (0,0) to radius
 
     const slices = svg.selectAll("g.slice")
         .data(pie(data))
@@ -57,8 +57,13 @@ function drawPie(width, height) {
         .attr("class", (d) => {
             return d.data.party;
         })
-        .attr("d", arc)
         .on("mouseover", (event, d) =>{
+            d3.select(event.currentTarget)
+                      	.transition()
+                  	  	.duration(500)
+                        .style('stroke', "white")
+                  		.attr('transform', calcTranslate(d, 6));
+
             tooltip.select(".ttp-logo").selectAll("img").remove();
             tooltip.select(".ttp-logo").append("img").attr("src", `assets/logos/${d.data.party}.svg`);
 
@@ -69,39 +74,31 @@ function drawPie(width, height) {
                 .style("opacity", 1)
         })
         .on("mouseout", () =>{
+            d3.select(event.currentTarget).transition().duration(400).attr('transform', 'translate(0, 0)').style('stroke', 'none');
+
             tooltip.transition().delay(200).duration(300).style("opacity", 0);
         })
+        .attr("d", arc)
         /*.transition()
-            .duration(1000)
-            .attrTween("d", (d) =>{
-                let originalEnd = d.endAngle;
+            .ease("bounce")
+            .duration(2000)
+                .ease("bounce")
+                .attrTween("d", d => {
+                    var originalEnd = d.endAngle;
+                    return t => {
+                        var currentAngle = angleInterpolation(t);
+                        if (currentAngle < d.startAngle) {
+                            return "";
+                        }
 
-                return (t) => {
-                    let currentAngle = d3.interpolate(t);
-                    if (currentAngle < d.startAngle) {
-                        return "";
+                        d.endAngle = Math.min(currentAngle, originalEnd);
+
+                        return arc(d);
                     }
+                });*/
 
-                    d.endAngle = Math.min(currentAngle, originalEnd);
-
-                    return arc(d);
-                }
-
-            });*/
-
-    /*slices.append("text")
-        .attr("transform", (d) =>{
-            if (d.data.party != "AfD" && d.data.party != "CSU") { // CSU and AfD dont align correctly, this fixes it
-                return `translate(${arc.centroid(d)})`;
-            } else {
-                var c = arc.centroid(d);
-                c.splice(1, 1, arc.centroid(d)[1] + 6);
-
-                return `translate(${c})`;
-            }
-        })
-        .attr("text-anchor", "middle")
-        .text((d) =>{
-            return d.data.seats;
-        });*/
+        function calcTranslate(data, move = 4) {
+            const moveAngle = data.startAngle + ((data.endAngle - data.startAngle) / 2);
+            return `translate(${- move * Math.cos(moveAngle + Math.PI / 2)}, ${- move * Math.sin(moveAngle + Math.PI / 2)})`;
+        }
 }

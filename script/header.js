@@ -13,7 +13,6 @@ function checkWidth() {
         var parentWidth = document.querySelector(".dropdown").scrollWidth;
         document.querySelector(".dropdown-content").style.width = parentWidth + "px";
     } else {
-        console.log("def");
         document.querySelector(".dropdown-content").style.width = "120px";
     }
 }
