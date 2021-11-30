@@ -26,19 +26,17 @@
     }
     #btw21 #arc_container {
     }
-        .slice text {
-            fill: white;
-            font-size: 15px;
-        }
 
+.ttp-container {
+    position: relative;
+    height: 1vh; /* needs to be some value so that it would keep on the same relative position */
+}
 #tooltip {
     opacity: 0;
     width: 5vw;
-    top: 150px;
     max-height: 80px;
     max-width: 63px;
     padding: 10px;
-    position: absolute;
     background-color: whitesmoke;
     border-radius: 5px;
 }
@@ -76,11 +74,6 @@
         .ttp-main {
             font-size: 1vw;
         }
-
-    .slice text {
-        fill: white;
-        font-size: 7.5px;
-    }
 }
 
 #welcome {
