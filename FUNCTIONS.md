@@ -135,6 +135,23 @@ A function which detects if certain array has more or less "seats" than they des
 
 ## [Graph.js](script/graph.js) <a name="graph"></a>
 
+### [#](#write) *graph*.write(data, search, container)
+This function writes the name of the selected wahlkreis into a selected container. It takes the parameters data, which is the master election data array; search, which is the selected wahlkreis. This can be obtained through a search bar input or on the data which is binded to the given path node.
+
+The function first filters the data array for the "search" parameter. If the filter returns a valid element, the function writes the name of the wahlkreis into the selected container.
+
+<a name="write"></a>
+```js
+const container = d3.select("#name");
+const data = [...]; //election data
+const search = "Hamburg-Mitte";
+
+d3.select("path").on("click", function() {
+        graph.write(data, search, container);
+});
+
+```
+
 ## [Map.js](script/map.js) <a name="map"></a>
 
 ## [Userinput.js](script/userinput.js) <a name="userinput"></a>
