@@ -80,21 +80,12 @@ function drawPie(width, height) {
         })
         .attr("d", arc)
         /*.transition()
-            .ease("bounce")
-            .duration(2000)
-                .ease("bounce")
-                .attrTween("d", d => {
-                    var originalEnd = d.endAngle;
-                    return t => {
-                        var currentAngle = angleInterpolation(t);
-                        if (currentAngle < d.startAngle) {
-                            return "";
-                        }
-
-                        d.endAngle = Math.min(currentAngle, originalEnd);
-
-                        return arc(d);
-                    }
+            .duration(1500)
+                .ease(d3.easeExpOut)
+                .attrTween("d", b => {
+                    b.innerRadius = 0;
+                    var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
+                    return function(t) { return arc(i(t)); };
                 });*/
 
         function calcTranslate(data, move = 4) {
